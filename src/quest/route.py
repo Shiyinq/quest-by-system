@@ -10,7 +10,7 @@ from src.quest.schemas import (
 router = APIRouter()
 
 
-@router.post("/quest/generate", status_code=201, response_model=ResponseGeneratedQuest)
+@router.post("/quests/generate", status_code=201, response_model=ResponseGeneratedQuest)
 async def generate_quest(data: GenerateQuest):
     """Generate Quest"""
     quest = await service.generate_quest(data)
@@ -18,7 +18,7 @@ async def generate_quest(data: GenerateQuest):
 
 
 @router.post(
-    "/quest/{quest_id}/accept", status_code=200, response_model=ResponseAcceptedQuest
+    "/quests/{quest_id}/accept", status_code=200, response_model=ResponseAcceptedQuest
 )
 async def accept_quest(quest_id: str):
     """Accept Quest"""

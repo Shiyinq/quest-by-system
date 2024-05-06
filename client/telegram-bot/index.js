@@ -26,7 +26,7 @@ function currentEditeMessage(ctx) {
 }
 
 async function generateQuest(type, ctx) {
-    const apiUrl = `${process.env.BASE_URL_BACKEND}/api/quest/generate`;
+    const apiUrl = `${process.env.BASE_URL_BACKEND}/api/quests/generate`;
     const requestData = {
         userId: checkUserId(ctx),
         type: type
@@ -66,7 +66,7 @@ async function generateQuest(type, ctx) {
 }
 
 async function acceptQuest(questId, ctx) {
-    let apiUrl = `${process.env.BASE_URL_BACKEND}/api/quest/${questId}/accept`;
+    let apiUrl = `${process.env.BASE_URL_BACKEND}/api/quests/${questId}/accept`;
     try {
         const response = await axios.post(apiUrl)
         console.log(response.data)

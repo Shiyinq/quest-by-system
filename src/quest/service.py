@@ -50,9 +50,8 @@ async def generate_quest(data: GenerateQuest) -> ResponseGeneratedQuest:
     quest = response["message"]["content"]
 
     try:
+        data.quest = quest
         data = dict(data)
-        data["quest"] = quest
-
         new_quest = await database.generated_quest.insert_one(data)
         if new_quest.inserted_id:
             if "_id" in data:

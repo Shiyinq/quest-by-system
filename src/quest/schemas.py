@@ -9,7 +9,16 @@ class GenerateQuest(BaseModel):
     questId: UUID = Field(default_factory=lambda: str(uuid4()))
     userId: str
     type: Literal["daily", "weekly", "monthly", "side"]
+    quest: str = None
     createdAt: datetime = datetime.now()
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "userId": "unique-string",
+                "type": "daily",
+            }
+        }
 
 
 class ResponseGeneratedQuest(BaseModel):

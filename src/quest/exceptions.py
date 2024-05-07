@@ -16,3 +16,7 @@ class QuestNotFound(NotFound):
 
 class QuestAcceptFailed(InternalServerError):
     DETAIL = ErrorCode.QUEST_ACCEPT_FAILED
+
+
+class QuestGetFailed(InternalServerError):
+    DETAIL = ErrorCode.QUEST_GET_FAILED

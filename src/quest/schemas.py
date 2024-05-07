@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Literal
+from typing import Literal, Union
 from uuid import UUID, uuid4
 
 from pydantic import BaseModel, Field
@@ -29,3 +29,12 @@ class ResponseGeneratedQuest(BaseModel):
 
 class ResponseAcceptedQuest(BaseModel):
     message: str
+
+
+class ResponseGetQuest(BaseModel):
+    questId: str
+    userId: str
+    type: str
+    quest: str
+    createdAt: Union[datetime, None] = None
+    acceptedAt: Union[datetime, None] = None

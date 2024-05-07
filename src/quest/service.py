@@ -7,6 +7,7 @@ from src.quest.constants import Info
 from src.quest.exceptions import (
     QuestAcceptFailed,
     QuestGenerateFailed,
+    QuestGetFailed,
     QuestNotFound,
     QuestSaveFailed,
 )
@@ -15,6 +16,7 @@ from src.quest.schemas import (
     GenerateQuest,
     ResponseAcceptedQuest,
     ResponseGeneratedQuest,
+    ResponseGetQuest,
 )
 
 
@@ -84,3 +86,19 @@ async def accept_quest(quest_id: str) -> ResponseAcceptedQuest:
     except Exception as e:
         print(e)
         raise QuestAcceptFailed()
+
+
+async def get_quest(quest_id: str) -> ResponseGetQuest:
+    try:
+        quest = await database.accepted_quest.find_one(
+            {"questId": quest_id}, {"_id": 0}
+        )
+        if not quest:
+            raise QuestNotFound()
+
+        return quest
+    except QuestNotFound:
+        raise QuestNotFound()
+    except Exception as e:
+        print(e)
+        raise QuestGetFailed()

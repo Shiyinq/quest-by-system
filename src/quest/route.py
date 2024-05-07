@@ -5,6 +5,7 @@ from src.quest.schemas import (
     GenerateQuest,
     ResponseAcceptedQuest,
     ResponseGeneratedQuest,
+    ResponseGetQuest,
 )
 
 router = APIRouter()
@@ -24,3 +25,10 @@ async def accept_quest(quest_id: str):
     """Accept Quest"""
     accept = await service.accept_quest(quest_id)
     return accept
+
+
+@router.get("/quests/{quest_id}", status_code=200, response_model=ResponseGetQuest)
+async def get_quest(quest_id: str):
+    """Get Quest Accepted"""
+    quest = await service.get_quest(quest_id)
+    return quest

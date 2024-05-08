@@ -20,3 +20,7 @@ class QuestAcceptFailed(InternalServerError):
 
 class QuestGetFailed(InternalServerError):
     DETAIL = ErrorCode.QUEST_GET_FAILED
+
+
+class QuestStatusUpdateFailed(InternalServerError):
+    DETAIL = ErrorCode.QUEST_STATUS_UPDATE_FAILED

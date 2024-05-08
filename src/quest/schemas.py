@@ -27,10 +27,6 @@ class ResponseGeneratedQuest(BaseModel):
     quest: str
 
 
-class ResponseAcceptedQuest(BaseModel):
-    message: str
-
-
 class ResponseGetQuest(BaseModel):
     questId: str
     userId: str
@@ -38,3 +34,8 @@ class ResponseGetQuest(BaseModel):
     quest: str
     createdAt: Union[datetime, None] = None
     acceptedAt: Union[datetime, None] = None
+
+
+class UpdateStatusQuest(BaseModel):
+    status: str
+    statusUpdatedAt: datetime = datetime.now()

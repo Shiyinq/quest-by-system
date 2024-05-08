@@ -10,14 +10,16 @@ from src.quest.exceptions import (
     QuestGetFailed,
     QuestNotFound,
     QuestSaveFailed,
+    QuestStatusUpdateFailed,
 )
 from src.quest.prompt import daily_prompt, monthly_prompt, side_prompt, weekly_prompt
 from src.quest.schemas import (
     GenerateQuest,
-    ResponseAcceptedQuest,
     ResponseGeneratedQuest,
     ResponseGetQuest,
+    UpdateStatusQuest,
 )
+from src.schemas import GeneralResponse
 
 
 async def ollama(prompt) -> dict:
@@ -68,7 +70,7 @@ async def generate_quest(data: GenerateQuest) -> ResponseGeneratedQuest:
         raise QuestGenerateFailed()
 
 
-async def accept_quest(quest_id: str) -> ResponseAcceptedQuest:
+async def accept_quest(quest_id: str) -> GeneralResponse:
     quest = await database.generated_quest.find_one({"questId": quest_id}, {"_id": 0})
     if not quest:
         raise QuestNotFound()
@@ -102,3 +104,21 @@ async def get_quest(quest_id: str) -> ResponseGetQuest:
     except Exception as e:
         print(e)
         raise QuestGetFailed()
+
+
+async def update_status_quest(
+    quest_id: str, data: UpdateStatusQuest
+) -> GeneralResponse:
+    try:
+        quest = await database.accepted_quest.update_one(
+            {"questId": quest_id}, {"$set": dict(data)}
+        )
+        if not quest.matched_count:
+            raise QuestNotFound()
+
+        return {"message": Info.QUEST_STATUS_UPDATED}
+    except QuestNotFound:
+        raise QuestNotFound()
+    except Exception as e:
+        print(e)
+        raise QuestStatusUpdateFailed()

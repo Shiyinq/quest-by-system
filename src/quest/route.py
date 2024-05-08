@@ -3,10 +3,11 @@ from fastapi import APIRouter
 from src.quest import service
 from src.quest.schemas import (
     GenerateQuest,
-    ResponseAcceptedQuest,
     ResponseGeneratedQuest,
     ResponseGetQuest,
+    UpdateStatusQuest,
 )
+from src.schemas import GeneralResponse
 
 router = APIRouter()
 
@@ -19,11 +20,20 @@ async def generate_quest(data: GenerateQuest):
 
 
 @router.post(
-    "/quests/{quest_id}/accept", status_code=200, response_model=ResponseAcceptedQuest
+    "/quests/{quest_id}/accept", status_code=200, response_model=GeneralResponse
 )
 async def accept_quest(quest_id: str):
     """Accept Quest"""
     accept = await service.accept_quest(quest_id)
+    return accept
+
+
+@router.put(
+    "/quests/{quest_id}/status", status_code=200, response_model=GeneralResponse
+)
+async def update_status_quest(quest_id: str, data: UpdateStatusQuest):
+    """Update Status Quest Accepted"""
+    accept = await service.update_status_quest(quest_id, data)
     return accept
 
 

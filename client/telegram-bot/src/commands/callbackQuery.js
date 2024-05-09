@@ -1,4 +1,4 @@
-import { generate } from "./quests/_sharing.js";
+import { generate } from "./quests/index.js";
 import { acceptQuest } from "../apis/quests.js";
 import { questHistory } from "./history/index.js";
 

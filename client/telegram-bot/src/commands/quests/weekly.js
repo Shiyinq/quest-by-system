@@ -1,4 +1,4 @@
-import { generate } from "./_sharing.js";
+import { generate } from "./index.js";
 
 const weekly = async (ctx) => {
     await generate("weekly", ctx);

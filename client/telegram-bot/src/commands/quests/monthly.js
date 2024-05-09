@@ -1,4 +1,4 @@
-import { generate } from "./_sharing.js";
+import { generate } from "./index.js";
 
 const monthly = async (ctx) => {
     await generate("monthly", ctx);

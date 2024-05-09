@@ -5,8 +5,12 @@ from uuid import UUID, uuid4
 from pydantic import BaseModel, Field
 
 
+def uniqueQuestId():
+    return "quest_" + str(uuid4()).replace("-", "")[:24]
+
+
 class GenerateQuest(BaseModel):
-    questId: UUID = Field(default_factory=lambda: str(uuid4()))
+    questId: UUID = Field(default_factory=uniqueQuestId)
     userId: str
     type: Literal["daily", "weekly", "monthly", "side"]
     quest: str = None

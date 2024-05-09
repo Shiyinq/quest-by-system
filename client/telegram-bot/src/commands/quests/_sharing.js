@@ -5,7 +5,7 @@ const checkUserId = (ctx) => {
     if (ctx?.message) {
         userId = ctx.message.from.id.toString();
     } else if (ctx?.update) {
-        userId = ctx.update.callback_query.message.from.id.toString();
+        userId = ctx.update.callback_query.message.chat.id.toString();
     }
     return userId;
 };

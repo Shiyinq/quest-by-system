@@ -1,5 +1,6 @@
 import { generate } from "./quests/_sharing.js";
 import { acceptQuest } from "../apis/quests.js";
+import { questHistory } from "./history/index.js";
 
 const reGenerate = async (type, ctx) => {
     await generate(type, ctx);
@@ -19,6 +20,11 @@ const accept = async (questId, ctx) => {
     });
 }
 
+const getMoreQuestHistory = async (param, ctx) => {
+    const [userId, type, page] = param.split("_");
+    await questHistory(ctx, userId, type, page, "paging");
+}
+
 const callback = async (ctx) => {
     let dataQuery = ctx.callbackQuery.data;
     let [action, param] = dataQuery.split("#");
@@ -32,6 +38,10 @@ const callback = async (ctx) => {
             break;
         case "acceptQuest":
             await accept(param, ctx);
+            break;
+        case "prevHistory":
+        case "nextHistory":
+            await getMoreQuestHistory(param, ctx);
             break;
         default:
             break;

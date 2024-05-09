@@ -8,7 +8,7 @@ const reGenerate = async (type, ctx) => {
 
 const accept = async (questId, ctx) => {
     const accept = await acceptQuest(questId);
-    
+
     if (!accept) {
         ctx.reply("Failed to accept quest");
         return
@@ -32,6 +32,9 @@ const callback = async (ctx) => {
     console.log(action, param);
 
     switch (action) {
+        case "deleteMessage":
+            ctx.deleteMessage();
+            break;
         case "generateQuest":
             ctx.deleteMessage();
             await reGenerate(param, ctx);
@@ -48,4 +51,4 @@ const callback = async (ctx) => {
     }
 }
 
-export default  (bot) => bot.on("callback_query", async (ctx) => { await callback(ctx)});
+export default (bot) => bot.on("callback_query", async (ctx) => { await callback(ctx) });

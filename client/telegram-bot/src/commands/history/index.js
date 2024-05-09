@@ -10,9 +10,9 @@ export const questHistory = async (ctx, userId, type, page, from = null) => {
 
     const formattedText = data.reduce((acc, curr, index) => {
         return acc + `${index + 1}. /${curr.questId}\n`;
-    }, `🗒️ Here your quest ${type} history\n\n`);
+    }, `🗒️ Here is your ${type} quest history\n\n`);
 
-    const finalText = `${formattedText}\nTap on each quest to see details 🔎\n\nPage: ${metadata.page}/${metadata.totalPage}`;
+    const finalText = `${formattedText}\nTap on each quest to view details 🔎\n\nPage: ${metadata.page}/${metadata.totalPage}`;
 
     const paging = [[]]
     if (metadata.prevPage) {

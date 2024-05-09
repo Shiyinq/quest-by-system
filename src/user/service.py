@@ -38,7 +38,6 @@ async def user_quest_history(
     user_id: str, quest_type: str, page: int, limit: int
 ) -> ResponseUserHistoryQuest:
     skip = (page - 1) * limit
-    print(skip, type(skip))
     try:
         query = {}
         if quest_type == "all":

@@ -10,3 +10,13 @@ export const userQuestHistory = async (userId, type = "all", page = 1, limit = 8
         return false;
     }
 }
+
+export const detailQuest = async (questId) => {
+    try {
+        const response = await axios.get(`${BASE_URL_BACKEND}/api/quests/${questId}`);
+        return response.data;
+    } catch (error) {
+        console.log(error.response.status);
+        return false;
+    }
+}

@@ -2,7 +2,6 @@ import { userQuestHistory } from "../../apis/history.js";
 
 export const questHistory = async (ctx, userId, type, page, from = null) => {
     let { metadata, data } = await userQuestHistory(userId, type, page);
-    console.log(metadata, data);
 
     if (metadata.totalPage == 0) {
         ctx.reply(`4️⃣0️⃣4️⃣\n\nSory you don't have history for ${type} quest, you can generate one using command\n\n/${type} - generate ${type} quest`);

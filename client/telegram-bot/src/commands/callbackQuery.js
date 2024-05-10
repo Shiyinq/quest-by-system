@@ -1,5 +1,5 @@
 import { generate } from "./quests/index.js";
-import { acceptQuest } from "../apis/quests.js";
+import { acceptQuest, updateStatusQuest } from "../apis/quests.js";
 import { questHistory } from "./history/index.js";
 
 const reGenerate = async (type, ctx) => {
@@ -25,6 +25,36 @@ const getMoreQuestHistory = async (param, ctx) => {
     await questHistory(ctx, userId, type, page, "paging");
 }
 
+const updateStatus = async (questId, action, ctx) => {
+    const status = {
+        questCompleted: "completed",
+        questNotComplete: "not complete"
+    }
+
+    const updated = await updateStatusQuest(questId, status[action]);
+
+    if (!updated) {
+        ctx.reply("Failed to update status");
+        return
+    }
+
+    let message = `✅ UPDATE STATUS SUCCES\n\n /${questId} is ${status[action]}`;
+    ctx.editMessageText(message, {
+        message_id: ctx.update.callback_query.message.message_id,
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    {
+                        text: "❌ Close",
+                        callback_data: `deleteMessage`,
+                        hide: false,
+                    }
+                ],
+            ],
+        }
+    });
+}
+
 const callback = async (ctx) => {
     let dataQuery = ctx.callbackQuery.data;
     let [action, param] = dataQuery.split("#");
@@ -45,6 +75,10 @@ const callback = async (ctx) => {
         case "prevHistory":
         case "nextHistory":
             await getMoreQuestHistory(param, ctx);
+            break;
+        case "questCompleted":
+        case "questNotComplete":
+            await updateStatus(param, action, ctx);
             break;
         default:
             break;

@@ -14,7 +14,10 @@ class GenerateQuest(BaseModel):
     userId: str
     type: Literal["daily", "weekly", "monthly", "side"]
     quest: str = None
+    status: str = "generated"
     createdAt: datetime = datetime.now()
+    acceptedAt: datetime = None
+    statusUpdatedAt: datetime = None
 
     class Config:
         json_schema_extra = {
@@ -36,8 +39,10 @@ class ResponseGetQuest(BaseModel):
     userId: str
     type: str
     quest: str
+    status: Union[str, None] = None
     createdAt: Union[datetime, None] = None
     acceptedAt: Union[datetime, None] = None
+    statusUpdatedAt: Union[datetime, None] = None
 
 
 class UpdateStatusQuest(BaseModel):

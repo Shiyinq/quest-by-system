@@ -38,7 +38,7 @@ const updateStatus = async (questId, action, ctx) => {
         return
     }
 
-    let message = `✅ UPDATE STATUS SUCCES\n\n /${questId} is ${status[action]}`;
+    let message = `✅ STATUS UPDATED\n\n /${questId} is ${status[action]}`;
     ctx.editMessageText(message, {
         message_id: ctx.update.callback_query.message.message_id,
         reply_markup: {

@@ -76,6 +76,7 @@ async def accept_quest(quest_id: str) -> GeneralResponse:
         raise QuestNotFound()
 
     try:
+        quest["status"] = "in progress"
         quest["acceptedAt"] = datetime.now()
         accepted = await database.accepted_quest.insert_one(quest)
         if accepted.inserted_id:

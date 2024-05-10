@@ -14,7 +14,7 @@ const accept = async (questId, ctx) => {
         return
     }
 
-    let message = `${ctx.update.callback_query.message.text}\n\n\n QUEST ACCEPTED ✅`;
+    let message = `${ctx.update.callback_query.message.text}\n\n\n ✅ QUEST ACCEPTED`;
     ctx.editMessageText(message, {
         message_id: ctx.update.callback_query.message.message_id,
     });

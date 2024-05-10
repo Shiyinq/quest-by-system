@@ -14,9 +14,26 @@ const detailHistory = async (ctx) => {
     let metadata = `ID: ${detail.questId}\nTYPE: ${detail.type}\nSTATUS: ${detail.status}\nCREATED AT: ${detail.createdAt}\nACCEPTED AT: ${detail.acceptedAt}`
     let data = `${metadata}\n\n\nQUEST:\n${detail.quest}`;
 
+    let confirmButton = []
+    if (!detail.status || detail.status == 'in progress') {
+        confirmButton = [
+            {
+                text: "✅ Completed",
+                callback_data: `questCompleted#${detail.questId}`,
+                hide: false,
+            },
+            {
+                text: "⏳ Not Complete",
+                callback_data: `questNotComplete#${detail.questId}`,
+                hide: false,
+            }
+        ]
+    }
+
     ctx.reply(data, {
         reply_markup: {
             inline_keyboard: [
+                confirmButton,
                 [
                     {
                         text: "❌ Close",

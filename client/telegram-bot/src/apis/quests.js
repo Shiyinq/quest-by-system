@@ -1,5 +1,5 @@
 import axios from "axios";
-import {BASE_URL_BACKEND} from "../config/index.js";
+import { BASE_URL_BACKEND } from "../config/index.js";
 
 export const generateQuest = async (userId, type) => {
     try {
@@ -17,6 +17,18 @@ export const generateQuest = async (userId, type) => {
 export const acceptQuest = async (questId) => {
     try {
         const response = await axios.post(`${BASE_URL_BACKEND}/api/quests/${questId}/accept`);
+        return response.data;
+    } catch (error) {
+        console.log(error.response.status);
+        return false;
+    }
+}
+
+export const updateStatusQuest = async (questId, status) => {
+    try {
+        const response = await axios.put(`${BASE_URL_BACKEND}/api/quests/${questId}/status`, {
+            status: status
+        })
         return response.data;
     } catch (error) {
         console.log(error.response.status);

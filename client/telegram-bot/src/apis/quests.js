@@ -2,12 +2,11 @@ import axios from "axios";
 import {BASE_URL_BACKEND} from "../config/index.js";
 
 export const generateQuest = async (userId, type) => {
-    let data = {
-        userId: userId,
-        type: type,
-    }
     try {
-        const response = await axios.post(`${BASE_URL_BACKEND}/api/quests/generate`, data)
+        const response = await axios.post(`${BASE_URL_BACKEND}/api/quests/generate`, {
+            userId: userId,
+            type: type,
+        })
         return response.data;
     } catch (error) {
         console.log(error.response.status);

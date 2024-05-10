@@ -1,15 +1,15 @@
 from datetime import datetime
 from typing import List, Union
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class UserCreate(BaseModel):
     userId: str
     name: str
     source: str
-    createdAt: datetime = datetime.now()
-    updatedAt: datetime = datetime.now()
+    createdAt: datetime = Field(default_factory=datetime.now)
+    updatedAt: datetime = Field(default_factory=datetime.now)
 
 
 class ResponseUserCreated(BaseModel):

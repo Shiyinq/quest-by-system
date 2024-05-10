@@ -15,7 +15,7 @@ class GenerateQuest(BaseModel):
     type: Literal["daily", "weekly", "monthly", "side"]
     quest: str = None
     status: str = "generated"
-    createdAt: datetime = datetime.now()
+    createdAt: datetime = Field(default_factory=datetime.now)
     acceptedAt: datetime = None
     statusUpdatedAt: datetime = None
 
@@ -47,4 +47,4 @@ class ResponseGetQuest(BaseModel):
 
 class UpdateStatusQuest(BaseModel):
     status: str
-    statusUpdatedAt: datetime = datetime.now()
+    statusUpdatedAt: datetime = Field(default_factory=datetime.now)

@@ -1,4 +1,4 @@
-import { detailQuest } from "../../apis/history.js";
+import { detailQuest } from "../../apis/quests.js";
 
 
 const detailHistory = async (ctx) => {

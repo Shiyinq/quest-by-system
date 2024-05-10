@@ -24,3 +24,13 @@ export const acceptQuest = async (questId) => {
         return false;
     }
 }
+
+export const detailQuest = async (questId) => {
+    try {
+        const response = await axios.get(`${BASE_URL_BACKEND}/api/quests/${questId}`);
+        return response.data;
+    } catch (error) {
+        console.log(error.response.status);
+        return false;
+    }
+}

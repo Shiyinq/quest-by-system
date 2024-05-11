@@ -1,4 +1,4 @@
-import { userQuestHistory } from "../../apis/history.js";
+import { userQuestHistory } from "../../apis/users.js";
 
 export const questHistory = async (ctx, userId, type, page, from = null) => {
     let { metadata, data } = await userQuestHistory(userId, type, page);

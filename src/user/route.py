@@ -31,10 +31,10 @@ async def get_user(user_id: str):
     response_model=ResponseUserHistoryQuest,
 )
 async def user_quest_history(
-    user_id: str, type: str = "all", page: int = 1, limit: int = 10
+    user_id: str, type: str = "all", status: str = None, page: int = 1, limit: int = 10
 ):
     """Get User Quest History"""
-    history = await service.user_quest_history(user_id, type, page, limit)
+    history = await service.user_quest_history(user_id, type, status, page, limit)
     return history
 
 

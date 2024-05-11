@@ -28,6 +28,7 @@ class DataUserQuestHistory(BaseModel):
     questId: str
     userId: str
     type: str
+    status: str
     createdAt: datetime = None
     acceptedAt: datetime = None
 

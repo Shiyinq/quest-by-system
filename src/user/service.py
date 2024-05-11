@@ -50,7 +50,7 @@ async def user_quest_history(
             query = {"userId": user_id}
         else:
             query = {"userId": user_id, "type": quest_type}
-        
+
         if quest_status and quest_status != "null":
             query["status"] = quest_status
 

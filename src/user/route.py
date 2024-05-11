@@ -1,7 +1,12 @@
 from fastapi import APIRouter
 
 from src.user import service
-from src.user.schemas import ResponseUserCreated, ResponseUserHistoryQuest, UserCreate
+from src.user.schemas import (
+    ResponseStatsQuest,
+    ResponseUserCreated,
+    ResponseUserHistoryQuest,
+    UserCreate,
+)
 
 router = APIRouter()
 
@@ -31,3 +36,12 @@ async def user_quest_history(
     """Get User Quest History"""
     history = await service.user_quest_history(user_id, type, page, limit)
     return history
+
+
+@router.get(
+    "/users/{user_id}/quests/stats", status_code=200, response_model=ResponseStatsQuest
+)
+async def user_quest_stats(user_id: str):
+    """Get User Quest Stats"""
+    stats = await service.stats(user_id)
+    return stats

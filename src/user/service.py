@@ -51,7 +51,7 @@ async def user_quest_history(
         else:
             query = {"userId": user_id, "type": quest_type}
         
-        if quest_status:
+        if quest_status and quest_status != "null":
             query["status"] = quest_status
 
         user = await database.users.find_one({"userId": user_id}, {"_id": 0})

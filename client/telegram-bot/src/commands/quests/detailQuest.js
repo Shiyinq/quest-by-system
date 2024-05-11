@@ -17,7 +17,7 @@ const formatTime = (date) => {
 }
 
 
-const detailHistory = async (ctx) => {
+const quest = async (ctx) => {
     let questId = ctx.message.text.substring(1);
 
     let detail = await detailQuest(questId);
@@ -62,4 +62,4 @@ const detailHistory = async (ctx) => {
     });
 }
 
-export default (bot) => bot.command(/quest_(.+)/, async (ctx) => { await detailHistory(ctx) });
+export default (bot) => bot.command(/quest_(.+)/, async (ctx) => { await quest(ctx) });

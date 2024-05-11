@@ -3,4 +3,4 @@ const menu = (ctx) => {
     ctx.reply(menu);
 }
 
-export default  (bot) => bot.command("start", (ctx) => {menu(ctx)});
+export default (bot) => bot.command(["start", "menu", "hi"], (ctx) => { menu(ctx) });

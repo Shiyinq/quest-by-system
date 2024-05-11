@@ -4,9 +4,15 @@ from src.user.exceptions import (
     UserCreateFailed,
     UserGetDetailFailed,
     UserNotFound,
+    UserQuestGetStatsFailed,
     UserQuestHistoryFailed,
 )
-from src.user.schemas import ResponseUserCreated, ResponseUserHistoryQuest, UserCreate
+from src.user.schemas import (
+    ResponseStatsQuest,
+    ResponseUserCreated,
+    ResponseUserHistoryQuest,
+    UserCreate,
+)
 from src.utils import pagination
 
 
@@ -64,3 +70,52 @@ async def user_quest_history(
     except Exception as e:
         print(e)
         raise UserQuestHistoryFailed()
+
+
+async def stats(user_id: str) -> ResponseStatsQuest:
+    query = [
+        {"$match": {"userId": user_id}},
+        {
+            "$lookup": {
+                "from": "accepted_quest",
+                "localField": "userId",
+                "foreignField": "userId",
+                "as": "quests",
+            }
+        },
+        {"$unwind": "$quests"},
+        {
+            "$group": {
+                "_id": {"type": "$quests.type", "status": "$quests.status"},
+                "totalQuests": {"$sum": 1},
+            }
+        },
+        {
+            "$project": {
+                "type": "$_id.type",
+                "status": "$_id.status",
+                "totalQuests": 1,
+                "_id": 0,
+            }
+        },
+    ]
+
+    try:
+        stats_quest_cursor = database.users.aggregate(query)
+        stats_quest = await stats_quest_cursor.to_list(length=None)
+
+        group_stats = {}
+        for item in stats_quest:
+            quest_type = item["type"]
+            status = item["status"].replace(" ", "_")
+            if quest_type not in group_stats:
+                group_stats[quest_type] = {
+                    "in_progress": 0,
+                    "completed": 0,
+                    "not_completed": 0,
+                }
+            group_stats[quest_type][status] += item["totalQuests"]
+        return group_stats
+    except Exception as e:
+        print(e)
+        raise UserQuestGetStatsFailed()

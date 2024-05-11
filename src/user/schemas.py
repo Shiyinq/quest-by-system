@@ -35,3 +35,16 @@ class DataUserQuestHistory(BaseModel):
 class ResponseUserHistoryQuest(BaseModel):
     metadata: Metadata
     data: List[DataUserQuestHistory]
+
+
+class TaskStatus(BaseModel):
+    in_progress: int
+    completed: int
+    not_completed: int
+
+
+class ResponseStatsQuest(BaseModel):
+    daily: TaskStatus
+    weekly: TaskStatus
+    monthly: TaskStatus
+    side: TaskStatus

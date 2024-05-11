@@ -28,7 +28,7 @@ const getMoreQuestHistory = async (param, ctx) => {
 const updateStatus = async (questId, action, ctx) => {
     const status = {
         questCompleted: "completed",
-        questNotComplete: "not complete"
+        questNotComplete: "not completed"
     }
 
     const updated = await updateStatusQuest(questId, status[action]);

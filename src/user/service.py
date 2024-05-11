@@ -41,7 +41,7 @@ async def get_user(user_id: str) -> UserCreate:
 
 
 async def user_quest_history(
-    user_id: str, quest_type: str, page: int, limit: int
+    user_id: str, quest_type: str, quest_status: str, page: int, limit: int
 ) -> ResponseUserHistoryQuest:
     skip = (page - 1) * limit
     try:
@@ -50,6 +50,9 @@ async def user_quest_history(
             query = {"userId": user_id}
         else:
             query = {"userId": user_id, "type": quest_type}
+        
+        if quest_status:
+            query["status"] = quest_status
 
         user = await database.users.find_one({"userId": user_id}, {"_id": 0})
         if not user:

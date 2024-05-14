@@ -1,5 +1,6 @@
 import { Telegraf } from "telegraf";
 import { BOT_TOKEN } from './src/config/index.js';
+import { userDetail, userRegister } from './src/apis/users.js';
 
 const bot = new Telegraf(BOT_TOKEN);
 
@@ -20,7 +21,7 @@ async function loadCommands(bot) {
                     if (subFileStat.isFile()) {
                         const commandModule = await import(`./${subFilePath}`);
                         const command = commandModule.default;
-                        if(command) {
+                        if (command) {
                             command(bot);
                         }
                     }
@@ -38,7 +39,22 @@ async function loadCommands(bot) {
     }
 }
 
-bot.use((ctx, next) => {
+bot.use(async (ctx, next) => {
+    let userId = ctx.message.from.id.toString();
+    let name = ctx.message.from.first_name;
+
+    let userExist = await userDetail(userId);
+    if (!userExist) {
+        return
+    }
+
+    if (userExist == 404) {
+        let register = await userRegister(userId, name);
+        if (!register) {
+            return
+        }
+    }
+
     next();
 });
 

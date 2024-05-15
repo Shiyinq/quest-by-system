@@ -39,9 +39,17 @@ async function loadCommands(bot) {
     }
 }
 
+const userInfo = (ctx) => {
+    if (ctx?.message) {
+        return ctx.message.from;
+    } else if (ctx?.update) {
+        return ctx.update.callback_query.from;
+    }
+};
+
 bot.use(async (ctx, next) => {
-    let userId = ctx.message.from.id.toString();
-    let name = ctx.message.from.first_name;
+    let userId = userInfo(ctx).id.toString();
+    let name = userInfo(ctx).first_name;
 
     let userExist = await userDetail(userId);
     if (!userExist) {

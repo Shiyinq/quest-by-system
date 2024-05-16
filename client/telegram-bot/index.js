@@ -48,8 +48,9 @@ const userInfo = (ctx) => {
 };
 
 bot.use(async (ctx, next) => {
-    let userId = userInfo(ctx).id.toString();
-    let name = userInfo(ctx).first_name;
+    let { id, first_name } = userInfo(ctx);
+    let userId = id.toString();
+    let name = first_name;
 
     let userExist = await userDetail(userId);
     if (!userExist) {

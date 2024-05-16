@@ -23,4 +23,4 @@ const stats = async (ctx) => {
     ctx.reply(stats);
 }
 
-export default (bot) => bot.command("stats", async (ctx) => { await stats(ctx) });
+export default (bot) => bot.command("quests", async (ctx) => { await stats(ctx) });

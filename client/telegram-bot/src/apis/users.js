@@ -15,6 +15,18 @@ export const userRegister = async (userId, name) => {
     }
 }
 
+export const setUserGoal = async (userId, goal) => {
+    try {
+        const response = await axios.post(`${BASE_URL_BACKEND}/api/users/${userId}/goal`, {
+            goal: goal
+        })
+        return response.data;
+    } catch (error) {
+        console.log(error.response.status);
+        return false;
+    }
+}
+
 export const userDetail = async (userId) => {
     try {
         const response = await axios.get(`${BASE_URL_BACKEND}/api/users/${userId}/detail`);

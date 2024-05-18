@@ -14,6 +14,7 @@ from src.user.exceptions import (
 from src.user.schemas import (
     ResponseStatsQuest,
     ResponseUserCreated,
+    ResponseUserDetail,
     ResponseUserHistoryQuest,
     UserCreate,
     UserGoalUpdate,
@@ -32,7 +33,7 @@ async def register_user(data: UserCreate) -> ResponseUserCreated:
         raise UserCreateFailed()
 
 
-async def get_user(user_id: str) -> UserCreate:
+async def get_user(user_id: str) -> ResponseUserDetail:
     try:
         user = await database.users.find_one({"userId": user_id}, {"_id": 0})
         if user:

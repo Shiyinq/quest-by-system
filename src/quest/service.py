@@ -20,6 +20,7 @@ from src.quest.schemas import (
     UpdateStatusQuest,
 )
 from src.schemas import GeneralResponse
+from src.user.service import get_user
 
 
 async def ollama(prompt) -> dict:
@@ -42,12 +43,13 @@ async def ollama(prompt) -> dict:
 
 
 async def generate_quest(data: GenerateQuest) -> ResponseGeneratedQuest:
-    role = "software engineer"
+    user = await get_user(data.userId)
+    goal = user["goal"]
     prompts = {
-        "daily": daily_prompt(role),
-        "weekly": weekly_prompt(role),
-        "monthly": monthly_prompt(role),
-        "side": side_prompt(role),
+        "daily": daily_prompt(goal),
+        "weekly": weekly_prompt(goal),
+        "monthly": monthly_prompt(goal),
+        "side": side_prompt(goal),
     }
     prompt = prompts[data.type]
     response = await ollama(prompt)

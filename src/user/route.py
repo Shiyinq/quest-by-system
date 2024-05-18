@@ -1,11 +1,13 @@
 from fastapi import APIRouter
 
+from src.schemas import GeneralResponse
 from src.user import service
 from src.user.schemas import (
     ResponseStatsQuest,
     ResponseUserCreated,
     ResponseUserHistoryQuest,
     UserCreate,
+    UserGoalUpdate,
 )
 
 router = APIRouter()
@@ -45,3 +47,10 @@ async def user_quest_stats(user_id: str):
     """Get User Quest Stats"""
     stats = await service.stats(user_id)
     return stats
+
+
+@router.post("/users/{user_id}/goal", status_code=200, response_model=GeneralResponse)
+async def set_user_goal(user_id: str, data: UserGoalUpdate):
+    """Set User Goal"""
+    goal = await service.update_goal(user_id, data)
+    return goal

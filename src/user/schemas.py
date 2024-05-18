@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 class UserCreate(BaseModel):
     userId: str
     name: str
+    goal: str = None
     source: str
     createdAt: datetime = Field(default_factory=datetime.now)
     updatedAt: datetime = Field(default_factory=datetime.now)

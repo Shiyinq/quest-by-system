@@ -49,3 +49,7 @@ class ResponseStatsQuest(BaseModel):
     weekly: TaskStatus
     monthly: TaskStatus
     side: TaskStatus
+
+
+class UserGoalUpdate(BaseModel):
+    goal: str

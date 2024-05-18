@@ -20,3 +20,7 @@ class UserQuestHistoryFailed(InternalServerError):
 
 class UserQuestGetStatsFailed(InternalServerError):
     DETAIL = ErrorCode.USER_QUEST_GET_STATS_FAILED
+
+
+class UserUpdateGoalFailed(InternalServerError):
+    DETAIL = ErrorCode.USER_UPDATE_GOAL_FAILED

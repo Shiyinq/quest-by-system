@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from src.database import database
+from src.schemas import GeneralResponse
 from src.user.constants import Info
 from src.user.exceptions import (
     UserCreateFailed,
@@ -6,12 +9,14 @@ from src.user.exceptions import (
     UserNotFound,
     UserQuestGetStatsFailed,
     UserQuestHistoryFailed,
+    UserUpdateGoalFailed,
 )
 from src.user.schemas import (
     ResponseStatsQuest,
     ResponseUserCreated,
     ResponseUserHistoryQuest,
     UserCreate,
+    UserGoalUpdate,
 )
 from src.utils import pagination
 
@@ -122,3 +127,21 @@ async def stats(user_id: str) -> ResponseStatsQuest:
     except Exception as e:
         print(e)
         raise UserQuestGetStatsFailed()
+
+
+async def update_goal(user_id: str, data: UserGoalUpdate) -> GeneralResponse:
+    try:
+        goal = await database.users.update_one(
+            {"userId": user_id},
+            {"$set": {"goal": data.goal, "created_at": datetime.now()}},
+        )
+
+        if not goal.matched_count:
+            raise UserNotFound()
+
+        return {"message": Info.USER_UPDATE_GOAL}
+    except UserNotFound:
+        raise UserNotFound()
+    except Exception as e:
+        print(e)
+        raise UserUpdateGoalFailed()

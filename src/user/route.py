@@ -5,6 +5,7 @@ from src.user import service
 from src.user.schemas import (
     ResponseStatsQuest,
     ResponseUserCreated,
+    ResponseUserDetail,
     ResponseUserHistoryQuest,
     UserCreate,
     UserGoalUpdate,
@@ -20,7 +21,9 @@ async def register_user(data: UserCreate):
     return user
 
 
-@router.get("/users/{user_id}/detail", status_code=200, response_model=UserCreate)
+@router.get(
+    "/users/{user_id}/detail", status_code=200, response_model=ResponseUserDetail
+)
 async def get_user(user_id: str):
     """Get User"""
     user = await service.get_user(user_id)

@@ -1,10 +1,8 @@
-import axios from "axios";
-import { BASE_URL_BACKEND } from "../config/index.js";
-
+import axiosInstance from "../config/axios.js";
 
 export const healthCheck = async () => {
     try {
-        const response = await axios.get(`${BASE_URL_BACKEND}/api/healthcheck`);
+        const response = await axiosInstance.get(`/healthcheck`);
         return response.data;
     } catch (error) {
         console.log(error.response.status);

@@ -8,7 +8,6 @@ export const generateQuest = async (userId, type) => {
         })
         return response.data;
     } catch (error) {
-        console.log(error.response.status);
         return false;
     }
 }
@@ -18,7 +17,6 @@ export const acceptQuest = async (questId) => {
         const response = await axiosInstance.post(`/quests/${questId}/accept`);
         return response.data;
     } catch (error) {
-        console.log(error.response.status);
         return false;
     }
 }
@@ -30,7 +28,6 @@ export const updateStatusQuest = async (questId, status) => {
         })
         return response.data;
     } catch (error) {
-        console.log(error.response.status);
         return false;
     }
 }
@@ -40,7 +37,6 @@ export const detailQuest = async (questId) => {
         const response = await axiosInstance.get(`/quests/${questId}`);
         return response.data;
     } catch (error) {
-        console.log(error.response.status);
         return false;
     }
 }

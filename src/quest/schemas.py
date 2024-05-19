@@ -48,3 +48,6 @@ class ResponseGetQuest(BaseModel):
 class UpdateStatusQuest(BaseModel):
     status: str
     statusUpdatedAt: datetime = Field(default_factory=datetime.now)
+
+    class Config:
+        json_schema_extra = {"example": {"status": "completed"}}

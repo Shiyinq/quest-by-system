@@ -16,7 +16,32 @@ axiosInstance.interceptors.response.use(
         return response;
     },
     (error) => {
-        console.log(error.response);
+        if (error.response) {
+            switch (error.response.status) {
+                case 400:
+                    console.error("Bad Request:", error.response.data);
+                    break;
+                case 401:
+                    console.error("Unauthorized:", error.response.data);
+                    break;
+                case 403:
+                    console.error("Forbidden:", error.response.data);
+                    break;
+                case 404:
+                    console.error("Not Found:", error.response.data);
+                    break;
+                case 500:
+                    console.error("Internal Server Error:", error.response.data);
+                    break;
+                default:
+                    console.error("Error:", error.response.data);
+            }
+        } else if (error.request) {
+            console.error("No response received:", error.request);
+        } else {
+            console.error("Error setting up request:", error.message);
+        }
+
         return Promise.reject(error);
     }
 );

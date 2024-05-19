@@ -1,9 +1,8 @@
-import axios from "axios";
-import { BASE_URL_BACKEND } from "../config/index.js";
+import axiosInstance from "../config/axios.js";
 
 export const generateQuest = async (userId, type) => {
     try {
-        const response = await axios.post(`${BASE_URL_BACKEND}/api/quests/generate`, {
+        const response = await axiosInstance.post(`/quests/generate`, {
             userId: userId,
             type: type,
         })
@@ -16,7 +15,7 @@ export const generateQuest = async (userId, type) => {
 
 export const acceptQuest = async (questId) => {
     try {
-        const response = await axios.post(`${BASE_URL_BACKEND}/api/quests/${questId}/accept`);
+        const response = await axiosInstance.post(`/quests/${questId}/accept`);
         return response.data;
     } catch (error) {
         console.log(error.response.status);
@@ -26,7 +25,7 @@ export const acceptQuest = async (questId) => {
 
 export const updateStatusQuest = async (questId, status) => {
     try {
-        const response = await axios.put(`${BASE_URL_BACKEND}/api/quests/${questId}/status`, {
+        const response = await axiosInstance.put(`/quests/${questId}/status`, {
             status: status
         })
         return response.data;
@@ -38,7 +37,7 @@ export const updateStatusQuest = async (questId, status) => {
 
 export const detailQuest = async (questId) => {
     try {
-        const response = await axios.get(`${BASE_URL_BACKEND}/api/quests/${questId}`);
+        const response = await axiosInstance.get(`/quests/${questId}`);
         return response.data;
     } catch (error) {
         console.log(error.response.status);

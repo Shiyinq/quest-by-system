@@ -1,9 +1,8 @@
-import axios from "axios";
-import { BASE_URL_BACKEND } from "../config/index.js";
+import axiosInstance from "../config/axios.js";
 
 export const userRegister = async (userId, name) => {
     try {
-        const response = await axios.post(`${BASE_URL_BACKEND}/api/users/register`, {
+        const response = await axiosInstance.post(`/users/register`, {
             userId: userId,
             name: name,
             source: "telegram"
@@ -17,7 +16,7 @@ export const userRegister = async (userId, name) => {
 
 export const setUserGoal = async (userId, goal) => {
     try {
-        const response = await axios.post(`${BASE_URL_BACKEND}/api/users/${userId}/goal`, {
+        const response = await axiosInstance.post(`/users/${userId}/goal`, {
             goal: goal
         })
         return response.data;
@@ -29,7 +28,7 @@ export const setUserGoal = async (userId, goal) => {
 
 export const userDetail = async (userId) => {
     try {
-        const response = await axios.get(`${BASE_URL_BACKEND}/api/users/${userId}/detail`);
+        const response = await axiosInstance.get(`/users/${userId}/detail`);
         return response.data;
     } catch (error) {
         console.log(error.response.status);
@@ -42,7 +41,7 @@ export const userDetail = async (userId) => {
 
 export const userQuestHistory = async (userId, type = "all", status = null, page = 1, limit = 8) => {
     try {
-        const response = await axios.get(`${BASE_URL_BACKEND}/api/users/${userId}/quests/history?type=${type}&status=${status}&page=${page}&limit=${limit}`);
+        const response = await axiosInstance.get(`/users/${userId}/quests/history?type=${type}&status=${status}&page=${page}&limit=${limit}`);
         return response.data;
     } catch (error) {
         console.log(error.response.status);
@@ -52,7 +51,7 @@ export const userQuestHistory = async (userId, type = "all", status = null, page
 
 export const userQuestStats = async (userId) => {
     try {
-        const response = await axios.get(`${BASE_URL_BACKEND}/api/users/${userId}/quests/stats`);
+        const response = await axiosInstance.get(`/users/${userId}/quests/stats`);
         return response.data;
     } catch (error) {
         console.log(error.response.status);

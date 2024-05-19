@@ -9,7 +9,6 @@ export const userRegister = async (userId, name) => {
         })
         return response.data;
     } catch (error) {
-        console.log(error.response.status);
         return false;
     }
 }
@@ -21,7 +20,6 @@ export const setUserGoal = async (userId, goal) => {
         })
         return response.data;
     } catch (error) {
-        console.log(error.response.status);
         return false;
     }
 }
@@ -31,7 +29,6 @@ export const userDetail = async (userId) => {
         const response = await axiosInstance.get(`/users/${userId}/detail`);
         return response.data;
     } catch (error) {
-        console.log(error.response.status);
         if (error.response.status == 404) {
             return 404;
         }
@@ -44,7 +41,6 @@ export const userQuestHistory = async (userId, type = "all", status = null, page
         const response = await axiosInstance.get(`/users/${userId}/quests/history?type=${type}&status=${status}&page=${page}&limit=${limit}`);
         return response.data;
     } catch (error) {
-        console.log(error.response.status);
         return false;
     }
 }
@@ -54,7 +50,6 @@ export const userQuestStats = async (userId) => {
         const response = await axiosInstance.get(`/users/${userId}/quests/stats`);
         return response.data;
     } catch (error) {
-        console.log(error.response.status);
         return false;
     }
 }

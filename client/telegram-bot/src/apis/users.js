@@ -29,7 +29,7 @@ export const userDetail = async (userId) => {
         const response = await axiosInstance.get(`/users/${userId}/detail`);
         return response.data;
     } catch (error) {
-        if (error.response.status == 404) {
+        if (error?.response?.status == 404) {
             return 404;
         }
         return false;

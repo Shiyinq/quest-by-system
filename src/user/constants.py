@@ -3,6 +3,7 @@ class ErrorCode:
     USER_CREATE_FAILED = "Failed register."
     USER_GET_DETAIL_FAILED = "Failed to get detail user."
     USER_QUEST_HISTORY_FAILED = "Failed to get quest history."
+    USER_QUEST_GENERATED_FAILED = "Failed to get generated quest."
     USER_QUEST_GET_STATS_FAILED = "Failed to get stats."
     USER_UPDATE_GOAL_FAILED = "Failed to update goal."
 

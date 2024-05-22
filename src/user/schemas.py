@@ -74,9 +74,23 @@ class DataUserQuestHistory(BaseModel):
     acceptedAt: datetime = None
 
 
+class DataUserQuestGenerated(BaseModel):
+    questId: str
+    userId: str
+    type: str
+    quest: str
+    status: str
+    createdAt: datetime
+
+
 class ResponseUserHistoryQuest(BaseModel):
     metadata: Metadata
     data: List[DataUserQuestHistory]
+
+
+class ResponseUserGeneratedQuest(BaseModel):
+    metadata: Metadata
+    data: List[DataUserQuestGenerated]
 
 
 class TaskStatus(BaseModel):

@@ -18,6 +18,10 @@ class UserQuestHistoryFailed(InternalServerError):
     DETAIL = ErrorCode.USER_QUEST_HISTORY_FAILED
 
 
+class UserQuestGeneratedFailed(InternalServerError):
+    DETAIL = ErrorCode.USER_QUEST_GENERATED_FAILED
+
+
 class UserQuestGetStatsFailed(InternalServerError):
     DETAIL = ErrorCode.USER_QUEST_GET_STATS_FAILED
 

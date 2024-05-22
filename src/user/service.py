@@ -7,6 +7,7 @@ from src.user.exceptions import (
     UserCreateFailed,
     UserGetDetailFailed,
     UserNotFound,
+    UserQuestGeneratedFailed,
     UserQuestGetStatsFailed,
     UserQuestHistoryFailed,
     UserUpdateGoalFailed,
@@ -15,6 +16,7 @@ from src.user.schemas import (
     ResponseStatsQuest,
     ResponseUserCreated,
     ResponseUserDetail,
+    ResponseUserGeneratedQuest,
     ResponseUserHistoryQuest,
     UserCreate,
     UserGoalUpdate,
@@ -44,6 +46,33 @@ async def get_user(user_id: str) -> ResponseUserDetail:
     except Exception as e:
         print(e)
         raise UserGetDetailFailed()
+
+
+async def user_quest_generated(
+    user_id: str, page: int, limit: int
+) -> ResponseUserGeneratedQuest:
+    skip = (page - 1) * limit
+    try:
+        query = {"userId": user_id}
+        user = await database.users.find_one(query, {"_id": 0})
+        if not user:
+            raise UserNotFound()
+
+        total_generated = await database.generated_quest.count_documents(query)
+        generated = (
+            await database.generated_quest.find(query, {"_id": 0})
+            .sort("createdAt", -1)
+            .skip(skip)
+            .limit(limit)
+            .to_list(length=None)
+        )
+        metadata = pagination(total_generated, page, limit)
+        return {"metadata": metadata, "data": generated}
+    except UserNotFound:
+        raise UserNotFound()
+    except Exception as e:
+        print(e)
+        raise UserQuestGeneratedFailed()
 
 
 async def user_quest_history(

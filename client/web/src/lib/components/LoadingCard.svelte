@@ -1,10 +1,9 @@
-
 <div class="dialog">
-    <p>Loading...</p>
+	<p>Loading...</p>
 </div>
 
 <style>
-    .dialog {
+	.dialog {
 		width: 480px;
 		padding: 20px;
 		border-radius: 10px;

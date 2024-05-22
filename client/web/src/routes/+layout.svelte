@@ -1,10 +1,10 @@
 <script>
-	import Header from "$lib/components/layout/Header.svelte";
-	import Footer from "$lib/components/layout/Footer.svelte";
-	import { onMount } from "svelte";
-	import { goto } from "$app/navigation";
+	import Header from '$lib/components/layout/Header.svelte';
+	import Footer from '$lib/components/layout/Footer.svelte';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
-    const userInfo = {
+	const userInfo = {
 		userId: '123123',
 		name: 'Zero',
 		goal: 'UI Designer',
@@ -14,11 +14,11 @@
 	};
 	onMount(() => {
 		if (!localStorage.userId) {
-			goto("/auth");
-		}else {
-			goto("/");
+			goto('/auth');
+		} else {
+			goto('/');
 		}
-	})
+	});
 </script>
 
 {#if localStorage.userId}
@@ -28,5 +28,5 @@
 <slot />
 
 {#if localStorage.userId}
-	<Footer userInfo={userInfo}/>
+	<Footer {userInfo} />
 {/if}

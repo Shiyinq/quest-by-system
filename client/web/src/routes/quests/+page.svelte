@@ -40,6 +40,7 @@
 			title="📅 Daily"
 			description="Your daily quest"
 			quests={dailyQuests}
+			moreQuestType={"daily"}
 		/>
 	{:catch}
 		<ReFetchData actionButton={reFetchDailyQuests} />
@@ -52,6 +53,7 @@
 			title="📆 Weekly"
 			description="Your weekly quest"
 			quests={weeklyQuests}
+			moreQuestType="weekly"
 		/>
 	{:catch}
 		<ReFetchData actionButton={reFetchWeeklyQuests} />
@@ -64,6 +66,7 @@
 			title="🗓️ Monthly"
 			description="Your monthly quest"
 			quests={monthlyQuests}
+			moreQuestType="monthly"
 		/>
 	{:catch}
 		<ReFetchData actionButton={reFetchMonthlyQuests} />
@@ -76,6 +79,7 @@
 			title="🗓️ Monthly"
 			description="Your monthly quest"
 			quests={sideQuests}
+			moreQuestType="side"
 		/>
 	{:catch}
 		<ReFetchData actionButton={reFetchSideQuests} />

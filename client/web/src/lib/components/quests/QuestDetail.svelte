@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { updateQuestStatus } from '$lib/apis/quests';
+	import { updateQuestStatus, acceptQuest } from '$lib/apis/quests';
 	import { marked } from 'marked';
 
 	export let quest;
@@ -25,6 +25,17 @@
 		try {
 			loading = true;
 			await updateQuestStatus(questId, status);
+			statusChange = true;
+			loading = true;
+		} catch (error) {
+			loading = false;
+		}
+	};
+
+	const acceptQuestGenerated = async (questId: string) => {
+		try {
+			loading = true;
+			await acceptQuest(questId);
 			statusChange = true;
 			loading = true;
 		} catch (error) {
@@ -60,7 +71,7 @@
 			{#if quest.status == 'generated'}
 				<button
 					class="nb-button blue"
-					on:click={async () => await changeStatusQuest(quest.questId, 'accepted')}
+					on:click={async () => await acceptQuestGenerated(quest.questId)}
 				>
 					{#if loadingStatusChange}
 						🔄 Loading...

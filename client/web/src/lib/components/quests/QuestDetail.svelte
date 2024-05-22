@@ -30,14 +30,14 @@
 		} catch (error) {
 			loading = false;
 		}
-	}
+	};
 </script>
 
 <div class={trimContent}>
 	{#if statusChange}
 		<div class="alert success">
 			<p>Status updated successfully!</p>
-		</div>  
+		</div>
 	{/if}
 	<div class="quest-info">
 		<p>Id: {quest.questId}</p>
@@ -58,7 +58,10 @@
 	<div class="quest-button-container">
 		{#if !statusChanged}
 			{#if quest.status == 'generated'}
-				<button class="nb-button blue" on:click={async () => await changeStatusQuest(quest.questId, 'accepted')}>
+				<button
+					class="nb-button blue"
+					on:click={async () => await changeStatusQuest(quest.questId, 'accepted')}
+				>
 					{#if loadingStatusChange}
 						🔄 Loading...
 					{:else}
@@ -67,7 +70,10 @@
 				</button>
 			{/if}
 			{#if quest.status == 'in progress'}
-				<button class="nb-button green" on:click={async () => await changeStatusQuest(quest.questId, 'completed')}>
+				<button
+					class="nb-button green"
+					on:click={async () => await changeStatusQuest(quest.questId, 'completed')}
+				>
 					{#if loadingStatusChange}
 						🔄 Loading...
 					{:else}

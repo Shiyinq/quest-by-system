@@ -11,14 +11,13 @@
     
     const questType = $page.params.questType;
 
-    let userId = "123";
     let list: any[] = [];
     let pages = 1;
 
     const infiniteHandler = async (event: CustomEvent<InfiniteEventDetail>) => {
         const { loaded, complete } = event.detail;
         try {
-            const {metadata, data} = await getUserQuestHistory(userId, questType, "null", pages);
+            const {metadata, data} = await getUserQuestHistory(localStorage.userId, questType, "null", pages);
             if (metadata.nextPage) {
                 pages = metadata.nextPage; 
                 list = [...list, ...data];

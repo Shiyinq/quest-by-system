@@ -4,26 +4,25 @@
 	import ReFetchData from "$lib/components/ReFetchData.svelte";
 	import CardQuests from "$lib/components/quests/CardQuests.svelte";
 
-	let userId = "123";
-	let getDailyQuests = getUserQuestHistory(userId, "daily");
-	let getWeeklyQuests = getUserQuestHistory(userId, "weekly");
-	let getMonthlyQuests = getUserQuestHistory(userId, "monthly");
-	let getSideQuests = getUserQuestHistory(userId, "side");
+	let getDailyQuests = getUserQuestHistory(localStorage.userId, "daily");
+	let getWeeklyQuests = getUserQuestHistory(localStorage.userId, "weekly");
+	let getMonthlyQuests = getUserQuestHistory(localStorage.userId, "monthly");
+	let getSideQuests = getUserQuestHistory(localStorage.userId, "side");
 
 	const reFetchDailyQuests = () => {
-		getDailyQuests = getUserQuestHistory(userId, "daily");
+		getDailyQuests = getUserQuestHistory(localStorage.userId, "daily");
 	}
 
 	const reFetchWeeklyQuests = () => {
-		getWeeklyQuests = getUserQuestHistory(userId, "weekly");
+		getWeeklyQuests = getUserQuestHistory(localStorage.userId, "weekly");
 	}
 
 	const reFetchMonthlyQuests = () => {
-		getMonthlyQuests = getUserQuestHistory(userId, "monthly");
+		getMonthlyQuests = getUserQuestHistory(localStorage.userId, "monthly");
 	}
 
 	const reFetchSideQuests = () => {
-		getSideQuests = getUserQuestHistory(userId, "side");
+		getSideQuests = getUserQuestHistory(localStorage.userId, "side");
 	}
 </script>
 

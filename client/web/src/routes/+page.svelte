@@ -5,16 +5,15 @@
 	import LoadingCard from "$lib/components/LoadingCard.svelte";
 	import ReFetchData from "$lib/components/ReFetchData.svelte";
 
-	let userId = "123";
-	let getGeneratedQuest = getUserQuestGenerated(userId);
-	let getAcceptedQuest = getUserQuestHistory(userId, "all", "in progress");
+	let getGeneratedQuest = getUserQuestGenerated(localStorage.userId);
+	let getAcceptedQuest = getUserQuestHistory(localStorage.userId, "all", "in progress");
 
 	const reFetchGeneratedQuest = () => {
-		getGeneratedQuest = getUserQuestGenerated(userId);
+		getGeneratedQuest = getUserQuestGenerated(localStorage.userId);
 	}
 
 	const reFetchAcceptedQuest = () => {
-		getAcceptedQuest = getUserQuestHistory(userId, "all", "in progress");
+		getAcceptedQuest = getUserQuestHistory(localStorage.userId, "all", "in progress");
 	}
 </script>
 

@@ -6,8 +6,8 @@
 	import ReFetchData from "$lib/components/ReFetchData.svelte";
 
 	let userId = "123";
-	let getUserInfo = getUserDetail(userId);
-	let getQuestStats = getUserQuestStats(userId);
+	let getUserInfo = getUserDetail(localStorage.userId);
+	let getQuestStats = getUserQuestStats(localStorage.userId);
 
 	const questTypes = [
 		{ title: "📋 Daily Quest", key: "daily" },
@@ -17,11 +17,11 @@
 	];
 
 	const reFetchUserInfo = () => {
-		getUserInfo = getUserDetail(userId);
+		getUserInfo = getUserDetail(localStorage.userId);
 	}
 
 	const reFetchQuestStats = () => {
-		getQuestStats = getUserQuestStats(userId);
+		getQuestStats = getUserQuestStats(localStorage.userId);
 	}
 
 </script>

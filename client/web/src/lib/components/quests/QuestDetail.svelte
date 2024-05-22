@@ -23,7 +23,7 @@
         <p>Created At: {quest.createdAt}</p>
         {#if !showMoreButton}
             <div class="quest-button-container">
-                <button class="nb-button blue" on:click={showMore}>🔄 Show more</button>
+                <button class="nb-button blue" on:click={showMore}>⬇️ Show more</button>
             </div>
         {/if}
     </div>
@@ -40,7 +40,7 @@
             <button class="nb-button green">✅  Completed</button>
         {/if}
         {#if showMoreButton}
-            <button class="nb-button sky-blue" on:click={showMore}>🔄 Hide Content</button>
+            <button class="nb-button sky-blue" on:click={showMore}>⬆️ Show less</button>
         {/if}
     </div>
 </div>

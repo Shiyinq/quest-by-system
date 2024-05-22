@@ -11,6 +11,20 @@ export const getQuestDetail = async (questId: string) => {
 	}
 };
 
+export const acceptQuest = async (questId: string) => {
+	try {
+		const response = await fetch(`${QUEBYS_API_BASE_URL}/quests/${questId}/accept`, {
+			method: 'POST'
+		});
+
+		const data = await response.json();
+		return data;
+	} catch (err) {
+		console.log(err);
+		throw err;
+	}
+};
+
 export const updateQuestStatus = async (questId: string, status: string) => {
 	try {
 		const response = await fetch(`${QUEBYS_API_BASE_URL}/quests/${questId}/status`, {

@@ -1,54 +1,54 @@
 <script>
-	import { getUserQuestHistory } from "$lib/apis/users";
-	import LoadingCard from "$lib/components/LoadingCard.svelte";
-	import ReFetchData from "$lib/components/ReFetchData.svelte";
-	import CardQuests from "$lib/components/quests/CardQuests.svelte";
+	import { getUserQuestHistory } from '$lib/apis/users';
+	import LoadingCard from '$lib/components/LoadingCard.svelte';
+	import ReFetchData from '$lib/components/ReFetchData.svelte';
+	import CardQuests from '$lib/components/quests/CardQuests.svelte';
 
-	let getDailyQuests = getUserQuestHistory(localStorage.userId, "daily");
-	let getWeeklyQuests = getUserQuestHistory(localStorage.userId, "weekly");
-	let getMonthlyQuests = getUserQuestHistory(localStorage.userId, "monthly");
-	let getSideQuests = getUserQuestHistory(localStorage.userId, "side");
+	let getDailyQuests = getUserQuestHistory(localStorage.userId, 'daily');
+	let getWeeklyQuests = getUserQuestHistory(localStorage.userId, 'weekly');
+	let getMonthlyQuests = getUserQuestHistory(localStorage.userId, 'monthly');
+	let getSideQuests = getUserQuestHistory(localStorage.userId, 'side');
 
 	const reFetchDailyQuests = () => {
-		getDailyQuests = getUserQuestHistory(localStorage.userId, "daily");
-	}
+		getDailyQuests = getUserQuestHistory(localStorage.userId, 'daily');
+	};
 
 	const reFetchWeeklyQuests = () => {
-		getWeeklyQuests = getUserQuestHistory(localStorage.userId, "weekly");
-	}
+		getWeeklyQuests = getUserQuestHistory(localStorage.userId, 'weekly');
+	};
 
 	const reFetchMonthlyQuests = () => {
-		getMonthlyQuests = getUserQuestHistory(localStorage.userId, "monthly");
-	}
+		getMonthlyQuests = getUserQuestHistory(localStorage.userId, 'monthly');
+	};
 
 	const reFetchSideQuests = () => {
-		getSideQuests = getUserQuestHistory(localStorage.userId, "side");
-	}
+		getSideQuests = getUserQuestHistory(localStorage.userId, 'side');
+	};
 </script>
 
 <div class="card-container">
-    <div class="dialog">
-        <h2>📜 Quests</h2>
-        <p>Your quest history</p>
-    </div>
+	<div class="dialog">
+		<h2>📜 Quests</h2>
+		<p>Your quest history</p>
+	</div>
 
 	{#await getDailyQuests}
 		<LoadingCard />
 	{:then dailyQuests}
-		<CardQuests 
+		<CardQuests
 			title="📅 Daily"
 			description="Your daily quest"
 			quests={dailyQuests}
-			moreQuestType={"daily"}
+			moreQuestType={'daily'}
 		/>
 	{:catch}
 		<ReFetchData actionButton={reFetchDailyQuests} />
 	{/await}
-	
+
 	{#await getWeeklyQuests}
 		<LoadingCard />
 	{:then weeklyQuests}
-		<CardQuests 
+		<CardQuests
 			title="📆 Weekly"
 			description="Your weekly quest"
 			quests={weeklyQuests}
@@ -61,7 +61,7 @@
 	{#await getMonthlyQuests}
 		<LoadingCard />
 	{:then monthlyQuests}
-		<CardQuests 
+		<CardQuests
 			title="🗓️ Monthly"
 			description="Your monthly quest"
 			quests={monthlyQuests}
@@ -74,7 +74,7 @@
 	{#await getSideQuests}
 		<LoadingCard />
 	{:then sideQuests}
-		<CardQuests 
+		<CardQuests
 			title="🗓️ Side"
 			description="Your side quest"
 			quests={sideQuests}
@@ -86,13 +86,13 @@
 </div>
 
 <style>
-    .card-container {
+	.card-container {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 
-    .dialog {
+	.dialog {
 		width: 480px;
 		padding: 20px;
 		border-radius: 10px;

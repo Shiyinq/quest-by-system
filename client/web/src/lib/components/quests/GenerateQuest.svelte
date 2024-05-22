@@ -1,16 +1,16 @@
 <div class="dialog">
-    <h2>🔄 Generate Quest</h2>
-    <p>Generate and receive quests based on the type you choose</p>
-    <div class="button-container">
-        <button class="nb-button blue rounded">Daily</button>
-        <button class="nb-button blue rounded">Weekly</button>
-        <button class="nb-button blue rounded">Monthly</button>
-        <button class="nb-button blue rounded">Side</button>
-    </div>
+	<h2>🔄 Generate Quest</h2>
+	<p>Generate and receive quests based on the type you choose</p>
+	<div class="button-container">
+		<button class="nb-button blue rounded">Daily</button>
+		<button class="nb-button blue rounded">Weekly</button>
+		<button class="nb-button blue rounded">Monthly</button>
+		<button class="nb-button blue rounded">Side</button>
+	</div>
 </div>
 
 <style>
-    .dialog {
+	.dialog {
 		width: 480px;
 		padding: 20px;
 		border-radius: 10px;

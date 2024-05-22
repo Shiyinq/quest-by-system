@@ -1,20 +1,20 @@
 <script>
-	import { getUserQuestGenerated, getUserQuestHistory } from "$lib/apis/users";
-	import CardQuests from "$lib/components/quests/CardQuests.svelte";
-	import GenerateQuest from "$lib/components/quests/GenerateQuest.svelte";
-	import LoadingCard from "$lib/components/LoadingCard.svelte";
-	import ReFetchData from "$lib/components/ReFetchData.svelte";
+	import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
+	import CardQuests from '$lib/components/quests/CardQuests.svelte';
+	import GenerateQuest from '$lib/components/quests/GenerateQuest.svelte';
+	import LoadingCard from '$lib/components/LoadingCard.svelte';
+	import ReFetchData from '$lib/components/ReFetchData.svelte';
 
 	let getGeneratedQuest = getUserQuestGenerated(localStorage.userId);
-	let getAcceptedQuest = getUserQuestHistory(localStorage.userId, "all", "in progress");
+	let getAcceptedQuest = getUserQuestHistory(localStorage.userId, 'all', 'in progress');
 
 	const reFetchGeneratedQuest = () => {
 		getGeneratedQuest = getUserQuestGenerated(localStorage.userId);
-	}
+	};
 
 	const reFetchAcceptedQuest = () => {
-		getAcceptedQuest = getUserQuestHistory(localStorage.userId, "all", "in progress");
-	}
+		getAcceptedQuest = getUserQuestHistory(localStorage.userId, 'all', 'in progress');
+	};
 </script>
 
 <div class="card-container">
@@ -30,11 +30,11 @@
 	{:catch}
 		<ReFetchData actionButton={reFetchGeneratedQuest} />
 	{/await}
-    
-	{#await getAcceptedQuest }
+
+	{#await getAcceptedQuest}
 		<LoadingCard />
 	{:then acceptedQuests}
-		<CardQuests 
+		<CardQuests
 			title="📜 Recently Accepted Quests"
 			description="Recently received quests"
 			quests={acceptedQuests}
@@ -45,7 +45,7 @@
 </div>
 
 <style>
-    .card-container {
+	.card-container {
 		display: flex;
 		flex-direction: column;
 		align-items: center;

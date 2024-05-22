@@ -18,7 +18,11 @@
         const { loaded, complete } = event.detail;
         try {
             const {metadata, data} = await getUserQuestHistory(localStorage.userId, questType, "null", pages);
-            if (metadata.nextPage) {
+            if (pages == 1) {
+                list = [...list, ...data];
+                pages += 1
+                loaded();
+            }else if (metadata.nextPage) {
                 pages = metadata.nextPage; 
                 list = [...list, ...data];
                 loaded();

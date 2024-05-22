@@ -1,18 +1,23 @@
 <script>
+	export let loading = false;
     export let title = "";
     export let description = "";
-    export let quests = []
+    export let quests;
 </script>
 
 
 <div class="dialog">
     <h2>{title}</h2>
     <p>{description}</p>
+	{#if loading}
+		<p>Loading...</p>
+	{:else}
     <ul class="quest-list">
-        {#each quests as quest}
-            <li><a class="quest-link" href="quests/1">{quest}</a></li>
+        {#each quests.data as {questId}}
+            <li><a class="quest-link" href={'quests/' + questId}>{'/'+questId}</a></li>
         {/each}
     </ul>
+	{/if}
 </div>
 
 

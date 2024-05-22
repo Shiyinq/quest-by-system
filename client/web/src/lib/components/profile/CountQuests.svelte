@@ -1,18 +1,18 @@
 <script>
     export let title = "";
     export let quest = {
-		inProgress: 0,
+		in_progress: 0,
 		completed: 0,
-		notCompleted: 0
+		not_completed: 0
 	};
 </script>
 
 <div class="dialog task-category">
     <h2>{title}</h2>
     <ul>
-        <li>In Progress: {quest.inProgress}</li>
+        <li>In Progress: {quest.in_progress}</li>
         <li>Completed: {quest.completed}</li>
-        <li>Not Completed: {quest.notCompleted}</li>
+        <li>Not Completed: {quest.not_completed}</li>
     </ul>
 </div>
 

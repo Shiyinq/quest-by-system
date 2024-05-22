@@ -1,18 +1,5 @@
 <script>
-	import {beforeNavigate} from "$app/navigation"
-
-	beforeNavigate((navigation) => {
-		console.log({before: navigation})
-	});
-
-	const userInfo = {
-		userId: '123123',
-		name: 'Zero',
-		goal: 'UI Designer',
-		source: 'Telegram',
-		createdAt: '5/14/2024 9:17:47 PM',
-		updatedAt: '5/14/2024 9:17:47 PM'
-	};
+	export let userInfo;
 </script>
 
 <div class="dialog user-info">

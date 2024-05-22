@@ -1,10 +1,30 @@
 <script>
+	import { getUserQuestHistory } from "$lib/apis/users";
+	import LoadingCard from "$lib/components/LoadingCard.svelte";
+	import ReFetchData from "$lib/components/ReFetchData.svelte";
 	import CardQuests from "$lib/components/quests/CardQuests.svelte";
 
-	const dailyQuests = ["Quest 1", "Quest 2", "Quest 3"];
-	const weeklyQuests = ["Quest 1", "Quest 2", "Quest 3"];
-	const monthlyQuests = ["Quest 1", "Quest 2", "Quest 3"];
-	const sideQuests = ["Quest 1", "Quest 2", "Quest 3"];
+	let userId = "123";
+	let getDailyQuests = getUserQuestHistory(userId, "daily");
+	let getWeeklyQuests = getUserQuestHistory(userId, "weekly");
+	let getMonthlyQuests = getUserQuestHistory(userId, "monthly");
+	let getSideQuests = getUserQuestHistory(userId, "side");
+
+	const reFetchDailyQuests = () => {
+		getDailyQuests = getUserQuestHistory(userId, "daily");
+	}
+
+	const reFetchWeeklyQuests = () => {
+		getWeeklyQuests = getUserQuestHistory(userId, "weekly");
+	}
+
+	const reFetchMonthlyQuests = () => {
+		getMonthlyQuests = getUserQuestHistory(userId, "monthly");
+	}
+
+	const reFetchSideQuests = () => {
+		getSideQuests = getUserQuestHistory(userId, "side");
+	}
 </script>
 
 <div class="card-container">
@@ -13,29 +33,53 @@
         <p>Your quest history</p>
     </div>
 
-	<CardQuests 
-		title="📅 Daily"
-		description="Your daily quest"
-		quests={dailyQuests}
-	/>
+	{#await getDailyQuests}
+		<LoadingCard />
+	{:then dailyQuests}
+		<CardQuests 
+			title="📅 Daily"
+			description="Your daily quest"
+			quests={dailyQuests}
+		/>
+	{:catch}
+		<ReFetchData actionButton={reFetchDailyQuests} />
+	{/await}
+	
+	{#await getWeeklyQuests}
+		<LoadingCard />
+	{:then weeklyQuests}
+		<CardQuests 
+			title="📆 Weekly"
+			description="Your weekly quest"
+			quests={weeklyQuests}
+		/>
+	{:catch}
+		<ReFetchData actionButton={reFetchWeeklyQuests} />
+	{/await}
 
-	<CardQuests 
-		title="📆 Weekly"
-		description="Your weekly quest"
-		quests={weeklyQuests}
-	/>
+	{#await getMonthlyQuests}
+		<LoadingCard />
+	{:then monthlyQuests}
+		<CardQuests 
+			title="🗓️ Monthly"
+			description="Your monthly quest"
+			quests={monthlyQuests}
+		/>
+	{:catch}
+		<ReFetchData actionButton={reFetchMonthlyQuests} />
+	{/await}
 
-	<CardQuests 
-		title="🗓️ Monthly"
-		description="Your monthly quest"
-		quests={monthlyQuests}
-	/>
-
-	<CardQuests 
-		title="➡️ Side"
-		description="Your side quest"
-		quests={sideQuests}
-	/>
+	{#await getSideQuests}
+		<LoadingCard />
+	{:then sideQuests}
+		<CardQuests 
+			title="🗓️ Monthly"
+			description="Your monthly quest"
+			quests={sideQuests}
+		/>
+	{:catch}
+		<ReFetchData actionButton={reFetchSideQuests} />
+	{/await}
 </div>
 
 <style>

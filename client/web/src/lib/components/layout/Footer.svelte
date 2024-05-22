@@ -1,10 +1,4 @@
-<script>
-	export let userInfo = { name: '' };
-</script>
-
-<div class="footer">
-	Keep up the good work! 💪🚀 and ✨ Stay awesome, {userInfo.name}! ✨
-</div>
+<div class="footer">Keep up the good work! 💪🚀</div>
 
 <style>
 	.footer {

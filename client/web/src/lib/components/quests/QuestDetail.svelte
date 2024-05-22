@@ -1,10 +1,17 @@
-<script>
+<script lang="ts">
+	import { updateQuestStatus } from '$lib/apis/quests';
 	import { marked } from 'marked';
+
 	export let quest;
 	export let showFullContent = false;
 
+	let statusChange = false;
+	let loading = false;
+
 	$: trimContent = showFullContent ? 'dialog' : 'dialog trim-content';
 	$: showMoreButton = showFullContent;
+	$: statusChanged = statusChange;
+	$: loadingStatusChange = loading;
 
 	marked.setOptions({
 		breaks: true
@@ -13,9 +20,25 @@
 	const showMore = () => {
 		showFullContent = !showFullContent;
 	};
+
+	const changeStatusQuest = async (questId: string, status: string) => {
+		try {
+			loading = true;
+			await updateQuestStatus(questId, status);
+			statusChange = true;
+			loading = true;
+		} catch (error) {
+			loading = false;
+		}
+	}
 </script>
 
 <div class={trimContent}>
+	{#if statusChange}
+		<div class="alert success">
+			<p>Status updated successfully!</p>
+		</div>  
+	{/if}
 	<div class="quest-info">
 		<p>Id: {quest.questId}</p>
 		<p>Type: {quest.type}</p>
@@ -33,11 +56,25 @@
 	</div>
 
 	<div class="quest-button-container">
-		{#if quest.status == 'generated'}
-			<button class="nb-button blue">✅ Accept</button>
-		{/if}
-		{#if quest.status == 'in progress'}
-			<button class="nb-button green">✅ Completed</button>
+		{#if !statusChanged}
+			{#if quest.status == 'generated'}
+				<button class="nb-button blue" on:click={async () => await changeStatusQuest(quest.questId, 'accepted')}>
+					{#if loadingStatusChange}
+						🔄 Loading...
+					{:else}
+						✅ Accept
+					{/if}
+				</button>
+			{/if}
+			{#if quest.status == 'in progress'}
+				<button class="nb-button green" on:click={async () => await changeStatusQuest(quest.questId, 'completed')}>
+					{#if loadingStatusChange}
+						🔄 Loading...
+					{:else}
+						✅ Completed
+					{/if}
+				</button>
+			{/if}
 		{/if}
 		{#if showMoreButton}
 			<button class="nb-button sky-blue" on:click={showMore}>⬆️ Show less</button>

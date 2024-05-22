@@ -1,8 +1,8 @@
 <header class="header">
     <div class="dialog navigation">
         <a href="/">🏠 Home</a>
-        <a href="quests">🎯 Quests</a>
-        <a href="profile">👤 Profile</a>
+        <a href="/quests">🎯 Quests</a>
+        <a href="/profile">👤 Profile</a>
     </div>
 </header>
 

@@ -7,8 +7,6 @@
 	onMount(() => {
 		if (!localStorage.userId) {
 			goto('/auth');
-		} else {
-			goto('/');
 		}
 	});
 </script>

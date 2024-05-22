@@ -4,14 +4,6 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
-	const userInfo = {
-		userId: '123123',
-		name: 'Zero',
-		goal: 'UI Designer',
-		source: 'Telegram',
-		createdAt: '5/14/2024 9:17:47 PM',
-		updatedAt: '5/14/2024 9:17:47 PM'
-	};
 	onMount(() => {
 		if (!localStorage.userId) {
 			goto('/auth');
@@ -28,5 +20,5 @@
 <slot />
 
 {#if localStorage.userId}
-	<Footer {userInfo} />
+	<Footer />
 {/if}

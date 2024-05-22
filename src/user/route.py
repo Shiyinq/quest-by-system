@@ -6,6 +6,7 @@ from src.user.schemas import (
     ResponseStatsQuest,
     ResponseUserCreated,
     ResponseUserDetail,
+    ResponseUserGeneratedQuest,
     ResponseUserHistoryQuest,
     UserCreate,
     UserGoalUpdate,
@@ -28,6 +29,17 @@ async def get_user(user_id: str):
     """Get User"""
     user = await service.get_user(user_id)
     return user
+
+
+@router.get(
+    "/users/{user_id}/quests/generated",
+    status_code=200,
+    response_model=ResponseUserGeneratedQuest,
+)
+async def user_quest_generated(user_id: str, page: int = 1, limit: int = 10):
+    """Get User Quest Generated"""
+    generated = await service.user_quest_generated(user_id, page, limit)
+    return generated
 
 
 @router.get(

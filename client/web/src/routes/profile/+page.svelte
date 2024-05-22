@@ -1,53 +1,52 @@
 <script>
+	import { getUserDetail, getUserQuestStats } from "$lib/apis/users";
 	import UserInfo from "$lib/components/profile/UserInfo.svelte";
 	import CountQuests from "$lib/components/profile/CountQuests.svelte";
+	import LoadingCard from "$lib/components/LoadingCard.svelte";
+	import ReFetchData from "$lib/components/ReFetchData.svelte";
 
-	const dailyQuest = {
-		inProgress: 3,
-		completed: 7,
-		notCompleted: 2
-	};
+	let userId = "123";
+	let getUserInfo = getUserDetail(userId);
+	let getQuestStats = getUserQuestStats(userId);
 
-	const weeklyQuest = {
-		inProgress: 0,
-		completed: 3,
-		notCompleted: 1
-	};
+	const questTypes = [
+		{ title: "📋 Daily Quest", key: "daily" },
+		{ title: "📋 Weekly Quest", key: "weekly" },
+		{ title: "📋 Monthly Quest", key: "monthly" },
+		{ title: "📋 Side Quest", key: "side" }
+	];
 
-	const monthlyQuest = {
-		inProgress: 2,
-		completed: 2,
-		notCompleted: 2
-	};
+	const reFetchUserInfo = () => {
+		getUserInfo = getUserDetail(userId);
+	}
 
-	const sideQuest = {
-		inProgress: 1,
-		completed: 4,
-		notCompleted: 0
-	};
+	const reFetchQuestStats = () => {
+		getQuestStats = getUserQuestStats(userId);
+	}
+
 </script>
 
 <div class="card-container">
-	<UserInfo />
+	{#await getUserInfo}
+		<LoadingCard />
+	{:then userInfo}
+		<UserInfo userInfo={userInfo} />
+	{:catch}
+		<ReFetchData actionButton={reFetchUserInfo}/>
+	{/await}
 
-	<CountQuests 
-		title="📋 Daily Quest"
-		quest={dailyQuest}
-	/>
-
-	<CountQuests 
-		title="📋 Weekly Quest"
-		quest={weeklyQuest}
-	/>
-
-	<CountQuests 
-		title="📋 Monthly Quest"
-		quest={monthlyQuest}
-	/>
-	<CountQuests 
-		title="📋 Side Quest"
-		quest={sideQuest}
-	/>
+	{#await getQuestStats}
+		<LoadingCard />
+	{:then countQuests}
+		{#each questTypes as questType}
+			<CountQuests 
+				title={questType.title}
+				quest={countQuests[questType.key]}
+			/>
+		{/each}
+	{:catch}
+		<ReFetchData actionButton={reFetchQuestStats}/>
+	{/await}
 </div>
 
 <style>

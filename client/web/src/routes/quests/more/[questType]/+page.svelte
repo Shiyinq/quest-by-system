@@ -1,39 +1,53 @@
-<script>
+<script lang="ts">
+    interface InfiniteEventDetail {
+        loaded: () => void;
+        complete: () => void;
+    }
+
+    import InfiniteLoading from 'svelte-infinite-loading';
     import QuestDetail from "$lib/components/quests/QuestDetail.svelte";
     import {page} from "$app/stores";
     import { getUserQuestHistory } from "$lib/apis/users";
-
-    import LoadingCard from "$lib/components/LoadingCard.svelte";
-    import ReFetchData from "$lib/components/ReFetchData.svelte";
-
+    
     const questType = $page.params.questType;
 
     let userId = "123";
-    let questHistory = getUserQuestHistory(userId, questType);
-    const reFetchQuestHistory = () => {
-        questHistory = getUserQuestHistory(userId, questType);
+    let list: any[] = [];
+    let pages = 1;
+
+    const infiniteHandler = async (event: CustomEvent<InfiniteEventDetail>) => {
+        const { loaded, complete } = event.detail;
+        try {
+            const {metadata, data} = await getUserQuestHistory(userId, questType, "null", pages);
+            if (metadata.nextPage) {
+                pages = metadata.nextPage; 
+                list = [...list, ...data];
+                loaded();
+            } else {
+                complete();
+            }
+        } catch (error) {
+            complete();
+        }
     }
 </script>
 
 <div class="card-container">
-    {#await questHistory}
-        <LoadingCard />
-    {:then quest}
-        {#each quest.data as data}
-            <QuestDetail 
-                quest={data}
-                showFullContent={false}
-            />
-        {/each}
-    {:catch}
-        <ReFetchData actionButton={reFetchQuestHistory}/>
-    {/await}
+    {#each list as quest}
+        <QuestDetail 
+            quest={quest}
+            showFullContent={false}
+        />
+    {/each}
 </div>
+
+<InfiniteLoading on:infinite={infiniteHandler} />
+<br />
 
 <style>
     .card-container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 </style>

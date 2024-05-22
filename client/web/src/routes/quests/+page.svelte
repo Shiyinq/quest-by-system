@@ -75,8 +75,8 @@
 		<LoadingCard />
 	{:then sideQuests}
 		<CardQuests 
-			title="🗓️ Monthly"
-			description="Your monthly quest"
+			title="🗓️ Side"
+			description="Your side quest"
 			quests={sideQuests}
 			moreQuestType="side"
 		/>

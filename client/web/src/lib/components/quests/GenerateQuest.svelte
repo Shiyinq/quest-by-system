@@ -1,13 +1,60 @@
+<script lang="ts">
+	import { generateQuest } from '$lib/apis/quests';
+	import LoadingCard from '$lib/components/LoadingCard.svelte';
+	import QuestDetail from '$lib/components/quests/QuestDetail.svelte';
+
+	let generating = false;
+	let quest = '';
+	$: colorButton = generating ? 'default disabled' : 'blue';
+
+	const generatingQuest = async (questType: string) => {
+		generating = true;
+		quest = '';
+		try {
+			quest = await generateQuest(localStorage.userId, questType);
+			console.log(quest);
+			generating = false;
+		} catch (err) {
+			console.log(err);
+			generating = false;
+		}
+	};
+</script>
+
 <div class="dialog">
 	<h2>🔄 Generate Quest</h2>
 	<p>Generate and receive quests based on the type you choose</p>
 	<div class="button-container">
-		<button class="nb-button blue rounded">Daily</button>
-		<button class="nb-button blue rounded">Weekly</button>
-		<button class="nb-button blue rounded">Monthly</button>
-		<button class="nb-button blue rounded">Side</button>
+		<button
+			class={'nb-button rounded ' + colorButton}
+			on:click={() => generatingQuest('daily')}
+			disabled={generating}>Daily</button
+		>
+		<button
+			class={'nb-button rounded ' + colorButton}
+			on:click={() => generatingQuest('weekly')}
+			disabled={generating}>Weekly</button
+		>
+		<button
+			class={'nb-button rounded ' + colorButton}
+			on:click={() => generatingQuest('monthly')}
+			disabled={generating}>Monthly</button
+		>
+		<button
+			class={'nb-button rounded ' + colorButton}
+			on:click={() => generatingQuest('side')}
+			disabled={generating}>Side</button
+		>
 	</div>
 </div>
+
+{#if generating}
+	<LoadingCard text="🔄 Generating quest for you, please wait..." />
+{/if}
+
+{#if quest}
+	<QuestDetail {quest} />
+{/if}
 
 <style>
 	.dialog {
@@ -37,5 +84,10 @@
 	.button-container {
 		display: flex;
 		gap: 10px;
+	}
+
+	.disabled {
+		pointer-events: none;
+		cursor: default;
 	}
 </style>

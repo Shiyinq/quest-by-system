@@ -31,7 +31,10 @@ class GenerateQuest(BaseModel):
 class ResponseGeneratedQuest(BaseModel):
     questId: str
     userId: str
+    type: str
     quest: str
+    status: str
+    createdAt: datetime
 
 
 class ResponseGetQuest(BaseModel):

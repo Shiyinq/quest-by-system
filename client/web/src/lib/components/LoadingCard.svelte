@@ -1,5 +1,9 @@
+<script>
+	export let text = 'Loading...';
+</script>
+
 <div class="dialog">
-	<p>Loading...</p>
+	<p>{text}</p>
 </div>
 
 <style>

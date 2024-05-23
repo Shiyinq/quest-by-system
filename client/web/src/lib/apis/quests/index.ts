@@ -1,5 +1,27 @@
 import { QUEBYS_API_BASE_URL } from '$lib/constants';
 
+export const generateQuest = async (userId: string, type: string) => {
+	try {
+		const response = await fetch(`${QUEBYS_API_BASE_URL}/quests/generate`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				userId: userId,
+				type: type
+			})
+		});
+
+		const data = await response.json();
+		return data;
+	} catch (err) {
+		console.log(err);
+		throw err;
+	}
+};
+
 export const getQuestDetail = async (questId: string) => {
 	try {
 		const response = await fetch(`${QUEBYS_API_BASE_URL}/quests/${questId}`);

@@ -1,14 +1,16 @@
 <script lang="ts">
+	import { userId } from '$lib/store';
 	import { goto } from '$app/navigation';
 
-	let userId = localStorage.getItem('userId') || '';
+	let initialUserId = localStorage.getItem('userId') || '';
 
 	const setUserId = (e: any) => {
-		userId = e.target.value;
+		initialUserId = e.target.value;
 	};
 
 	const login = () => {
-		localStorage.setItem('userId', userId);
+		localStorage.setItem('userId', initialUserId);
+		userId.set(initialUserId);
 		goto('/');
 	};
 </script>
@@ -22,7 +24,7 @@
 			<input
 				class="nb-input default"
 				placeholder="ID Telegram"
-				value={userId}
+				value={initialUserId}
 				on:change={setUserId}
 			/>
 		</div>

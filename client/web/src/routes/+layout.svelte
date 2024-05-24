@@ -1,22 +1,23 @@
 <script>
+	import { userId } from '$lib/store';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
 	onMount(() => {
-		if (!localStorage.userId) {
+		if (!$userId) {
 			goto('/auth');
 		}
 	});
 </script>
 
-{#if localStorage.userId}
+{#if $userId}
 	<Header />
 {/if}
 
 <slot />
 
-{#if localStorage.userId}
+{#if $userId}
 	<Footer />
 {/if}

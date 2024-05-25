@@ -1,10 +1,11 @@
 <script>
 	import { getLabelNew } from '$lib/utils';
+
 	export let loading = false;
 	export let title = '';
 	export let description = '';
 	export let quests;
-	export let moreQuestType = 'all';
+	export let query = '?type=all';
 </script>
 
 <div class="dialog">
@@ -23,7 +24,7 @@
 			{/each}
 		</ul>
 		<div class="dialog-footer">
-			<a class="nb-button blue" href={'/quests/more/' + moreQuestType}>More</a>
+			<a class="nb-button blue" href={'/quests/more' + query}>More</a>
 		</div>
 	{/if}
 </div>

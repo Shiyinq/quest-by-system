@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { updateQuestStatus, acceptQuest } from '$lib/apis/quests';
+	import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
+	import { dataGeneratedQuests, dataAcceptedQuests } from '$lib/store';
 	import { marked } from 'marked';
 
 	export let quest;
@@ -21,6 +23,24 @@
 		showFullContent = !showFullContent;
 	};
 
+	const fetchGeneratedQuest = async () => {
+		try {
+			let getGeneratedQuest = await getUserQuestGenerated(localStorage.userId);
+			dataGeneratedQuests.set(getGeneratedQuest);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const fetchAcceptedQuest = async () => {
+		try {
+			let getAcceptedQuest = await getUserQuestHistory(localStorage.userId, 'all', 'in progress');
+			dataAcceptedQuests.set(getAcceptedQuest);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const changeStatusQuest = async (questId: string, status: string) => {
 		try {
 			loading = true;
@@ -36,6 +56,8 @@
 		try {
 			loading = true;
 			await acceptQuest(questId);
+			await fetchGeneratedQuest();
+			await fetchAcceptedQuest();
 			statusChange = true;
 			loading = true;
 		} catch (error) {

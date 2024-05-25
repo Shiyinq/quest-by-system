@@ -1,4 +1,5 @@
 <script>
+	import { getLabelNew } from '$lib/utils';
 	export let loading = false;
 	export let title = '';
 	export let description = '';
@@ -13,8 +14,12 @@
 		<p>Loading...</p>
 	{:else}
 		<ul class="quest-list">
-			{#each quests.data as { questId }}
-				<li><a class="quest-link" href={'quests/' + questId}>{'/' + questId}</a></li>
+			{#each quests.data as { questId, createdAt }}
+				<li>
+					<a class="quest-link" href={'quests/' + questId}>{'/' + questId}</a>{getLabelNew(
+						createdAt
+					)}
+				</li>
 			{/each}
 		</ul>
 		<div class="dialog-footer">

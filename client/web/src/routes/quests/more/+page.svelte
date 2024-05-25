@@ -43,9 +43,9 @@
 		}
 	};
 
-	const filterButton = async (type: string) => {
+	const filterButton = async (status: string) => {
 		pages = 1;
-		questStatus = type;
+		questStatus = status;
 		const { data } = await getUserQuestHistory(localStorage.userId, questType, questStatus, pages);
 		list = data;
 

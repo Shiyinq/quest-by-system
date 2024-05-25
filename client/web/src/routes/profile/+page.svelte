@@ -4,6 +4,7 @@
 	import CountQuests from '$lib/components/profile/CountQuests.svelte';
 	import LoadingCard from '$lib/components/LoadingCard.svelte';
 	import ReFetchData from '$lib/components/ReFetchData.svelte';
+	import { slide } from 'svelte/transition';
 
 	let userId = '123';
 	let getUserInfo = getUserDetail(localStorage.userId);
@@ -25,7 +26,7 @@
 	};
 </script>
 
-<div class="card-container">
+<div class="card-container" transition:slide="{{ duration: 1000 }}">
 	{#await getUserInfo}
 		<LoadingCard />
 	{:then userInfo}

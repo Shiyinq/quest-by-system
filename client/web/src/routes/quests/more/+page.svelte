@@ -10,6 +10,7 @@
 	import { getUserQuestHistory } from '$lib/apis/users';
 	import { capitalizeWord } from '$lib/utils';
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
 
 	let questType = $page.url.searchParams.get('type') || 'all';
 	let questStatus = $page.url.searchParams.get('status') || 'null';
@@ -50,6 +51,11 @@
 
 		goto(`${window.location.origin}/quests/more?type=${questType}&status=${questStatus}`);
 	};
+
+	onMount(async () =>{
+		const { data } = await getUserQuestHistory(localStorage.userId, questType, questStatus, pages);
+		list = data;
+	})
 </script>
 
 <div class="card-container">

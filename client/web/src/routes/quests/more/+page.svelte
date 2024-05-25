@@ -7,7 +7,7 @@
 	import InfiniteLoading from 'svelte-infinite-loading';
 	import QuestDetail from '$lib/components/quests/QuestDetail.svelte';
 	import { page } from '$app/stores';
-	import { getUserQuestHistory } from '$lib/apis/users';
+	import { getUserQuestHistory, getUserQuestGenerated } from '$lib/apis/users';
 	import { capitalizeWord } from '$lib/utils';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
@@ -21,19 +21,30 @@
 	const infiniteHandler = async (event: CustomEvent<InfiniteEventDetail>) => {
 		const { loaded, complete } = event.detail;
 		try {
-			const { metadata, data } = await getUserQuestHistory(
-				localStorage.userId,
-				questType,
-				questStatus,
-				pages
-			);
+			let meta: any = {};
+			let datas: any[] = [];
+			if (questType == 'generated') {
+				const { metadata, data } = await getUserQuestGenerated(localStorage.userId, pages);
+				meta = metadata;
+				datas = data;
+			} else {
+				const { metadata, data } = await getUserQuestHistory(
+					localStorage.userId,
+					questType,
+					questStatus,
+					pages
+				);
+
+				meta = metadata;
+				datas = data;
+			}
 			if (pages == 1) {
-				list = [...list, ...data];
+				list = [...list, ...datas];
 				pages += 1;
 				loaded();
-			} else if (metadata.nextPage) {
-				pages = metadata.nextPage;
-				list = [...list, ...data];
+			} else if (meta.nextPage) {
+				pages = meta.nextPage;
+				list = [...list, ...datas];
 				loaded();
 			} else {
 				complete();
@@ -52,10 +63,20 @@
 		goto(`${window.location.origin}/quests/more?type=${questType}&status=${questStatus}`);
 	};
 
-	onMount(async () =>{
-		const { data } = await getUserQuestHistory(localStorage.userId, questType, questStatus, pages);
-		list = data;
-	})
+	onMount(async () => {
+		if (questType == 'generated') {
+			const { data } = await getUserQuestGenerated(localStorage.userId, pages);
+			list = data;
+		} else {
+			const { data } = await getUserQuestHistory(
+				localStorage.userId,
+				questType,
+				questStatus,
+				pages
+			);
+			list = data;
+		}
+	});
 </script>
 
 <div class="card-container">
@@ -63,7 +84,8 @@
 		<div class="dialog">
 			<h2>📜 {capitalizeWord(questType)} Quests</h2>
 			<div class="filter-button">
-				<button class="nb-button blue" on:click={async () => await filterButton('null')}>All</button>
+				<button class="nb-button blue" on:click={async () => await filterButton('null')}>All</button
+				>
 				<button class="nb-button blue" on:click={async () => await filterButton('in progress')}
 					>In progress</button
 				>

@@ -47,6 +47,7 @@
 			title="🌟 Generated Quests"
 			description="Quests that have been generated but not yet accepted"
 			quests={$dataGeneratedQuests}
+			query="?type=generated"
 		/>
 	{/if}
 
@@ -59,6 +60,7 @@
 			title="📜 Recently Accepted Quests"
 			description="Recently received quests"
 			quests={$dataAcceptedQuests}
+			query="?type=all&status=in%20progress"
 		/>
 	{/if}
 </div>

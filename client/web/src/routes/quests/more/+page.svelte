@@ -9,7 +9,8 @@
 	import { page } from '$app/stores';
 	import { getUserQuestHistory } from '$lib/apis/users';
 
-	const questType = $page.params.questType;
+	const questType = $page.url.searchParams.get('type') || 'all';
+	const questStatus = $page.url.searchParams.get('status') || 'null';
 
 	let list: any[] = [];
 	let pages = 1;
@@ -20,7 +21,7 @@
 			const { metadata, data } = await getUserQuestHistory(
 				localStorage.userId,
 				questType,
-				'null',
+				questStatus,
 				pages
 			);
 			if (pages == 1) {

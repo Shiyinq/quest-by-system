@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { slide } from 'svelte/transition';
 	import { dataGeneratedQuests, dataAcceptedQuests } from '$lib/store';
 	import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
 	import CardQuests from '$lib/components/quests/CardQuests.svelte';
@@ -35,7 +36,7 @@
 	});
 </script>
 
-<div class="card-container">
+<div class="card-container" transition:slide="{{ duration: 1000 }}">
 	<GenerateQuest />
 
 	{#if $dataGeneratedQuests == 'loading'}

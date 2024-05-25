@@ -3,6 +3,7 @@
 	import LoadingCard from '$lib/components/LoadingCard.svelte';
 	import ReFetchData from '$lib/components/ReFetchData.svelte';
 	import CardQuests from '$lib/components/quests/CardQuests.svelte';
+	import { slide } from 'svelte/transition';
 
 	let getDailyQuests = getUserQuestHistory(localStorage.userId, 'daily');
 	let getWeeklyQuests = getUserQuestHistory(localStorage.userId, 'weekly');
@@ -26,7 +27,7 @@
 	};
 </script>
 
-<div class="card-container">
+<div class="card-container" transition:slide="{{ duration: 1000 }}">
 	<div class="dialog">
 		<h2>📜 Quests</h2>
 		<p>Your quest history</p>

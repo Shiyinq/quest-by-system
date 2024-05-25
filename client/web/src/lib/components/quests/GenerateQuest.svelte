@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { generateQuest } from '$lib/apis/quests';
+	import { getUserQuestGenerated } from '$lib/apis/users';
+	import { dataGeneratedQuests } from '$lib/store';
 	import LoadingCard from '$lib/components/LoadingCard.svelte';
 	import QuestDetail from '$lib/components/quests/QuestDetail.svelte';
 
@@ -7,12 +9,21 @@
 	let quest = '';
 	$: colorButton = generating ? 'default disabled' : 'blue';
 
+	const fetchGeneratedQuest = async () => {
+		try {
+			let getGeneratedQuest = await getUserQuestGenerated(localStorage.userId);
+			dataGeneratedQuests.set(getGeneratedQuest);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	const generatingQuest = async (questType: string) => {
 		generating = true;
 		quest = '';
 		try {
 			quest = await generateQuest(localStorage.userId, questType);
-			console.log(quest);
+			await fetchGeneratedQuest();
 			generating = false;
 		} catch (err) {
 			console.log(err);

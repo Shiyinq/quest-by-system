@@ -36,7 +36,7 @@
 	});
 </script>
 
-<div class="card-container" transition:slide="{{ duration: 1000 }}">
+<div class="card-container" transition:slide={{ duration: 1000 }}>
 	<GenerateQuest />
 
 	{#if $dataGeneratedQuests == 'loading'}

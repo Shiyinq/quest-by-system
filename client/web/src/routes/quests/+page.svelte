@@ -27,7 +27,7 @@
 	};
 </script>
 
-<div class="card-container" transition:slide="{{ duration: 1000 }}">
+<div class="card-container" transition:slide={{ duration: 1000 }}>
 	<div class="dialog">
 		<h2>📜 Quests</h2>
 		<p>Your quest history</p>

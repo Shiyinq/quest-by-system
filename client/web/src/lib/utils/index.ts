@@ -25,3 +25,10 @@ export const numberToEmoji = (number: number) => {
 
 	return result;
 };
+
+export const capitalizeWord = (word: string) => {
+	if (!word) return '';
+	const firstLetter = word.charAt(0).toUpperCase();
+	const capitalizedWord = firstLetter + word.slice(1);
+	return capitalizedWord;
+};

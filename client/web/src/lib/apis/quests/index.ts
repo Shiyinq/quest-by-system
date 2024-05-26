@@ -22,9 +22,15 @@ export const generateQuest = async (userId: string, type: string) => {
 	}
 };
 
-export const getQuestDetail = async (questId: string) => {
+export const getQuestDetail = async (questId: string, type: string) => {
 	try {
-		const response = await fetch(`${QUEBYS_API_BASE_URL}/quests/${questId}`);
+		let URL_API = '';
+		if (type === 'generated') {
+			URL_API = `${QUEBYS_API_BASE_URL}/quests/${questId}?type=${type}`;
+		}else {
+			URL_API = `${QUEBYS_API_BASE_URL}/quests/${questId}`;
+		}
+		const response = await fetch(URL_API);
 		const data = await response.json();
 		return data;
 	} catch (err) {

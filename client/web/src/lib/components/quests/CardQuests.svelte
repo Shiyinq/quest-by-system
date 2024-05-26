@@ -15,11 +15,16 @@
 		<p>Loading...</p>
 	{:else}
 		<ul class="quest-list">
-			{#each quests.data as { questId, createdAt }}
+			{#each quests.data as { questId, status, createdAt }}
 				<li>
-					<a class="quest-link" href={'quests/' + questId}>{'/' + questId}</a>{getLabelNew(
-						createdAt
-					)}
+					{#if status == 'generated'}
+						<a class="quest-link" href={'quests/' + questId + '?type=generated'}>{'/' + questId}</a
+						>{getLabelNew(createdAt)}
+					{:else}
+						<a class="quest-link" href={'quests/' + questId}>{'/' + questId}</a>{getLabelNew(
+							createdAt
+						)}
+					{/if}
 				</li>
 			{/each}
 		</ul>

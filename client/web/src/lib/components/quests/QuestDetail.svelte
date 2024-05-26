@@ -124,9 +124,6 @@
 <style>
 	.dialog {
 		width: 700px;
-		padding: 20px;
-		border-radius: 10px;
-		margin-bottom: 20px;
 	}
 
 	.trim-content {

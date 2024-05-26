@@ -2,7 +2,7 @@
 	import { slide } from 'svelte/transition';
 </script>
 
-<header class="header" transition:slide={{ duration: 1000 }}>
+<header class="card-container" transition:slide={{ duration: 1000 }}>
 	<div class="dialog navigation">
 		<a href="/">🏠 Home</a>
 		<a href="/quests">🎯 Quests</a>
@@ -11,12 +11,6 @@
 </header>
 
 <style>
-	.header {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
 	.navigation {
 		padding: 20px;
 		display: flex;

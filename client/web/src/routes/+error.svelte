@@ -11,11 +11,8 @@
 
 <style>
 	.card-container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
 		height: 80vh;
+		justify-content: center;
 	}
 	h1 {
 		font-size: 70px;

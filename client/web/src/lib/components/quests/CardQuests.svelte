@@ -35,33 +35,9 @@
 </div>
 
 <style>
-	.dialog {
-		width: 480px;
-		padding: 20px;
-		border-radius: 10px;
-		margin-bottom: 20px;
-	}
-
 	.dialog-footer {
 		display: flex;
 		justify-content: flex-end;
-	}
-
-	.dialog h2 {
-		margin: 0 0 10px;
-		color: #0077b6;
-	}
-
-	h2 {
-		font-size: 24px;
-		margin-top: 30px;
-		margin-bottom: 10px;
-		color: #0077b6;
-	}
-
-	p {
-		font-size: 18px;
-		margin-bottom: 20px;
 	}
 
 	.quest-list {

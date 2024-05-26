@@ -16,12 +16,6 @@
 </div>
 
 <style>
-	.dialog {
-		width: 480px;
-		padding: 20px;
-		border-radius: 10px;
-		margin-bottom: 20px;
-	}
 	button {
 		margin-bottom: 18px;
 	}

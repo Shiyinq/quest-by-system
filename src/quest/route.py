@@ -38,7 +38,7 @@ async def update_status_quest(quest_id: str, data: UpdateStatusQuest):
 
 
 @router.get("/quests/{quest_id}", status_code=200, response_model=ResponseGetQuest)
-async def get_quest(quest_id: str):
+async def get_quest(quest_id: str, type: str = None):
     """Get Quest Accepted"""
-    quest = await service.get_quest(quest_id)
+    quest = await service.get_quest(quest_id, type)
     return quest

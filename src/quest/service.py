@@ -93,11 +93,16 @@ async def accept_quest(quest_id: str) -> GeneralResponse:
         raise QuestAcceptFailed()
 
 
-async def get_quest(quest_id: str) -> ResponseGetQuest:
+async def get_quest(quest_id: str, type: str) -> ResponseGetQuest:
     try:
-        quest = await database.accepted_quest.find_one(
-            {"questId": quest_id}, {"_id": 0}
-        )
+        if type == "generated":
+            quest = await database.generated_quest.find_one(
+                {"questId": quest_id}, {"_id": 0}
+            )
+        else:
+            quest = await database.accepted_quest.find_one(
+                {"questId": quest_id}, {"_id": 0}
+            )
         if not quest:
             raise QuestNotFound()
 

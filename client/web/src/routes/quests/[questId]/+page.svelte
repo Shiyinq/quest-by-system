@@ -6,10 +6,10 @@
 	import ReFetchData from '$lib/components/ReFetchData.svelte';
 
 	const questId = $page.params.questId;
-
-	let questDetail = getQuestDetail(questId);
+	const questType = $page.url.searchParams.get('type') || 'null';
+	let questDetail = getQuestDetail(questId, questType);
 	const reFetchQuestDetail = () => {
-		questDetail = getQuestDetail(questId);
+		questDetail = getQuestDetail(questId, questType);
 	};
 </script>
 

@@ -1,4 +1,8 @@
-<header class="header">
+<script>
+	import { slide } from 'svelte/transition';
+</script>
+
+<header class="header" transition:slide={{ duration: 1000 }}>
 	<div class="dialog navigation">
 		<a href="/">🏠 Home</a>
 		<a href="/quests">🎯 Quests</a>

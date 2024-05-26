@@ -1,4 +1,8 @@
-<div class="footer">Keep up the good work! 💪🚀</div>
+<script>
+	import { slide } from 'svelte/transition';
+</script>
+
+<div class="footer" transition:slide={{ duration: 1000 }}>Keep up the good work! 💪🚀</div>
 
 <style>
 	.footer {

@@ -27,7 +27,7 @@ export const getQuestDetail = async (questId: string, type: string) => {
 		let URL_API = '';
 		if (type === 'generated') {
 			URL_API = `${QUEBYS_API_BASE_URL}/quests/${questId}?type=${type}`;
-		}else {
+		} else {
 			URL_API = `${QUEBYS_API_BASE_URL}/quests/${questId}`;
 		}
 		const response = await fetch(URL_API);

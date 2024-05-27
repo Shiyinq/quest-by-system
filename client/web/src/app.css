@@ -1,6 +1,11 @@
 :root {
     --text-color: #0077b6;
     --button-color: #0077b6;
+    --bg-color: #ffffff;
+}
+
+body {
+    background-color: var(--bg-color);
 }
 
 .card-container {
@@ -18,6 +23,7 @@
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
+    background-color: var(--bg-color);
 }
 
 .dialog h2 {

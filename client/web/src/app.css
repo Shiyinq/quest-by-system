@@ -1,6 +1,7 @@
 :root {
 	--main-text-color: #0077b6;
 	--second-text-color: #000000;
+	--text-link-active: #2196f3;
 	--main-text-button-color: #ffffff;
 	--button-color: #0077b6;
 	--bg-color: #ffffff;
@@ -9,8 +10,8 @@
 [data-theme='dark'] {
 	--main-text-color: #cfcfcf;
 	--second-text-color: #8a8a8a;
+	--text-link-active: #2196f3;
 	--main-text-button-color: #262626;
-	--text-color: #cfcfcf;
 	--button-color: #2196f3;
 	--bg-color: #181818;
 }
@@ -90,4 +91,12 @@ li {
 a {
 	color: var(--main-text-color);
 	text-decoration: none;
+}
+
+a:hover {
+	color: var(--text-link-active);
+}
+
+.active-menu {
+	color: var(--text-link-active);
 }

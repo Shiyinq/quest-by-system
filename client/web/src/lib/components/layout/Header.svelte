@@ -69,16 +69,8 @@
 		justify-content: flex-end;
 	}
 
-	.active-menu {
-		color: #0077b6;
-	}
-
 	a {
 		margin-right: 20px;
-	}
-
-	a:hover {
-		color: #0077b6;
 	}
 
 	.logout {

@@ -1,49 +1,55 @@
 :root {
-    --text-color: #0077b6;
-    --button-color: #0077b6;
-    --bg-color: #ffffff;
+	--text-color: #0077b6;
+	--button-color: #0077b6;
+	--bg-color: #ffffff;
+}
+
+[data-theme='dark'] {
+	--text-color: #ffffff;
+	--button-color: #ffffff;
+	--bg-color: #000000;
 }
 
 body {
-    background-color: var(--bg-color);
+	background-color: var(--bg-color);
 }
 
 .card-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .blue {
-    background-color: var(--button-color) !important;
+	background-color: var(--button-color) !important;
 }
 
 .dialog {
-    width: 480px;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    background-color: var(--bg-color);
+	width: 480px;
+	padding: 20px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	background-color: var(--bg-color);
 }
 
 .dialog h2 {
-    margin: 0 0 10px;
-    color: var(--text-color);
+	margin: 0 0 10px;
+	color: var(--text-color);
 }
 
 h2 {
-    font-size: 24px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    color: var(--text-color);
+	font-size: 24px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	color: var(--text-color);
 }
 
 p {
-    font-size: 18px;
-    margin-bottom: 20px;
+	font-size: 18px;
+	margin-bottom: 20px;
 }
 
 a {
-    color: var(--text-color);
+	color: var(--text-color);
 	text-decoration: none;
 }

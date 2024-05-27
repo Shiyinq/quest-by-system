@@ -1,11 +1,16 @@
 :root {
     --text-color: #0077b6;
+    --button-color: #0077b6;
 }
 
 .card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.blue {
+    background-color: var(--button-color) !important;
 }
 
 .dialog {

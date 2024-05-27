@@ -116,7 +116,7 @@
 			{/if}
 		{/if}
 		{#if showMoreButton}
-			<button class="nb-button sky-blue" on:click={showMore}>⬆️ Show less</button>
+			<button class="nb-button blue" on:click={showMore}>⬆️ Show less</button>
 		{/if}
 	</div>
 </div>

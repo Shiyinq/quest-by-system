@@ -1,14 +1,46 @@
 :root {
-	--text-color: #0077b6;
+    --main-text-color: #0077b6;
+	--second-text-color: #000000;
+    --main-text-button-color: #ffffff;
 	--button-color: #0077b6;
 	--bg-color: #ffffff;
 }
 
 [data-theme='dark'] {
-	--text-color: #ffffff;
-	--button-color: #ffffff;
-	--bg-color: #000000;
+    --main-text-color: #cfcfcf;
+    --second-text-color: #8a8a8a;
+    --main-text-button-color: #262626;
+    --text-color: #cfcfcf;
+    --button-color: #2196f3;
+    --bg-color: #181818;
 }
+
+/* [data-theme='dark'] {
+    --main-text-color: #e0e0e0;
+    --second-text-color: #b0b0b0;
+    --main-text-button-color: #000000;
+    --text-color: #e0e0e0;
+    --button-color: #0077b6;
+    --bg-color: #121212;
+} */
+
+/* [data-theme='dark'] {
+    --main-text-color: #d4d4d4;
+    --second-text-color: #a9a9a9;
+    --main-text-button-color: #121212;
+    --text-color: #d4d4d4;
+    --button-color: #32a852;
+    --bg-color: #1c1c1c;
+} */
+
+/* [data-theme='dark'] {
+    --main-text-color: #f0f0f0;
+    --second-text-color: #bbbbbb;
+    --main-text-button-color: #141414;
+    --text-color: #f0f0f0;
+    --button-color: #ffd700;
+    --bg-color: #232323;
+} */
 
 body {
 	background-color: var(--bg-color);
@@ -22,6 +54,7 @@ body {
 
 .blue {
 	background-color: var(--button-color) !important;
+    color: var(--main-text-button-color) !important;
 }
 
 .dialog {
@@ -34,22 +67,23 @@ body {
 
 .dialog h2 {
 	margin: 0 0 10px;
-	color: var(--text-color);
+	color: var(--main-text-color);
 }
 
 h2 {
 	font-size: 24px;
 	margin-top: 30px;
 	margin-bottom: 10px;
-	color: var(--text-color);
+	color: var(--main-text-color);
 }
 
 p {
 	font-size: 18px;
 	margin-bottom: 20px;
+    color: var(--second-text-color);
 }
 
 a {
-	color: var(--text-color);
+	color: var(--main-text-color);
 	text-decoration: none;
 }

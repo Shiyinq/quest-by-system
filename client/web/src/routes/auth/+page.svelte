@@ -36,6 +36,7 @@
 
 <style>
 	.card-container {
+		justify-content: center;
 		height: 100vh;
 	}
 

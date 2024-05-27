@@ -35,6 +35,15 @@
 </header>
 
 <style>
+	.card-container {
+		margin-bottom: 85px;
+	}
+
+	.dialog {
+		position: fixed;
+		z-index: 1000;
+	}
+
 	.dialog {
 		display: flex;
 		justify-content: space-between;

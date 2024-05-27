@@ -83,6 +83,10 @@ p {
     color: var(--second-text-color);
 }
 
+li {
+    color: var(--second-text-color);
+}
+
 a {
 	color: var(--main-text-color);
 	text-decoration: none;

@@ -45,12 +45,6 @@
 		padding: 0;
 	}
 
-	.quest-link {
-		color: #0077b6;
-		text-decoration: none;
-		margin-right: 10px;
-	}
-
 	.quest-link:hover {
 		text-decoration: underline;
 	}

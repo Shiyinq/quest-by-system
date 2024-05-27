@@ -18,9 +18,11 @@
 			<a href="/profile">👤 Profile</a>
 		</div>
 		<div class="toggle-theme">
-			{#if light}
+			{#if light}	  
+				<!-- svelte-ignore a11y-invalid-attribute -->
 				<a href="#" on:click={toggleThemes}>🌞</a>
 			{:else}
+				<!-- svelte-ignore a11y-invalid-attribute -->
 				<a href="#" on:click={toggleThemes}>🌙</a>
 			{/if}
 		</div>

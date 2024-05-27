@@ -1,18 +1,18 @@
 :root {
-    --main-text-color: #0077b6;
+	--main-text-color: #0077b6;
 	--second-text-color: #000000;
-    --main-text-button-color: #ffffff;
+	--main-text-button-color: #ffffff;
 	--button-color: #0077b6;
 	--bg-color: #ffffff;
 }
 
 [data-theme='dark'] {
-    --main-text-color: #cfcfcf;
-    --second-text-color: #8a8a8a;
-    --main-text-button-color: #262626;
-    --text-color: #cfcfcf;
-    --button-color: #2196f3;
-    --bg-color: #181818;
+	--main-text-color: #cfcfcf;
+	--second-text-color: #8a8a8a;
+	--main-text-button-color: #262626;
+	--text-color: #cfcfcf;
+	--button-color: #2196f3;
+	--bg-color: #181818;
 }
 
 /* [data-theme='dark'] {
@@ -54,7 +54,7 @@ body {
 
 .blue {
 	background-color: var(--button-color) !important;
-    color: var(--main-text-button-color) !important;
+	color: var(--main-text-button-color) !important;
 }
 
 .dialog {
@@ -80,11 +80,11 @@ h2 {
 p {
 	font-size: 18px;
 	margin-bottom: 20px;
-    color: var(--second-text-color);
+	color: var(--second-text-color);
 }
 
 li {
-    color: var(--second-text-color);
+	color: var(--second-text-color);
 }
 
 a {

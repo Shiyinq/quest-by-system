@@ -36,7 +36,7 @@
 
 <style>
 	.card-container {
-		margin-bottom: 85px;
+		margin-bottom: 86px;
 	}
 
 	.dialog {

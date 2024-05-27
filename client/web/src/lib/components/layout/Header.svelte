@@ -1,30 +1,49 @@
 <script>
+	import { theme } from '$lib/store';
 	import { slide } from 'svelte/transition';
+
+	let light = true;
+	const toggleThemes = () => {
+		light = !light;
+		theme.update((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'));
+	};
 </script>
 
 <header class="card-container" transition:slide={{ duration: 1000 }}>
-	<div class="dialog navigation">
-		<a href="/">🏠 Home</a>
-		<a href="/quests">🎯 Quests</a>
-		<a href="/profile">👤 Profile</a>
+	<div class="dialog">
+		<div></div>
+		<div class="navigation">
+			<a href="/">🏠 Home</a>
+			<a href="/quests">🎯 Quests</a>
+			<a href="/profile">👤 Profile</a>
+		</div>
+		<div class="toggle-theme">
+			{#if light}
+				<a href="#" on:click={toggleThemes}>🌞</a>
+			{:else}
+				<a href="#" on:click={toggleThemes}>🌙</a>
+			{/if}
+		</div>
 	</div>
 </header>
 
 <style>
-	.navigation {
-		padding: 20px;
+	.dialog {
 		display: flex;
-		justify-content: center;
-		margin-bottom: 20px;
+		justify-content: space-between;
+		align-items: center;
 	}
 
-	.navigation a {
-		color: #0077b6;
-		text-decoration: none;
+	.navigation {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	a {
 		margin-right: 20px;
 	}
 
-	.navigation a:hover {
+	a:hover {
 		color: #0077b6;
 	}
 </style>

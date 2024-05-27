@@ -92,7 +92,7 @@
 		{#if !statusChanged}
 			{#if quest.status == 'generated'}
 				<button
-					class="nb-button blue"
+					class="nb-button green"
 					on:click={async () => await acceptQuestGenerated(quest.questId)}
 				>
 					{#if loadingStatusChange}

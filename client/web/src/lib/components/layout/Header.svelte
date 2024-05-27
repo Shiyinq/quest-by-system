@@ -17,8 +17,7 @@
 
 	const menuClicked = (name: string) => {
 		activeMenu.set(name);
-	}
-
+	};
 </script>
 
 <header class="card-container" transition:slide={{ duration: 1000 }}>
@@ -28,9 +27,19 @@
 			<a href="#" title="Theme" on:click={toggleThemes}>{light ? '🌞' : '🌙'}</a>
 		</div>
 		<div class="navigation">
-			<a href="/" class={$activeMenu == "/" ? "active-menu" : ""} on:click={() => menuClicked('/')}>🏠 Home</a>
-			<a href="/quests" class={$activeMenu == "/quests" ? "active-menu" : ""} on:click={() => menuClicked('/quests')}>🎯 Quests</a>
-			<a href="/profile" class={$activeMenu == "/profile" ? "active-menu" : ""} on:click={() => menuClicked('/profile')}>👤 Profile</a>
+			<a href="/" class={$activeMenu == '/' ? 'active-menu' : ''} on:click={() => menuClicked('/')}
+				>🏠 Home</a
+			>
+			<a
+				href="/quests"
+				class={$activeMenu == '/quests' ? 'active-menu' : ''}
+				on:click={() => menuClicked('/quests')}>🎯 Quests</a
+			>
+			<a
+				href="/profile"
+				class={$activeMenu == '/profile' ? 'active-menu' : ''}
+				on:click={() => menuClicked('/profile')}>👤 Profile</a
+			>
 		</div>
 		<div>
 			<!-- svelte-ignore a11y-invalid-attribute -->

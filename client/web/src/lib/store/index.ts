@@ -13,6 +13,19 @@ const createPersistedStore = (key: string, startValue: string) => {
 	return store;
 };
 
+const toggleTheme = () => {
+	const initialTheme = localStorage.getItem('theme') || 'light';
+	const theme = writable(initialTheme);
+
+	theme.subscribe((value) => {
+		localStorage.setItem('theme', value);
+		document.documentElement.setAttribute('data-theme', value);
+	});
+
+	return theme;
+};
+
+export const theme = toggleTheme();
 export const userId = createPersistedStore('userId', '');
 export const dataGeneratedQuests: Writable<TypeGeneratedQuest | string> = writable();
 export const dataAcceptedQuests: Writable<TypeAcceptedQuest | string> = writable();

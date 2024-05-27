@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
-	import { theme, userId } from '$lib/store';
+	import { theme, userId, activeMenu } from '$lib/store';
 	import { slide } from 'svelte/transition';
 
 	let light = true;
@@ -14,6 +14,11 @@
 		userId.set('');
 		goto('/auth');
 	};
+
+	const menuClicked = (name: string) => {
+		activeMenu.set(name);
+	}
+
 </script>
 
 <header class="card-container" transition:slide={{ duration: 1000 }}>
@@ -23,9 +28,9 @@
 			<a href="#" title="Theme" on:click={toggleThemes}>{light ? '🌞' : '🌙'}</a>
 		</div>
 		<div class="navigation">
-			<a href="/">🏠 Home</a>
-			<a href="/quests">🎯 Quests</a>
-			<a href="/profile">👤 Profile</a>
+			<a href="/" class={$activeMenu == "/" ? "active-menu" : ""} on:click={() => menuClicked('/')}>🏠 Home</a>
+			<a href="/quests" class={$activeMenu == "/quests" ? "active-menu" : ""} on:click={() => menuClicked('/quests')}>🎯 Quests</a>
+			<a href="/profile" class={$activeMenu == "/profile" ? "active-menu" : ""} on:click={() => menuClicked('/profile')}>👤 Profile</a>
 		</div>
 		<div>
 			<!-- svelte-ignore a11y-invalid-attribute -->
@@ -53,6 +58,10 @@
 	.navigation {
 		display: flex;
 		justify-content: flex-end;
+	}
+
+	.active-menu {
+		color: #0077b6;
 	}
 
 	a {

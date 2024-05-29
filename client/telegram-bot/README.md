@@ -56,6 +56,6 @@ You can open `logs` folder to see the error and on your own terminal.
 - You can fix bugs and add features on your own.
   1. Fork this repository
   2. Create a feature branch `git checkout -b new-feature`
-  3. Commit your changes `git commit -m 'Add new feature`
+  3. Commit your changes `git commit -m 'Add new feature'`
   4. Push to the branch `git push origin new-feature`
   5. Create a Pull Request

@@ -1,8 +1,18 @@
-# QUEST BY SYSTEM - TELEGRAM BOT
+# QUEBYS - BOT
 
 This bot allows you to generate quests and much more using text-based specific commands.
 
 <img width="399" alt="image" src="quebys-bot.png">
+
+## Table of Contents
+- [QUEBYS - BOT](#quebys---bot)
+  - [Table of Contents](#table-of-contents)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Debug](#debug)
+  - [Contributing](#contributing)
+
 
 ## Requirements
 - Node JS v20.10.0

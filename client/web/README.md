@@ -58,7 +58,7 @@ You can preview the production build with `npm run preview`.
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
 ## Contributing
-- You can open issues to report bugs or request features.
+- You can open [issues](https://github.com/Shiyinq/quest-by-system/issues) to report bugs or request features.
 - You can fix bugs and add features on your own.
   1. Fork this repository
   2. Create a feature branch `git checkout -b new-feature`

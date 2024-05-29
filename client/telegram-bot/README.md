@@ -52,7 +52,7 @@ Steps to run the bot after installation.
 You can open `logs` folder to see the error and on your own terminal.
 
 ## Contributing
-- You can open issues to report bugs or request features.
+- You can open [issues](https://github.com/Shiyinq/quest-by-system/issues) to report bugs or request features.
 - You can fix bugs and add features on your own.
   1. Fork this repository
   2. Create a feature branch `git checkout -b new-feature`

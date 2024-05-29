@@ -28,7 +28,7 @@ Steps to install this project.
     ```
 2. Navigate to the project directory:
     ```bash
-    cd quest-by-system
+    cd quest-by-system/client/telegram-bot
     ```
 3. Install dependencies:
     ```bash

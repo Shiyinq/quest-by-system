@@ -1,22 +1,42 @@
-# create-svelte
+# QUEBYS - WEB
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Front-end version of [quebys-bot](../telegram-bot/README.md).
 
-## Creating a project
+<img width="399" alt="image" src="quebys-web.png">
 
-If you're seeing this, you've probably already done this step. Congrats!
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Table of Contents
+- [QUEBYS - WEB](#quebys---web)
+  - [Table of Contents](#table-of-contents)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Building](#building)
+  - [Contributing](#contributing)
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
 
-## Developing
+## Requirements
+- Node JS v20.10.0
+- NPM v10.2.3
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Installation
+Steps to install this project.
+
+1. Clone this repository
+    ```bash
+    git clone https://github.com/Shiyinq/quest-by-system.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd quest-by-system/client/web
+    ```
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+## Usage
+Once you've clone a repository and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
 npm run dev
@@ -36,3 +56,12 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+## Contributing
+- You can open issues to report bugs or request features.
+- You can fix bugs and add features on your own.
+  1. Fork this repository
+  2. Create a feature branch `git checkout -b new-feature`
+  3. Commit your changes `git commit -m 'Add new feature'`
+  4. Push to the branch `git push origin new-feature`
+  5. Create a Pull Request

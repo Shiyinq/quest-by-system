@@ -29,9 +29,9 @@ Steps to install this project.
 Steps to run the bot after installation.
 1. Run the Backend [README](/README.md)
 2. Create `.env` file
-```base
-    cp .env.example .env
-```
+    ```base
+        cp .env.example .env
+    ```
 3. Fill the `BOT_TOKEN` you can get token from [@BotFather](https://t.me/botfather)
 4. Run the bot script:
     ```bash

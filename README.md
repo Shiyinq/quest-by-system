@@ -79,5 +79,5 @@ Open API Docs
 You can use the [API](http://localhost:5000/docs) to create your own client, but we already have clients available for you to try: a Telegram Bot and a Web client.
 
 Documentation for the Telegram Bot and Web client is provided.
-- [Telegram Bot](./client/telegram-bot/README.md)
 - [Web](./client/web/README.md)
+- [Telegram Bot](./client/telegram-bot/README.md)

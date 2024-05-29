@@ -11,7 +11,7 @@ Sometimes we get confused about what to do today. For example, I'm a software en
   - [Installation](#installation)
   - [Usage](#usage)
   - [Contributing](#contributing)
-  - [Client Docs](#client-docs)
+  - [Install Client](#install-client)
 
 
 ## Requirements
@@ -75,7 +75,9 @@ Open API Docs
   5. Create a Pull Request
    
 
-## Client Docs
-Documentations for client Telegram Bot and Web
+## Install Client
+You can use the [API](http://localhost:5000/docs) to create your own client, but we already have clients available for you to try: a Telegram Bot and a Web client.
+
+Documentation for the Telegram Bot and Web client is provided.
 - [Telegram Bot](./client/telegram-bot/README.md)
-- [WEB](./client/web/README.md)
+- [Web](./client/web/README.md)

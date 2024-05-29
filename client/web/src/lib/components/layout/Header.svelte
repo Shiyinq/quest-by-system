@@ -75,8 +75,7 @@
 
 	.logout {
 		color: red;
-		/* background-color: lightgray; */
-		border: 1px solid lightgray;
+		border: 3px solid #000000;
 		padding: 5px 10px;
 		text-decoration: none;
 		border-radius: 4px;

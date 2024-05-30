@@ -163,7 +163,7 @@ async def update_goal(user_id: str, data: UserGoalUpdate) -> GeneralResponse:
     try:
         goal = await database.users.update_one(
             {"userId": user_id},
-            {"$set": {"goal": data.goal, "created_at": datetime.now()}},
+            {"$set": {"goal": data.goal, "updatedAt": datetime.now()}},
         )
 
         if not goal.matched_count:

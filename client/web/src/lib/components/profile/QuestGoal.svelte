@@ -1,10 +1,22 @@
 <script lang="ts">
+	import { getUserDetail, setUserGoal } from '$lib/apis/users';
+	import { dataUserInfo } from '$lib/store';
+
 	export let userInfo;
 
 	let goal = userInfo?.goal;
-	const changeGoal = () => {
-		if (userInfo.goal != goal) {
-			console.log(goal);
+	let loading = false;
+	const changeGoal = async () => {
+		if (userInfo.goal == goal) return;
+		try {
+			loading = !loading;
+			await setUserGoal(localStorage.userId, goal);
+			let getUserInfo = await getUserDetail(localStorage.userId);
+			dataUserInfo.set(getUserInfo);
+			loading = !loading;
+		} catch (error) {
+			console.log(error);
+			loading = !loading;
 		}
 	};
 </script>
@@ -13,7 +25,9 @@
 	<h2>Your Goal</h2>
 	<div class="form-goal">
 		<input class="nb-input default input-goal" placeholder="Type your goal" bind:value={goal} />
-		<button class="nb-button blue button-goal" on:click={changeGoal}>SAVE</button>
+		<button class="nb-button blue button-goal" on:click={changeGoal} disabled={loading}
+			>{loading ? 'LOADING...' : 'SAVE'}</button
+		>
 	</div>
 </div>
 

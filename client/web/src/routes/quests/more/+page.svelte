@@ -84,16 +84,20 @@
 		<div class="dialog">
 			<h2>📜 {capitalizeWord(questType)} Quests</h2>
 			<div class="filter-button">
-				<button class="nb-button blue" on:click={async () => await filterButton('null')}>All</button
+				<button class="nb-button blue rounded" on:click={async () => await filterButton('null')}
+					>All</button
 				>
-				<button class="nb-button blue" on:click={async () => await filterButton('in progress')}
-					>In progress</button
+				<button
+					class="nb-button blue rounded"
+					on:click={async () => await filterButton('in progress')}>In progress</button
 				>
-				<button class="nb-button blue" on:click={async () => await filterButton('completed')}
-					>Completed</button
+				<button
+					class="nb-button blue rounded"
+					on:click={async () => await filterButton('completed')}>Completed</button
 				>
-				<button class="nb-button blue" on:click={async () => await filterButton('not completed')}
-					>Not Completed</button
+				<button
+					class="nb-button blue rounded"
+					on:click={async () => await filterButton('not completed')}>Not Completed</button
 				>
 			</div>
 		</div>
@@ -114,5 +118,21 @@
 
 	button {
 		cursor: pointer;
+	}
+
+	@media (max-width: 480px) {
+		.dialog {
+			width: 98%;
+		}
+		.filter-button {
+			display: flex;
+			gap: 10px;
+			width: 100%;
+			overflow-x: scroll;
+		}
+
+		button {
+			font-size: 15px !important;
+		}
 	}
 </style>

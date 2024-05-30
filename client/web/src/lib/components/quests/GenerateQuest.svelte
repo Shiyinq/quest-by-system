@@ -71,6 +71,8 @@
 	.button-container {
 		display: flex;
 		gap: 10px;
+		width: 100%;
+		overflow-x: scroll;
 	}
 
 	.disabled {

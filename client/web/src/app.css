@@ -97,3 +97,32 @@ a:hover {
 .active-menu {
 	color: var(--text-link-active);
 }
+
+@media (max-width: 480px) {
+	.dialog {
+		width: 98%;
+		padding: 10px;
+	}
+
+	h2 {
+		font-size: 20px;
+		margin-top: 20px;
+		margin-bottom: 8px;
+	}
+
+	p {
+		font-size: 16px;
+		margin-bottom: 15px;
+	}
+
+	.card-container {
+		padding: 10px;
+	}
+
+	.card-container,
+	.dialog,
+	p {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}

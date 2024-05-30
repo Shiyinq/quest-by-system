@@ -6,10 +6,8 @@
 	import ReFetchData from '$lib/components/ReFetchData.svelte';
 	import { slide } from 'svelte/transition';
 	import QuestGoal from '$lib/components/profile/QuestGoal.svelte';
-
-	let userId = '123';
-	let getUserInfo = getUserDetail(localStorage.userId);
-	let getQuestStats = getUserQuestStats(localStorage.userId);
+	import { dataUserInfo } from '$lib/store';
+	import { onMount } from 'svelte';
 
 	const questTypes = [
 		{ title: '📋 Daily Quest', key: 'daily' },
@@ -18,25 +16,36 @@
 		{ title: '📋 Side Quest', key: 'side' }
 	];
 
-	const reFetchUserInfo = () => {
-		getUserInfo = getUserDetail(localStorage.userId);
-	};
-
+	let getQuestStats = getUserQuestStats(localStorage.userId);
 	const reFetchQuestStats = () => {
 		getQuestStats = getUserQuestStats(localStorage.userId);
 	};
+
+	const fetchUserInfo = async () => {
+		try {
+			dataUserInfo.set('loading');
+			let getUserInfo = await getUserDetail(localStorage.userId);
+			dataUserInfo.set(getUserInfo);
+		} catch (err) {
+			console.log(err);
+			dataUserInfo.set('error');
+		}
+	};
+
+	onMount(() => {
+		fetchUserInfo();
+	});
 </script>
 
 <div class="card-container" transition:slide={{ duration: 1000 }}>
-	{#await getUserInfo}
+	{#if $dataUserInfo == 'loading'}
 		<LoadingCard />
-	{:then userInfo}
-		<UserInfo {userInfo} />
-	{:catch}
-		<ReFetchData actionButton={reFetchUserInfo} />
-	{/await}
-
-	<QuestGoal />
+	{:else if $dataUserInfo == 'error' || !$dataUserInfo}
+		<ReFetchData actionButton={fetchUserInfo} />
+	{:else if $dataUserInfo}
+		<UserInfo userInfo={$dataUserInfo} />
+		<QuestGoal userInfo={$dataUserInfo} />
+	{/if}
 
 	{#await getQuestStats}
 		<LoadingCard />

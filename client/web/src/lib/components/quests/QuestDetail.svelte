@@ -7,6 +7,7 @@
 	export let quest;
 	export let showFullContent = false;
 
+	let statusUpdated = '';
 	let statusChange = false;
 	let loading = false;
 
@@ -44,7 +45,8 @@
 	const changeStatusQuest = async (questId: string, status: string) => {
 		try {
 			loading = true;
-			await updateQuestStatus(questId, status);
+			let { message } = await updateQuestStatus(questId, status);
+			statusUpdated = message;
 			statusChange = true;
 			loading = true;
 		} catch (error) {
@@ -55,21 +57,29 @@
 	const acceptQuestGenerated = async (questId: string) => {
 		try {
 			loading = true;
-			await acceptQuest(questId);
+			let { message } = await acceptQuest(questId);
 			await fetchGeneratedQuest();
 			await fetchAcceptedQuest();
+			statusUpdated = message;
 			statusChange = true;
 			loading = true;
 		} catch (error) {
 			loading = false;
 		}
 	};
+
+	$: if (statusUpdated) {
+		setTimeout(() => {
+			statusUpdated = '';
+			showFullContent = false;
+		}, 2000);
+	}
 </script>
 
 <div class={trimContent}>
-	{#if statusChange}
+	{#if statusUpdated}
 		<div class="alert success">
-			<p>Status updated successfully!</p>
+			<p>{statusUpdated}</p>
 		</div>
 	{/if}
 	<div class="quest-info">

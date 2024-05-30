@@ -159,4 +159,10 @@
 		width: 100%;
 		margin-bottom: 4px;
 	}
+
+	@media (max-width: 480px) {
+		.dialog {
+			width: 98%;
+		}
+	}
 </style>

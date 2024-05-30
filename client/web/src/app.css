@@ -98,6 +98,11 @@ a:hover {
 	color: var(--text-link-active);
 }
 
+.splash-screen {
+	color: var(--main-text-color);
+	background: var(--bg-color);
+}
+
 @media (max-width: 480px) {
 	.dialog {
 		width: 98%;

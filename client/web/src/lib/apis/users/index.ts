@@ -11,6 +11,26 @@ export const getUserDetail = async (userId: string) => {
 	}
 };
 
+export const setUserGoal = async (userId: string, goal: string) => {
+	try {
+		const response = await fetch(`${QUEBYS_API_BASE_URL}/users/${userId}/goal`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				goal: goal
+			})
+		});
+		const data = await response.json();
+		return data;
+	} catch (err) {
+		console.log(err);
+		throw err;
+	}
+};
+
 export const getUserQuestGenerated = async (
 	userId: string,
 	page: number = 1,

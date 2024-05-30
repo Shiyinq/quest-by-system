@@ -30,6 +30,17 @@ export const activeMenu = createPersistedStore('activeMenu', '/');
 export const userId = createPersistedStore('userId', '');
 export const dataGeneratedQuests: Writable<TypeGeneratedQuest | string> = writable();
 export const dataAcceptedQuests: Writable<TypeAcceptedQuest | string> = writable();
+export const dataUserInfo: Writable<TypeUserInfo | string> = writable();
+
+interface TypeUserInfo {
+	userId: string;
+	username: string | null;
+	name: string;
+	goal: string;
+	source: string;
+	createdAt: string;
+	updatedAt: string;
+}
 
 export interface TypeGeneratedQuest {
 	metadata: Metadata;

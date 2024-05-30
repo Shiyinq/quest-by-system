@@ -41,9 +41,13 @@
 				on:click={() => menuClicked('/profile')}>👤 Profile</a
 			>
 		</div>
-		<div>
+		<div class="logout-desktop">
 			<!-- svelte-ignore a11y-invalid-attribute -->
 			<a href="#" class="logout" on:click={logout}>↪️ Logout</a>
+		</div>
+		<div class="logout-mobil">
+			<!-- svelte-ignore a11y-invalid-attribute -->
+			<a href="#" class="logout" on:click={logout}>↪️</a>
 		</div>
 	</div>
 </header>
@@ -84,5 +88,28 @@
 	.logout:hover {
 		color: white;
 		background-color: darkred;
+	}
+
+	.logout-mobil {
+		display: none;
+	}
+
+	@media (max-width: 480px) {
+		.card-container {
+			margin-bottom: 70px;
+		}
+
+		.dialog {
+			width: 90%;
+			height: 65px;
+		}
+
+		.logout-desktop {
+			display: none;
+		}
+
+		.logout-mobil {
+			display: block;
+		}
 	}
 </style>

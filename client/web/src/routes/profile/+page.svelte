@@ -5,6 +5,7 @@
 	import LoadingCard from '$lib/components/LoadingCard.svelte';
 	import ReFetchData from '$lib/components/ReFetchData.svelte';
 	import { slide } from 'svelte/transition';
+	import QuestGoal from '$lib/components/profile/QuestGoal.svelte';
 
 	let userId = '123';
 	let getUserInfo = getUserDetail(localStorage.userId);
@@ -34,6 +35,8 @@
 	{:catch}
 		<ReFetchData actionButton={reFetchUserInfo} />
 	{/await}
+
+	<QuestGoal />
 
 	{#await getQuestStats}
 		<LoadingCard />

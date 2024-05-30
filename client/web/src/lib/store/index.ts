@@ -42,17 +42,17 @@ interface TypeUserInfo {
 	updatedAt: string;
 }
 
-export interface TypeGeneratedQuest {
+interface TypeGeneratedQuest {
 	metadata: Metadata;
 	data: Quest[];
 }
 
-export interface TypeAcceptedQuest {
+interface TypeAcceptedQuest {
 	metadata: Metadata;
 	data: Quest[];
 }
 
-export interface Metadata {
+interface Metadata {
 	page: number;
 	limit: number;
 	prevPage: number | null;
@@ -60,7 +60,7 @@ export interface Metadata {
 	totalPage: number;
 }
 
-export interface Quest {
+interface Quest {
 	questId: string;
 	userId: string;
 	type: string;

@@ -6,11 +6,13 @@
 
 	let goal = userInfo?.goal;
 	let loading = false;
+	let notifChangeGoal = '';
 	const changeGoal = async () => {
 		if (userInfo.goal == goal) return;
 		try {
 			loading = !loading;
-			await setUserGoal(localStorage.userId, goal);
+			let { message } = await setUserGoal(localStorage.userId, goal);
+			notifChangeGoal = message;
 			let getUserInfo = await getUserDetail(localStorage.userId);
 			dataUserInfo.set(getUserInfo);
 			loading = !loading;
@@ -19,10 +21,17 @@
 			loading = !loading;
 		}
 	};
+
+	$: if (notifChangeGoal) {
+		setTimeout(() => {
+			notifChangeGoal = '';
+		}, 2000);
+	}
 </script>
 
 <div class="dialog">
 	<h2>Your Goal</h2>
+	<p>{notifChangeGoal}</p>
 	<div class="form-goal">
 		<input class="nb-input default input-goal" placeholder="Type your goal" bind:value={goal} />
 		<button class="nb-button blue button-goal" on:click={changeGoal} disabled={loading}

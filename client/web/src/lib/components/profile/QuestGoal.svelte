@@ -26,7 +26,7 @@
 	<div class="form-goal">
 		<input class="nb-input default input-goal" placeholder="Type your goal" bind:value={goal} />
 		<button class="nb-button blue button-goal" on:click={changeGoal} disabled={loading}
-			>{loading ? 'LOADING...' : 'SAVE'}</button
+			>{loading ? 'LOADING...' : 'CHANGE'}</button
 		>
 	</div>
 </div>

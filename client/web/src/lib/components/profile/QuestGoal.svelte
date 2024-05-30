@@ -1,7 +1,11 @@
 <script lang="ts">
-	let goal = '';
+	export let userInfo;
+
+	let goal = userInfo?.goal;
 	const changeGoal = () => {
-		console.log(goal);
+		if (userInfo.goal != goal) {
+			console.log(goal);
+		}
 	};
 </script>
 

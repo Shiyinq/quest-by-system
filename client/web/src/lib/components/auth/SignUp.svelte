@@ -1,23 +1,63 @@
 <script>
-	const signUp = () => {
-		console.log('Sign up');
+	import { userRegister } from '$lib/apis/users';
+
+	let name = '';
+	let username = '';
+	let password = '';
+	let loading = false;
+	let infoRegister = '';
+	let success = false;
+	let error = false;
+
+	const signUp = async () => {
+		try {
+			loading = !loading;
+			let { message } = await userRegister(name, username, password);
+			infoRegister = message;
+			loading = !loading;
+			success = true;
+		} catch (err) {
+			console.log(err);
+			loading = !loading;
+			error = true;
+		}
 	};
+
+	$: if (success || error) {
+		setTimeout(() => {
+			error = false;
+			success = false;
+			infoRegister = '';
+		}, 2000);
+	}
 </script>
 
 <div class="dialog sign-up">
 	<div class="form-title">
+		{#if success || error}
+			<div class="alert" class:success class:error>
+				<p>{infoRegister || 'Sign Up Failed!'}</p>
+			</div>
+		{/if}
 		<h2>Sign up to QUEBYS</h2>
 	</div>
 	<div class="form">
 		<p class="label-input">Name</p>
-		<input class="nb-input default" placeholder="Enter Your Full Name" />
+		<input class="nb-input default" placeholder="Enter Your Full Name" bind:value={name} />
 		<p class="label-input">Username</p>
-		<input class="nb-input default" placeholder="Enter Your Username" />
+		<input class="nb-input default" placeholder="Enter Your Username" bind:value={username} />
 		<p class="label-input">Password</p>
-		<input class="nb-input default" placeholder="Enter Your Password" type="password" />
+		<input
+			class="nb-input default"
+			placeholder="Enter Your Password"
+			type="password"
+			bind:value={password}
+		/>
 	</div>
 	<div class="form-button">
-		<button class="nb-button blue" on:click={signUp}>Sign up</button>
+		<button class="nb-button blue" on:click={async () => await signUp()} disabled={loading}
+			>{loading ? 'LOADING...' : 'SIGN UP'}</button
+		>
 	</div>
 </div>
 

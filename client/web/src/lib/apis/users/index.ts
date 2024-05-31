@@ -1,5 +1,32 @@
 import { QUEBYS_API_BASE_URL } from '$lib/constants';
 
+export const userRegister = async (
+	name: string,
+	username: string,
+	password: string
+) => {
+	try {
+		const response = await fetch(`${QUEBYS_API_BASE_URL}/users/register`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				name: name,
+				username: username,
+				password: password,
+				source: 'web'
+			})
+		});
+		const data = await response.json();
+		return data;
+	} catch (err) {
+		console.log(err);
+		throw err;
+	}
+};
+
 export const getUserDetail = async (userId: string) => {
 	try {
 		const response = await fetch(`${QUEBYS_API_BASE_URL}/users/${userId}/detail`);

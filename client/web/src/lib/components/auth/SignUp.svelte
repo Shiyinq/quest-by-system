@@ -9,12 +9,16 @@
 
 	const signUp = async () => {
 		loading = !loading;
-		let { message } = await userRegister(name, username, password).catch((err) => {
+		let data = await userRegister(name, username, password).catch((err) => {
 			loading = !loading;
 			toast.error(err.detail || 'Internal Server Error!');
+			return;
 		});
-		loading = !loading;
-		toast.success(message);
+
+		if (data) {
+			loading = !loading;
+			toast.success(data.message);
+		}
 	};
 </script>
 

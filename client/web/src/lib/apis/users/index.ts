@@ -14,7 +14,7 @@ export const userRegister = async (name: string, username: string, password: str
 			source: 'web'
 		})
 	});
-	if (!response.ok) await response.json();
+	if (!response.ok) throw await response.json();
 	return await response.json();
 };
 

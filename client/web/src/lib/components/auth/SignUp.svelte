@@ -1,44 +1,26 @@
 <script>
+	import { Toaster, toast } from 'svelte-sonner';
 	import { userRegister } from '$lib/apis/users';
 
 	let name = '';
 	let username = '';
 	let password = '';
 	let loading = false;
-	let infoRegister = '';
-	let success = false;
-	let error = false;
 
 	const signUp = async () => {
-		try {
+		loading = !loading;
+		let { message } = await userRegister(name, username, password).catch((err) => {
 			loading = !loading;
-			let { message } = await userRegister(name, username, password);
-			infoRegister = message;
-			loading = !loading;
-			success = true;
-		} catch (err) {
-			console.log(err);
-			loading = !loading;
-			error = true;
-		}
+			toast.error(err.detail || "Internal Server Error!");
+		});
+		loading = !loading;
+		toast.success(message);
 	};
-
-	$: if (success || error) {
-		setTimeout(() => {
-			error = false;
-			success = false;
-			infoRegister = '';
-		}, 2000);
-	}
 </script>
 
+<Toaster richColors position="top-right" />
 <div class="dialog sign-up">
 	<div class="form-title">
-		{#if success || error}
-			<div class="alert" class:success class:error>
-				<p>{infoRegister || 'Sign Up Failed!'}</p>
-			</div>
-		{/if}
 		<h2>Sign up to QUEBYS</h2>
 	</div>
 	<div class="form">

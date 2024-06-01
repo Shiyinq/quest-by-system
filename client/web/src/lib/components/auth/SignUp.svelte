@@ -11,7 +11,7 @@
 		loading = !loading;
 		let { message } = await userRegister(name, username, password).catch((err) => {
 			loading = !loading;
-			toast.error(err.detail || "Internal Server Error!");
+			toast.error(err.detail || 'Internal Server Error!');
 		});
 		loading = !loading;
 		toast.success(message);

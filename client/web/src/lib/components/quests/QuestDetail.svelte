@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Toaster, toast } from 'svelte-sonner';
 	import { updateQuestStatus, acceptQuest } from '$lib/apis/quests';
 	import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
 	import { dataGeneratedQuests, dataAcceptedQuests } from '$lib/store';
@@ -7,14 +8,10 @@
 	export let quest;
 	export let showFullContent = false;
 
-	let statusUpdated = '';
-	let statusChange = false;
 	let loading = false;
+	let statusChanged = false;
 
 	$: trimContent = showFullContent ? 'dialog' : 'dialog trim-content';
-	$: showMoreButton = showFullContent;
-	$: statusChanged = statusChange;
-	$: loadingStatusChange = loading;
 
 	marked.setOptions({
 		breaks: true
@@ -28,8 +25,8 @@
 		try {
 			let getGeneratedQuest = await getUserQuestGenerated(localStorage.userId);
 			dataGeneratedQuests.set(getGeneratedQuest);
-		} catch (err) {
-			console.log(err);
+		} catch (error) {
+			throw error;
 		}
 	};
 
@@ -38,7 +35,7 @@
 			let getAcceptedQuest = await getUserQuestHistory(localStorage.userId, 'all', 'in progress');
 			dataAcceptedQuests.set(getAcceptedQuest);
 		} catch (error) {
-			console.log(error);
+			throw error;
 		}
 	};
 
@@ -46,10 +43,13 @@
 		try {
 			loading = true;
 			let { message } = await updateQuestStatus(questId, status);
-			statusUpdated = message;
-			statusChange = true;
-			loading = true;
-		} catch (error) {
+			statusChanged = true;
+			showFullContent = false;
+			toast.success(message);
+		} catch (error: any) {
+			loading = false;
+			toast.error(error.detail || 'Internal Server Error!');
+		} finally {
 			loading = false;
 		}
 	};
@@ -60,34 +60,25 @@
 			let { message } = await acceptQuest(questId);
 			await fetchGeneratedQuest();
 			await fetchAcceptedQuest();
-			statusUpdated = message;
-			statusChange = true;
-			loading = true;
-		} catch (error) {
+			statusChanged = true;
+			showFullContent = false;
+			toast.success(message);
+		} catch (error: any) {
+			toast.error(error.detail || 'Internal Server Error!');
+		} finally {
 			loading = false;
 		}
 	};
-
-	$: if (statusUpdated) {
-		setTimeout(() => {
-			statusUpdated = '';
-			showFullContent = false;
-		}, 2000);
-	}
 </script>
 
+<Toaster richColors position="top-right" />
 <div class={trimContent}>
-	{#if statusUpdated}
-		<div class="alert success">
-			<p>{statusUpdated}</p>
-		</div>
-	{/if}
 	<div class="quest-info">
 		<p>Id: {quest.questId}</p>
 		<p>Type: {quest.type}</p>
 		<p>Status: {quest.status}</p>
 		<p>Created At: {quest.createdAt}</p>
-		{#if !showMoreButton}
+		{#if !showFullContent}
 			<div class="quest-button-container">
 				<button class="nb-button blue" on:click={showMore}>⬇️ Show more</button>
 			</div>
@@ -105,7 +96,7 @@
 					class="nb-button green"
 					on:click={async () => await acceptQuestGenerated(quest.questId)}
 				>
-					{#if loadingStatusChange}
+					{#if loading}
 						🔄 Loading...
 					{:else}
 						✅ Accept
@@ -117,7 +108,7 @@
 					class="nb-button green"
 					on:click={async () => await changeStatusQuest(quest.questId, 'completed')}
 				>
-					{#if loadingStatusChange}
+					{#if loading}
 						🔄 Loading...
 					{:else}
 						✅ Completed
@@ -125,7 +116,7 @@
 				</button>
 			{/if}
 		{/if}
-		{#if showMoreButton}
+		{#if showFullContent}
 			<button class="nb-button blue" on:click={showMore}>⬆️ Show less</button>
 		{/if}
 	</div>

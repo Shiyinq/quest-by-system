@@ -22,7 +22,7 @@
 	};
 </script>
 
-<Toaster richColors position="top-right" />
+<Toaster richColors position="top-center" />
 <div class="dialog sign-up">
 	<div class="form-title">
 		<h2>Sign up to QUEBYS</h2>

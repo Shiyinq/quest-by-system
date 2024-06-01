@@ -25,7 +25,7 @@
 	};
 </script>
 
-<Toaster richColors position="top-right" />
+<Toaster richColors position="top-center" />
 <div class="dialog">
 	<h2>Your Goal</h2>
 	<div class="form-goal">

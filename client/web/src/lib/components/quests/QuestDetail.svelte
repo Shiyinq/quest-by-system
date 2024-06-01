@@ -71,7 +71,7 @@
 	};
 </script>
 
-<Toaster richColors position="top-right" />
+<Toaster richColors position="top-center" />
 <div class={trimContent}>
 	<div class="quest-info">
 		<p>Id: {quest.questId}</p>

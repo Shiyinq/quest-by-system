@@ -20,7 +20,7 @@
 	};
 </script>
 
-<header class="card-container" transition:slide={{ duration: 1000 }}>
+<header transition:slide={{ duration: 1000 }}>
 	<div class="dialog">
 		<div class="toggle-theme">
 			<!-- svelte-ignore a11y-invalid-attribute -->
@@ -53,7 +53,10 @@
 </header>
 
 <style>
-	.card-container {
+	header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		margin-bottom: 86px;
 	}
 
@@ -95,7 +98,7 @@
 	}
 
 	@media (max-width: 480px) {
-		.card-container {
+		header {
 			margin-bottom: 70px;
 		}
 

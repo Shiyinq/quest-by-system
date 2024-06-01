@@ -15,6 +15,12 @@
 		<p>Loading...</p>
 	{:else}
 		<ul class="quest-list">
+			{#if quests.data.length == 0}
+				<div class="empty-state">
+					<h2 class="empty-state-emoji">💤</h2>
+					<p class="empty-state-text">You have no quests.</p>
+				</div>
+			{/if}
 			{#each quests.data as { questId, status, createdAt }}
 				<li>
 					{#if status == 'generated'}
@@ -28,9 +34,11 @@
 				</li>
 			{/each}
 		</ul>
-		<div class="dialog-footer">
-			<a class="nb-button blue" href={'/quests/more' + query}>More</a>
-		</div>
+		{#if quests.data.length > 0}
+			<div class="dialog-footer">
+				<a class="nb-button blue" href={'/quests/more' + query}>More</a>
+			</div>
+		{/if}
 	{/if}
 </div>
 
@@ -47,5 +55,19 @@
 
 	.quest-link:hover {
 		text-decoration: underline;
+	}
+
+	.empty-state {
+		text-align: center;
+	}
+
+	.empty-state-emoji {
+		padding: 0;
+	}
+
+	.empty-state-text {
+		margin: 0;
+		padding: 0;
+		font-size: 15px;
 	}
 </style>

@@ -1,37 +1,33 @@
 <script lang="ts">
+	import { Toaster, toast } from 'svelte-sonner';
 	import { getUserDetail, setUserGoal } from '$lib/apis/users';
 	import { dataUserInfo } from '$lib/store';
 
 	export let userInfo;
 
-	let goal = userInfo?.goal;
 	let loading = false;
-	let notifChangeGoal = '';
+	let goal = userInfo?.goal;
+
 	const changeGoal = async () => {
 		if (userInfo.goal == goal) return;
 		try {
 			loading = !loading;
 			let { message } = await setUserGoal(localStorage.userId, goal);
-			notifChangeGoal = message;
 			let getUserInfo = await getUserDetail(localStorage.userId);
 			dataUserInfo.set(getUserInfo);
-			loading = !loading;
-		} catch (error) {
+			toast.success(message);
+		} catch (error: any) {
 			console.log(error);
+			toast.error(error.detail || 'Internal Server Error!');
+		} finally {
 			loading = !loading;
 		}
 	};
-
-	$: if (notifChangeGoal) {
-		setTimeout(() => {
-			notifChangeGoal = '';
-		}, 2000);
-	}
 </script>
 
+<Toaster richColors position="top-right" />
 <div class="dialog">
 	<h2>Your Goal</h2>
-	<p>{notifChangeGoal}</p>
 	<div class="form-goal">
 		<input class="nb-input default input-goal" placeholder="Type your goal" bind:value={goal} />
 		<button class="nb-button blue button-goal" on:click={changeGoal} disabled={loading}

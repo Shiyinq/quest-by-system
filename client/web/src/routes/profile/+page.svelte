@@ -1,13 +1,13 @@
-<script>
-	import { getUserDetail, getUserQuestStats } from '$lib/apis/users';
-	import UserInfo from '$lib/components/profile/UserInfo.svelte';
-	import CountQuests from '$lib/components/profile/CountQuests.svelte';
-	import LoadingCard from '$lib/components/LoadingCard.svelte';
-	import ReFetchData from '$lib/components/ReFetchData.svelte';
-	import { slide } from 'svelte/transition';
-	import QuestGoal from '$lib/components/profile/QuestGoal.svelte';
-	import { dataUserInfo, userId } from '$lib/store';
+<script lang="ts">
 	import { onMount } from 'svelte';
+	import { dataUserInfo } from '$lib/store';
+	import { slide } from 'svelte/transition';
+
+	import UserInfo from '$lib/components/profile/UserInfo.svelte';
+	import QuestGoal from '$lib/components/profile/QuestGoal.svelte';
+	import CountQuests from '$lib/components/profile/CountQuests.svelte';
+
+	export let data: any;
 
 	const questTypes = [
 		{ title: '📋 Daily Quest', key: 'daily' },
@@ -16,44 +16,20 @@
 		{ title: '📋 Side Quest', key: 'side' }
 	];
 
-	let getQuestStats = getUserQuestStats($userId);
-	const reFetchQuestStats = () => {
-		getQuestStats = getUserQuestStats($userId);
-	};
-
-	const fetchUserInfo = async () => {
-		try {
-			dataUserInfo.set('loading');
-			let getUserInfo = await getUserDetail($userId);
-			dataUserInfo.set(getUserInfo);
-		} catch (err) {
-			console.log(err);
-			dataUserInfo.set('error');
-		}
-	};
-
 	onMount(() => {
-		fetchUserInfo();
+		dataUserInfo.set(data.userInfo);
 	});
 </script>
 
 <div class="card-container" transition:slide={{ duration: 1000 }}>
-	{#if $dataUserInfo == 'loading'}
-		<LoadingCard />
-	{:else if $dataUserInfo == 'error' || !$dataUserInfo}
-		<ReFetchData actionButton={fetchUserInfo} />
-	{:else if $dataUserInfo}
+	{#if $dataUserInfo}
 		<UserInfo userInfo={$dataUserInfo} />
 		<QuestGoal userInfo={$dataUserInfo} />
 	{/if}
 
-	{#await getQuestStats}
-		<LoadingCard />
-	{:then countQuests}
+	{#if data.userQuestStats}
 		{#each questTypes as questType}
-			<CountQuests title={questType.title} quest={countQuests[questType.key]} />
+			<CountQuests title={questType.title} quest={data.userQuestStats[questType.key]} />
 		{/each}
-	{:catch}
-		<ReFetchData actionButton={reFetchQuestStats} />
-	{/await}
+	{/if}
 </div>

@@ -6,7 +6,7 @@
 	import ReFetchData from '$lib/components/ReFetchData.svelte';
 	import { slide } from 'svelte/transition';
 	import QuestGoal from '$lib/components/profile/QuestGoal.svelte';
-	import { dataUserInfo } from '$lib/store';
+	import { dataUserInfo, userId } from '$lib/store';
 	import { onMount } from 'svelte';
 
 	const questTypes = [
@@ -16,15 +16,15 @@
 		{ title: '📋 Side Quest', key: 'side' }
 	];
 
-	let getQuestStats = getUserQuestStats(localStorage.userId);
+	let getQuestStats = getUserQuestStats($userId);
 	const reFetchQuestStats = () => {
-		getQuestStats = getUserQuestStats(localStorage.userId);
+		getQuestStats = getUserQuestStats($userId);
 	};
 
 	const fetchUserInfo = async () => {
 		try {
 			dataUserInfo.set('loading');
-			let getUserInfo = await getUserDetail(localStorage.userId);
+			let getUserInfo = await getUserDetail($userId);
 			dataUserInfo.set(getUserInfo);
 		} catch (err) {
 			console.log(err);

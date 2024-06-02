@@ -4,14 +4,16 @@
 		complete: () => void;
 	}
 
-	import InfiniteLoading from 'svelte-infinite-loading';
-	import QuestDetail from '$lib/components/quests/QuestDetail.svelte';
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { userId } from '$lib/store';
-	import { getUserQuestHistory, getUserQuestGenerated } from '$lib/apis/users';
-	import { capitalizeWord } from '$lib/utils';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
+	import { capitalizeWord } from '$lib/utils';
+	import { getUserQuestHistory, getUserQuestGenerated } from '$lib/apis/users';
+
+	import InfiniteLoading from 'svelte-infinite-loading';
+
+	import QuestDetail from '$lib/components/quests/QuestDetail.svelte';
 
 	export let data: any;
 	let questType = $page.url.searchParams.get('type') || 'all';

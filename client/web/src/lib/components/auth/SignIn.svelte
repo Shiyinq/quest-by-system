@@ -2,14 +2,13 @@
 	import { userId } from '$lib/store';
 	import { goto } from '$app/navigation';
 
-	let initialUserId = localStorage.getItem('userId') || '';
+	let initialUserId = '';
 
 	const setUserId = (e: any) => {
 		initialUserId = e.target.value;
 	};
 
 	const login = () => {
-		localStorage.setItem('userId', initialUserId);
 		userId.set(initialUserId);
 		goto('/');
 	};

@@ -69,12 +69,7 @@
 			const { data } = await getUserQuestGenerated($userId, pages);
 			list = data;
 		} else {
-			const { data } = await getUserQuestHistory(
-				$userId,
-				questType,
-				questStatus,
-				pages
-			);
+			const { data } = await getUserQuestHistory($userId, questType, questStatus, pages);
 			list = data;
 		}
 	});

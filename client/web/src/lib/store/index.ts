@@ -16,7 +16,7 @@ const createPersistedStore = (key: string, startValue: string) => {
 	const store = writable(parsedValue);
 
 	store.subscribe((value) => {
-		if (startValue !== '') {
+		if (value !== '') {
 			document.cookie = cookie.serialize(key, JSON.stringify(value), {
 				path: '/',
 				maxAge: 365 * 24 * 60 * 60

@@ -2,7 +2,7 @@
 	import { Toaster, toast } from 'svelte-sonner';
 	import { updateQuestStatus, acceptQuest } from '$lib/apis/quests';
 	import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
-	import { dataGeneratedQuests, dataAcceptedQuests } from '$lib/store';
+	import { dataGeneratedQuests, dataAcceptedQuests, userId } from '$lib/store';
 	import { marked } from 'marked';
 
 	export let quest;
@@ -23,7 +23,7 @@
 
 	const fetchGeneratedQuest = async () => {
 		try {
-			let getGeneratedQuest = await getUserQuestGenerated(localStorage.userId);
+			let getGeneratedQuest = await getUserQuestGenerated($userId);
 			dataGeneratedQuests.set(getGeneratedQuest);
 		} catch (error) {
 			throw error;
@@ -32,7 +32,7 @@
 
 	const fetchAcceptedQuest = async () => {
 		try {
-			let getAcceptedQuest = await getUserQuestHistory(localStorage.userId, 'all', 'in progress');
+			let getAcceptedQuest = await getUserQuestHistory($userId, 'all', 'in progress');
 			dataAcceptedQuests.set(getAcceptedQuest);
 		} catch (error) {
 			throw error;

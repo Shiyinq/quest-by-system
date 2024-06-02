@@ -1,7 +1,9 @@
+import cookie from 'cookie';
 import { writable, type Writable } from 'svelte/store';
 
 const createPersistedStore = (key: string, startValue: string) => {
-	const storedValue = localStorage.getItem(key);
+	const cookies = cookie.parse(document.cookie);
+	const storedValue = cookies[key];
 
 	let parsedValue;
 	try {
@@ -14,8 +16,11 @@ const createPersistedStore = (key: string, startValue: string) => {
 	const store = writable(parsedValue);
 
 	store.subscribe((value) => {
-		if (startValue != '') {
-			localStorage.setItem(key, JSON.stringify(value));
+		if (startValue !== '') {
+			document.cookie = cookie.serialize(key, JSON.stringify(value), {
+				path: '/',
+				maxAge: 365 * 24 * 60 * 60
+			});
 		}
 	});
 
@@ -23,11 +28,15 @@ const createPersistedStore = (key: string, startValue: string) => {
 };
 
 const toggleTheme = () => {
-	const initialTheme = localStorage.getItem('theme') || 'light';
+	const cookies = cookie.parse(document.cookie);
+	const initialTheme = cookies['theme'] || 'light';
 	const theme = writable(initialTheme);
 
 	theme.subscribe((value) => {
-		localStorage.setItem('theme', value);
+		document.cookie = cookie.serialize('theme', value, {
+			path: '/',
+			maxAge: 365 * 24 * 60 * 60
+		});
 		document.documentElement.setAttribute('data-theme', value);
 	});
 

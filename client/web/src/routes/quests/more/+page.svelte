@@ -7,6 +7,7 @@
 	import InfiniteLoading from 'svelte-infinite-loading';
 	import QuestDetail from '$lib/components/quests/QuestDetail.svelte';
 	import { page } from '$app/stores';
+	import { userId } from '$lib/store';
 	import { getUserQuestHistory, getUserQuestGenerated } from '$lib/apis/users';
 	import { capitalizeWord } from '$lib/utils';
 	import { goto } from '$app/navigation';
@@ -24,12 +25,12 @@
 			let meta: any = {};
 			let datas: any[] = [];
 			if (questType == 'generated') {
-				const { metadata, data } = await getUserQuestGenerated(localStorage.userId, pages);
+				const { metadata, data } = await getUserQuestGenerated($userId, pages);
 				meta = metadata;
 				datas = data;
 			} else {
 				const { metadata, data } = await getUserQuestHistory(
-					localStorage.userId,
+					$userId,
 					questType,
 					questStatus,
 					pages
@@ -57,7 +58,7 @@
 	const filterButton = async (status: string) => {
 		pages = 1;
 		questStatus = status;
-		const { data } = await getUserQuestHistory(localStorage.userId, questType, questStatus, pages);
+		const { data } = await getUserQuestHistory($userId, questType, questStatus, pages);
 		list = data;
 
 		goto(`${window.location.origin}/quests/more?type=${questType}&status=${questStatus}`);
@@ -65,11 +66,11 @@
 
 	onMount(async () => {
 		if (questType == 'generated') {
-			const { data } = await getUserQuestGenerated(localStorage.userId, pages);
+			const { data } = await getUserQuestGenerated($userId, pages);
 			list = data;
 		} else {
 			const { data } = await getUserQuestHistory(
-				localStorage.userId,
+				$userId,
 				questType,
 				questStatus,
 				pages

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import cookie from 'cookie';
 	import { goto } from '$app/navigation';
 	import { theme, userId, activeMenu } from '$lib/store';
 	import { slide } from 'svelte/transition';
@@ -10,7 +11,13 @@
 	};
 
 	const logout = () => {
-		localStorage.removeItem('userId');
+		const expiredCookieString = cookie.serialize('userId', '', {
+			path: '/',
+			maxAge: -1
+		});
+
+		document.cookie = expiredCookieString;
+
 		userId.set('');
 		goto('/auth');
 	};

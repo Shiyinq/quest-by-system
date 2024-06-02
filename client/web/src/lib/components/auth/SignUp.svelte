@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Toaster, toast } from 'svelte-sonner';
 	import { userRegister } from '$lib/apis/users';
 
@@ -6,8 +6,30 @@
 	let username = '';
 	let password = '';
 	let loading = false;
+	let validation: any = {};
+
+	const formValidation = () => {
+		let valid = true;
+		if (name.trim() == '') {
+			valid = false;
+			validation['name'] = 'Name is required!';
+		}
+
+		if (username.trim() == '') {
+			valid = false;
+			validation['username'] = 'Username is required!';
+		}
+
+		if (password.trim() == '') {
+			valid = false;
+			validation['password'] = 'Password is required!';
+		}
+
+		return valid;
+	};
 
 	const signUp = async () => {
+		if (!formValidation()) return;
 		loading = !loading;
 		let data = await userRegister(name, username, password).catch((err) => {
 			loading = !loading;
@@ -16,9 +38,16 @@
 		});
 
 		if (data) {
+			name = '';
+			username = '';
+			password = '';
 			loading = !loading;
 			toast.success(data.message);
 		}
+	};
+
+	const clearValidation = (key: string) => {
+		delete validation[key];
 	};
 </script>
 
@@ -27,19 +56,45 @@
 	<div class="form-title">
 		<h2>Sign up to QUEBYS</h2>
 	</div>
-	<div class="form">
-		<p class="label-input">Name</p>
-		<input class="nb-input default" placeholder="Enter Your Full Name" bind:value={name} />
-		<p class="label-input">Username</p>
-		<input class="nb-input default" placeholder="Enter Your Username" bind:value={username} />
-		<p class="label-input">Password</p>
-		<input
-			class="nb-input default"
-			placeholder="Enter Your Password"
-			type="password"
-			bind:value={password}
-		/>
-	</div>
+	<form class="form">
+		<div class="form-field">
+			<p class="label-input">Name</p>
+			<input
+				class="nb-input default"
+				placeholder="Enter Your Full Name"
+				bind:value={name}
+				on:keydown={() => clearValidation('name')}
+			/>
+			{#if validation.name}
+				<span>{validation.name}</span>
+			{/if}
+		</div>
+		<div class="form-field">
+			<p class="label-input">Username</p>
+			<input
+				class="nb-input default"
+				placeholder="Enter Your Username"
+				bind:value={username}
+				on:keydown={() => clearValidation('username')}
+			/>
+			{#if validation.username}
+				<span>{validation.username}</span>
+			{/if}
+		</div>
+		<div class="form-field">
+			<p class="label-input">Password</p>
+			<input
+				class="nb-input default"
+				placeholder="Enter Your Password"
+				type="password"
+				bind:value={password}
+				on:keydown={() => clearValidation('password')}
+			/>
+			{#if validation.password}
+				<span>{validation.password}</span>
+			{/if}
+		</div>
+	</form>
 	<div class="form-button">
 		<button class="nb-button blue" on:click={async () => await signUp()} disabled={loading}
 			>{loading ? 'LOADING...' : 'SIGN UP'}</button
@@ -79,5 +134,10 @@
 		margin-bottom: 12px;
 		margin-top: 8px;
 		border-radius: 5px;
+	}
+
+	span {
+		color: red;
+		font-size: 15px;
 	}
 </style>

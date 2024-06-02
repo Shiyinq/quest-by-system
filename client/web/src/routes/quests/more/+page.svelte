@@ -13,6 +13,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 
+	export let data: any;
 	let questType = $page.url.searchParams.get('type') || 'all';
 	let questStatus = $page.url.searchParams.get('status') || 'null';
 
@@ -65,13 +66,7 @@
 	};
 
 	onMount(async () => {
-		if (questType == 'generated') {
-			const { data } = await getUserQuestGenerated($userId, pages);
-			list = data;
-		} else {
-			const { data } = await getUserQuestHistory($userId, questType, questStatus, pages);
-			list = data;
-		}
+		list = data.quests;
 	});
 </script>
 

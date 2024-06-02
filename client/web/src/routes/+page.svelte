@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
-	import { dataGeneratedQuests, dataAcceptedQuests } from '$lib/store';
+	import { dataGeneratedQuests, dataAcceptedQuests, userId } from '$lib/store';
 	import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
 	import CardQuests from '$lib/components/quests/CardQuests.svelte';
 	import GenerateQuest from '$lib/components/quests/GenerateQuest.svelte';
@@ -11,7 +11,7 @@
 	const fetchGeneratedQuest = async () => {
 		try {
 			dataGeneratedQuests.set('loading');
-			let getGeneratedQuest = await getUserQuestGenerated(localStorage.userId);
+			let getGeneratedQuest = await getUserQuestGenerated($userId);
 			dataGeneratedQuests.set(getGeneratedQuest);
 		} catch (err) {
 			console.log(err);
@@ -22,7 +22,7 @@
 	const fetchAcceptedQuest = async () => {
 		try {
 			dataAcceptedQuests.set('loading');
-			let getAcceptedQuest = await getUserQuestHistory(localStorage.userId, 'all', 'in progress');
+			let getAcceptedQuest = await getUserQuestHistory($userId, 'all', 'in progress');
 			dataAcceptedQuests.set(getAcceptedQuest);
 		} catch (error) {
 			console.log(error);

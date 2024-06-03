@@ -1,8 +1,10 @@
 <script>
 	import '../app.css';
 	import { userId } from '$lib/store';
+	import { navigating } from '$app/stores';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
+	import PreloadingIndicator from './PreloadingIndicator.svelte';
 	import SplashScreen from '$lib/components/SplashScreen.svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
@@ -20,6 +22,10 @@
 
 {#if showSplash}
 	<SplashScreen show={showSplash} />
+{/if}
+
+{#if $navigating}
+	<PreloadingIndicator />
 {/if}
 
 {#if $userId}

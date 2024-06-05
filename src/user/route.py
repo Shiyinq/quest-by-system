@@ -4,22 +4,13 @@ from src.schemas import GeneralResponse
 from src.user import service
 from src.user.schemas import (
     ResponseStatsQuest,
-    ResponseUserCreated,
     ResponseUserDetail,
     ResponseUserGeneratedQuest,
     ResponseUserHistoryQuest,
-    UserCreate,
     UserGoalUpdate,
 )
 
 router = APIRouter()
-
-
-@router.post("/users/register", status_code=201, response_model=ResponseUserCreated)
-async def register_user(data: UserCreate):
-    """Register User"""
-    user = await service.register_user(data)
-    return user
 
 
 @router.get("/users/{user_id}", status_code=200, response_model=ResponseUserDetail)

@@ -4,7 +4,6 @@ from src.database import database
 from src.schemas import GeneralResponse
 from src.user.constants import Info
 from src.user.exceptions import (
-    UserCreateFailed,
     UserGetDetailFailed,
     UserNotFound,
     UserQuestGeneratedFailed,
@@ -14,25 +13,12 @@ from src.user.exceptions import (
 )
 from src.user.schemas import (
     ResponseStatsQuest,
-    ResponseUserCreated,
     ResponseUserDetail,
     ResponseUserGeneratedQuest,
     ResponseUserHistoryQuest,
-    UserCreate,
     UserGoalUpdate,
 )
 from src.utils import pagination
-
-
-async def register_user(data: UserCreate) -> ResponseUserCreated:
-    try:
-        data = dict(data)
-        user = await database.users.insert_one(data)
-        if user:
-            return {"message": Info.USER_CREATED}
-    except Exception as e:
-        print(e)
-        raise UserCreateFailed()
 
 
 async def get_user(user_id: str) -> ResponseUserDetail:

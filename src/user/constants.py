@@ -1,6 +1,5 @@
 class ErrorCode:
     USER_NOT_FOUND = "User not found."
-    USER_CREATE_FAILED = "Failed register."
     USER_GET_DETAIL_FAILED = "Failed to get detail user."
     USER_QUEST_HISTORY_FAILED = "Failed to get quest history."
     USER_QUEST_GENERATED_FAILED = "Failed to get generated quest."
@@ -9,6 +8,5 @@ class ErrorCode:
 
 
 class Info:
-    USER_CREATED = "Register user success."
     USER_UPDATED = "Update user success."
     USER_UPDATE_GOAL = "Goal updated."

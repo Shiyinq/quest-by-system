@@ -35,9 +35,12 @@ Steps to install this project.
    ```bash
    npm install
    ```
+4. Make `.env` file
+   ```bash
+   cp .env.example .env
+   ```
 
 ## Usage
-
 Once you've clone a repository and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
@@ -46,6 +49,7 @@ npm run dev
 # or start the server and open the app in a new browser tab
 npm run dev -- --open
 ```
+NOTE: Please ensure that you run the backend API first. You can find instructions in the [README](/README.md) file.
 
 ## Building
 

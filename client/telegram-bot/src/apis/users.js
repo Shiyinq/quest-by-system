@@ -2,7 +2,7 @@ import axiosInstance from "../config/axios.js";
 
 export const userRegister = async (userId, name) => {
     try {
-        const response = await axiosInstance.post(`/users/register`, {
+        const response = await axiosInstance.post(`/auth/sign-up`, {
             userId: userId,
             name: name,
             source: "telegram"

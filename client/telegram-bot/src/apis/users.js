@@ -1,6 +1,6 @@
 import axiosInstance from "../config/axios.js";
 
-export const userRegister = async (userId, name) => {
+export const userSignUp = async (userId, name) => {
     try {
         const response = await axiosInstance.post(`/auth/sign-up`, {
             userId: userId,

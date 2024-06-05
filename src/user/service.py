@@ -143,26 +143,10 @@ async def stats(user_id: str) -> ResponseStatsQuest:
         stats_quest = await stats_quest_cursor.to_list(length=None)
 
         group_stats = {
-            "daily": {
-                "in_progress": 0,
-                "completed": 0,
-                "not_completed":0
-            },
-            "weekly": {
-                "in_progress":0,
-                "completed":0,
-                "not_completed":0
-            },
-            "monthly": {
-                "in_progress":0,
-                "completed":0,
-                "not_completed":0
-            },
-            "side": {
-                "in_progress":0,
-                "completed": 0,
-                "not_completed": 0
-            }
+            "daily": {"in_progress": 0, "completed": 0, "not_completed": 0},
+            "weekly": {"in_progress": 0, "completed": 0, "not_completed": 0},
+            "monthly": {"in_progress": 0, "completed": 0, "not_completed": 0},
+            "side": {"in_progress": 0, "completed": 0, "not_completed": 0},
         }
         for item in stats_quest:
             quest_type = item["type"]

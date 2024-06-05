@@ -23,7 +23,7 @@ async def register_user(data: UserCreate):
 
 
 @router.get(
-    "/users/{user_id}/detail", status_code=200, response_model=ResponseUserDetail
+    "/users/{user_id}", status_code=200, response_model=ResponseUserDetail
 )
 async def get_user(user_id: str):
     """Get User"""

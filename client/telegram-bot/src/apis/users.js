@@ -26,7 +26,7 @@ export const setUserGoal = async (userId, goal) => {
 
 export const userDetail = async (userId) => {
     try {
-        const response = await axiosInstance.get(`/users/${userId}/detail`);
+        const response = await axiosInstance.get(`/users/${userId}`);
         return response.data;
     } catch (error) {
         if (error?.response?.status == 404) {

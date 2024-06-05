@@ -58,8 +58,8 @@ bot.use(async (ctx, next) => {
     }
 
     if (userExist == 404) {
-        let register = await userSignUp(userId, name);
-        if (!register) {
+        let signUp = await userSignUp(userId, name);
+        if (!signUp) {
             return
         }
     }

@@ -6,10 +6,6 @@ class UserNotFound(NotFound):
     DETAIL = ErrorCode.USER_NOT_FOUND
 
 
-class UserCreateFailed(InternalServerError):
-    DETAIL = ErrorCode.USER_CREATE_FAILED
-
-
 class UserGetDetailFailed(InternalServerError):
     DETAIL = ErrorCode.USER_GET_DETAIL_FAILED
 

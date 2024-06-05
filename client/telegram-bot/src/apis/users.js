@@ -15,7 +15,7 @@ export const userRegister = async (userId, name) => {
 
 export const setUserGoal = async (userId, goal) => {
     try {
-        const response = await axiosInstance.post(`/users/${userId}/goal`, {
+        const response = await axiosInstance.put(`/users/${userId}/goal`, {
             goal: goal
         })
         return response.data;

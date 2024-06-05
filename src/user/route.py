@@ -64,7 +64,7 @@ async def user_quest_stats(user_id: str):
     return stats
 
 
-@router.post("/users/{user_id}/goal", status_code=200, response_model=GeneralResponse)
+@router.put("/users/{user_id}/goal", status_code=200, response_model=GeneralResponse)
 async def set_user_goal(user_id: str, data: UserGoalUpdate):
     """Set User Goal"""
     goal = await service.update_goal(user_id, data)

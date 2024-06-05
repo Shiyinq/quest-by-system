@@ -26,7 +26,7 @@ export const getUserDetail = async (userId: string) => {
 
 export const setUserGoal = async (userId: string, goal: string) => {
 	const response = await fetch(`${QUEBYS_API_BASE_URL}/users/${userId}/goal`, {
-		method: 'POST',
+		method: 'PUT',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json'

@@ -19,7 +19,7 @@ export const userRegister = async (name: string, username: string, password: str
 };
 
 export const getUserDetail = async (userId: string) => {
-	const response = await fetch(`${QUEBYS_API_BASE_URL}/users/${userId}/detail`);
+	const response = await fetch(`${QUEBYS_API_BASE_URL}/users/${userId}`);
 	if (!response.ok) throw await response.json();
 	return await response.json();
 };

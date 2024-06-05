@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Toaster, toast } from 'svelte-sonner';
-	import { userRegister } from '$lib/apis/users';
+	import { userSignUp } from '$lib/apis/users';
 
 	let name = '';
 	let username = '';
@@ -31,7 +31,7 @@
 	const signUp = async () => {
 		if (!formValidation()) return;
 		loading = !loading;
-		let data = await userRegister(name, username, password).catch((err) => {
+		let data = await userSignUp(name, username, password).catch((err) => {
 			loading = !loading;
 			toast.error(err.detail || 'Internal Server Error!');
 			return;

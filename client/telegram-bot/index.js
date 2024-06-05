@@ -1,6 +1,6 @@
 import { Telegraf } from "telegraf";
 import { BOT_TOKEN } from './src/config/index.js';
-import { userDetail, userRegister } from './src/apis/users.js';
+import { userDetail, userSignUp } from './src/apis/users.js';
 
 const bot = new Telegraf(BOT_TOKEN);
 
@@ -58,7 +58,7 @@ bot.use(async (ctx, next) => {
     }
 
     if (userExist == 404) {
-        let register = await userRegister(userId, name);
+        let register = await userSignUp(userId, name);
         if (!register) {
             return
         }

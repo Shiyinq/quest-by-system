@@ -1,7 +1,7 @@
 import { QUEBYS_API_BASE_URL } from '$lib/constants';
 
 export const userRegister = async (name: string, username: string, password: string) => {
-	const response = await fetch(`${QUEBYS_API_BASE_URL}/users/register`, {
+	const response = await fetch(`${QUEBYS_API_BASE_URL}/auth/sign-up`, {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',

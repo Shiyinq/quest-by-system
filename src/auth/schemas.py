@@ -47,6 +47,10 @@ class User(BaseModel):
     password: str
 
 
+class UserId(BaseModel):
+    userId: str
+
+
 class Token(BaseModel):
     token_type: str
     expire: float

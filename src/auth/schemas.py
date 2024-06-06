@@ -11,7 +11,7 @@ def has_password(password) -> str:
     return pwd_context.hash(password)
 
 
-class UserCreate(BaseModel):
+class UserSignUp(BaseModel):
     userId: str = None
     username: str
     name: str
@@ -40,3 +40,14 @@ class UserCreate(BaseModel):
                 "password": "Zero123!",
             }
         }
+
+
+class User(BaseModel):
+    userId: str
+    password: str
+
+
+class Token(BaseModel):
+    token_type: str
+    expire: float
+    access_token: str

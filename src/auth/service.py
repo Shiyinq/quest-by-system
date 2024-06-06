@@ -48,7 +48,13 @@ def create_access_token(data: dict, expires_delta: timedelta = None) -> Token:
 
 
 async def get_user(username_or_email: str) -> User:
-    query = {"$or": [{"username": username_or_email}, {"email": username_or_email}]}
+    query = {
+        "$or": [
+            {"username": username_or_email},
+            {"email": username_or_email},
+            {"userId": username_or_email},
+        ]
+    }
     user = await database.users.find_one(query, {"_id": 0})
     if user:
         return User(**user)

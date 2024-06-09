@@ -1,7 +1,7 @@
 <script lang="ts">
 	import cookie from 'cookie';
 	import { goto } from '$app/navigation';
-	import { theme, userId, activeMenu } from '$lib/store';
+	import { theme, userId, activeMenu, token } from '$lib/store';
 	import { slide } from 'svelte/transition';
 
 	let light = true;
@@ -11,14 +11,22 @@
 	};
 
 	const logout = () => {
-		const expiredCookieString = cookie.serialize('userId', '', {
+		const expiredUserId = cookie.serialize('userId', '', {
 			path: '/',
 			maxAge: -1
 		});
 
-		document.cookie = expiredCookieString;
+		const expiredToken = cookie.serialize('token', '', {
+			path: '/',
+			maxAge: -1
+		});
+
+		document.cookie = expiredUserId;
+		document.cookie = expiredToken;
 
 		userId.set('');
+		token.set('');
+
 		goto('/auth');
 	};
 

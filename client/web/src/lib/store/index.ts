@@ -2,34 +2,34 @@ import cookie from 'cookie';
 import { writable, type Writable } from 'svelte/store';
 
 const createPersistedStore = (key: string, startValue: string) => {
-		let parsedValue = startValue;
-	
-		if (typeof document !== 'undefined') {
-			const cookies = cookie.parse(document.cookie);
-			const storedValue = cookies[key];
-	
-			try {
-				parsedValue = storedValue ? JSON.parse(storedValue) : startValue;
-			} catch (e) {
-				console.error('Error parsing stored value: ', e);
-				parsedValue = startValue;
+	let parsedValue = startValue;
+
+	if (typeof document !== 'undefined') {
+		const cookies = cookie.parse(document.cookie);
+		const storedValue = cookies[key];
+
+		try {
+			parsedValue = storedValue ? JSON.parse(storedValue) : startValue;
+		} catch (e) {
+			console.error('Error parsing stored value: ', e);
+			parsedValue = startValue;
+		}
+	}
+
+	const store = writable(parsedValue);
+
+	if (typeof document !== 'undefined') {
+		store.subscribe((value) => {
+			if (value !== '') {
+				document.cookie = cookie.serialize(key, JSON.stringify(value), {
+					path: '/',
+					maxAge: 365 * 24 * 60 * 60
+				});
 			}
-		}
-	
-		const store = writable(parsedValue);
-	
-		if (typeof document !== 'undefined') {
-			store.subscribe((value) => {
-				if (value !== '') {
-					document.cookie = cookie.serialize(key, JSON.stringify(value), {
-						path: '/',
-						maxAge: 365 * 24 * 60 * 60
-					});
-				}
-			});
-		}
-	
-		return store;
+		});
+	}
+
+	return store;
 };
 
 const toggleTheme = () => {

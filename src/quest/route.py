@@ -1,5 +1,6 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
+from src import dependencies
 from src.quest import service
 from src.quest.schemas import (
     GenerateQuest,
@@ -9,7 +10,7 @@ from src.quest.schemas import (
 )
 from src.schemas import GeneralResponse
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(dependencies.validate_token)])
 
 
 @router.post("/quests/generate", status_code=201, response_model=ResponseGeneratedQuest)

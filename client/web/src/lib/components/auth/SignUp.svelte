@@ -1,54 +1,26 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { Toaster, toast } from 'svelte-sonner';
-	import { userSignUp } from '$lib/apis/users';
+
+	export let form: any;
 
 	let name = '';
 	let username = '';
 	let password = '';
 	let loading = false;
-	let validation: any = {};
-
-	const formValidation = () => {
-		let valid = true;
-		if (name.trim() == '') {
-			valid = false;
-			validation['name'] = 'Name is required!';
-		}
-
-		if (username.trim() == '') {
-			valid = false;
-			validation['username'] = 'Username is required!';
-		}
-
-		if (password.trim() == '') {
-			valid = false;
-			validation['password'] = 'Password is required!';
-		}
-
-		return valid;
-	};
-
-	const signUp = async () => {
-		if (!formValidation()) return;
-		loading = !loading;
-		let data = await userSignUp(name, username, password).catch((err) => {
-			loading = !loading;
-			toast.error(err.detail || 'Internal Server Error!');
-			return;
-		});
-
-		if (data) {
-			name = '';
-			username = '';
-			password = '';
-			loading = !loading;
-			toast.success(data.message);
-		}
-	};
 
 	const clearValidation = (key: string) => {
-		delete validation[key];
+		delete form?.errors[key];
 	};
+
+	$: if (form) {
+		if (form?.status) {
+			toast.success(form?.message);
+		} else {
+			toast.error(form?.message);
+		}
+		console.log(form);
+	}
 </script>
 
 <Toaster richColors position="top-center" />
@@ -56,17 +28,18 @@
 	<div class="form-title">
 		<h2>Sign up to QUEBYS</h2>
 	</div>
-	<form class="form">
+	<form method="POST" class="form" action="?/signUp" use:enhance>
 		<div class="form-field">
 			<p class="label-input">Name</p>
 			<input
 				class="nb-input default"
 				placeholder="Enter Your Full Name"
+				name="name"
 				bind:value={name}
 				on:keydown={() => clearValidation('name')}
 			/>
-			{#if validation.name}
-				<span>{validation.name}</span>
+			{#if form?.errors?.name}
+				<span>{form?.errors?.name}</span>
 			{/if}
 		</div>
 		<div class="form-field">
@@ -74,11 +47,12 @@
 			<input
 				class="nb-input default"
 				placeholder="Enter Your Username"
+				name="username"
 				bind:value={username}
 				on:keydown={() => clearValidation('username')}
 			/>
-			{#if validation.username}
-				<span>{validation.username}</span>
+			{#if form?.errors?.username}
+				<span>{form?.errors?.username}</span>
 			{/if}
 		</div>
 		<div class="form-field">
@@ -86,20 +60,21 @@
 			<input
 				class="nb-input default"
 				placeholder="Enter Your Password"
+				name="password"
 				type="password"
 				bind:value={password}
 				on:keydown={() => clearValidation('password')}
 			/>
-			{#if validation.password}
-				<span>{validation.password}</span>
+			{#if form?.errors?.password}
+				<span>{form?.errors?.password}</span>
 			{/if}
 		</div>
+		<div class="form-button">
+			<button class="nb-button blue" disabled={loading} type="submit"
+				>{loading ? 'LOADING...' : 'SIGN UP'}</button
+			>
+		</div>
 	</form>
-	<div class="form-button">
-		<button class="nb-button blue" on:click={async () => await signUp()} disabled={loading}
-			>{loading ? 'LOADING...' : 'SIGN UP'}</button
-		>
-	</div>
 </div>
 
 <style>

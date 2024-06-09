@@ -2,6 +2,7 @@
 	import SignIn from '$lib/components/auth/SignIn.svelte';
 	import SignUp from '$lib/components/auth/SignUp.svelte';
 	let formSignIn = true;
+	export let form: any;
 </script>
 
 <div class="card-container">
@@ -10,7 +11,7 @@
 	</div>
 
 	<div class:hidden={formSignIn}>
-		<SignUp />
+		<SignUp {form} />
 	</div>
 
 	<div class="link">

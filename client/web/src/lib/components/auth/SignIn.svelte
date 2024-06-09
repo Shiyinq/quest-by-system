@@ -1,35 +1,67 @@
 <script lang="ts">
-	import { userId } from '$lib/store';
+	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
+	import { Toaster, toast } from 'svelte-sonner';
 
-	let initialUserId = '';
+	export let form: any;
 
-	const setUserId = (e: any) => {
-		initialUserId = e.target.value;
+	let username = '';
+	let password = '';
+	let loading = false;
+
+	const clearValidation = (key: string) => {
+		delete form?.errors[key];
 	};
 
-	const login = () => {
-		userId.set(initialUserId);
-		goto('/');
-	};
+	$: if (form) {
+		if (form?.status) {
+			toast.success(form?.message);
+			goto('/');
+		} else {
+			toast.error(form?.message);
+		}
+	}
 </script>
 
+<Toaster richColors position="top-center" />
 <div class="dialog sign-in">
 	<div class="form-title">
 		<h2>Sign in to QUEBYS</h2>
 	</div>
-	<div class="form">
-		<p class="label-input">ID Telegram</p>
-		<input
-			class="nb-input default"
-			placeholder="Enter Your ID Telegram"
-			value={initialUserId}
-			on:change={setUserId}
-		/>
-	</div>
-	<div class="form-button">
-		<button class="nb-button blue" on:click={login}>Sign in</button>
-	</div>
+	<form method="POST" class="form" action="?/signIn" use:enhance>
+		<div class="form-field">
+			<p class="label-input">Username</p>
+			<input
+				class="nb-input default"
+				placeholder="Enter Your Username"
+				name="username"
+				bind:value={username}
+				on:keydown={() => clearValidation('username')}
+			/>
+			{#if form?.errors?.username}
+				<span>{form?.errors?.username}</span>
+			{/if}
+		</div>
+		<div class="form-field">
+			<p class="label-input">Password</p>
+			<input
+				class="nb-input default"
+				placeholder="Enter Your Password"
+				name="password"
+				type="password"
+				bind:value={password}
+				on:keydown={() => clearValidation('password')}
+			/>
+			{#if form?.errors?.password}
+				<span>{form?.errors?.password}</span>
+			{/if}
+		</div>
+		<div class="form-button">
+			<button class="nb-button blue" disabled={loading} type="submit"
+				>{loading ? 'LOADING...' : 'SIGN IN'}</button
+			>
+		</div>
+	</form>
 </div>
 
 <style>
@@ -64,5 +96,10 @@
 		margin-bottom: 12px;
 		margin-top: 8px;
 		border-radius: 5px;
+	}
+
+	span {
+		color: red;
+		font-size: 15px;
 	}
 </style>

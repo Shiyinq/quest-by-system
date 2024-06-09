@@ -1,5 +1,6 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
+from src import dependencies
 from src.schemas import GeneralResponse
 from src.user import service
 from src.user.schemas import (
@@ -10,7 +11,7 @@ from src.user.schemas import (
     UserGoalUpdate,
 )
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(dependencies.validate_token)])
 
 
 @router.get("/users/{user_id}", status_code=200, response_model=ResponseUserDetail)

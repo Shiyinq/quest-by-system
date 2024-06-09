@@ -14,48 +14,55 @@ from src.user.schemas import (
 router = APIRouter(dependencies=[Depends(dependencies.validate_token)])
 
 
-@router.get("/users/{user_id}", status_code=200, response_model=ResponseUserDetail)
-async def get_user(user_id: str):
+@router.get("/users/me", status_code=200, response_model=ResponseUserDetail)
+async def get_user(current_user=Depends(dependencies.get_current_user)):
     """Get User"""
-    user = await service.get_user(user_id)
-    return user
+    return current_user
 
 
 @router.get(
-    "/users/{user_id}/quests/generated",
+    "/users/quests/generated",
     status_code=200,
     response_model=ResponseUserGeneratedQuest,
 )
-async def user_quest_generated(user_id: str, page: int = 1, limit: int = 10):
+async def user_quest_generated(
+    page: int = 1, limit: int = 10, current_user=Depends(dependencies.get_current_user)
+):
     """Get User Quest Generated"""
-    generated = await service.user_quest_generated(user_id, page, limit)
+    generated = await service.user_quest_generated(current_user.userId, page, limit)
     return generated
 
 
 @router.get(
-    "/users/{user_id}/quests/history",
+    "/users/quests/history",
     status_code=200,
     response_model=ResponseUserHistoryQuest,
 )
 async def user_quest_history(
-    user_id: str, type: str = "all", status: str = None, page: int = 1, limit: int = 10
+    type: str = "all",
+    status: str = None,
+    page: int = 1,
+    limit: int = 10,
+    current_user=Depends(dependencies.get_current_user),
 ):
     """Get User Quest History"""
-    history = await service.user_quest_history(user_id, type, status, page, limit)
+    history = await service.user_quest_history(
+        current_user.userId, type, status, page, limit
+    )
     return history
 
 
-@router.get(
-    "/users/{user_id}/quests/stats", status_code=200, response_model=ResponseStatsQuest
-)
-async def user_quest_stats(user_id: str):
+@router.get("/users/quests/stats", status_code=200, response_model=ResponseStatsQuest)
+async def user_quest_stats(current_user=Depends(dependencies.get_current_user)):
     """Get User Quest Stats"""
-    stats = await service.stats(user_id)
+    stats = await service.stats(current_user.userId)
     return stats
 
 
-@router.put("/users/{user_id}/goal", status_code=200, response_model=GeneralResponse)
-async def set_user_goal(user_id: str, data: UserGoalUpdate):
+@router.put("/users/goal", status_code=200, response_model=GeneralResponse)
+async def set_user_goal(
+    data: UserGoalUpdate, current_user=Depends(dependencies.get_current_user)
+):
     """Set User Goal"""
-    goal = await service.update_goal(user_id, data)
+    goal = await service.update_goal(current_user.userId, data)
     return goal

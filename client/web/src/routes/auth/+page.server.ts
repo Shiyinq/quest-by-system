@@ -1,7 +1,7 @@
 import { fail } from '@sveltejs/kit';
-import { jwtDecode } from 'jwt-decode';
 
 import { userSignIn, userSignUp } from '$lib/apis/users';
+// import { jwtDecode } from 'jwt-decode';
 
 const formValidation = (name: string, username: string, password: string) => {
 	const validation = { name: '', username: '', password: '' };
@@ -67,7 +67,7 @@ export const actions = {
 			});
 		}
 	},
-	signIn: async ({ request, cookies }) => {
+	signIn: async ({ request }) => {
 		const data = await request.formData();
 		const username = data.get('username') as string | null;
 		const password = data.get('password') as string | null;
@@ -83,11 +83,11 @@ export const actions = {
 
 		try {
 			const result = await userSignIn(username ?? '', password ?? '');
-			const { sub } = jwtDecode(result.access_token);
-			const maxAge = Math.floor(result.expire - Date.now() / 1000);
+			// const { sub } = jwtDecode(result.access_token);
+			// const maxAge = Math.floor(result.expire - Date.now() / 1000);
 
-			cookies.set('userId', sub ? sub : '', { path: '/' });
-			cookies.set('token', result.access_token, { path: '/', maxAge: maxAge });
+			// cookies.set('userId', sub ? sub : '', { path: '/' });
+			// cookies.set('token', result.access_token, { path: '/', maxAge: maxAge });
 
 			return { status: true, message: 'Sign successful.', ...result };
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any

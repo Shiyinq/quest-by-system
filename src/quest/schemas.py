@@ -11,7 +11,7 @@ def uniqueQuestId():
 
 class GenerateQuest(BaseModel):
     questId: UUID = Field(default_factory=uniqueQuestId)
-    userId: str
+    userId: str = None
     type: Literal["daily", "weekly", "monthly", "side"]
     quest: str = None
     status: str = "generated"
@@ -22,7 +22,6 @@ class GenerateQuest(BaseModel):
     class Config:
         json_schema_extra = {
             "example": {
-                "userId": "unique-string",
                 "type": "daily",
             }
         }

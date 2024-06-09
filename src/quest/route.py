@@ -14,8 +14,11 @@ router = APIRouter(dependencies=[Depends(dependencies.validate_token)])
 
 
 @router.post("/quests/generate", status_code=201, response_model=ResponseGeneratedQuest)
-async def generate_quest(data: GenerateQuest):
+async def generate_quest(
+    data: GenerateQuest, current_user=Depends(dependencies.get_current_user)
+):
     """Generate Quest"""
+    data.userId = current_user.userId
     quest = await service.generate_quest(data)
     return quest
 

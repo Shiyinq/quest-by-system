@@ -47,7 +47,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None) -> Token:
     }
 
 
-async def get_user(username_or_email: str) -> User:
+async def check_user(username_or_email: str) -> User:
     query = {
         "$or": [
             {"username": username_or_email},
@@ -63,7 +63,7 @@ async def get_user(username_or_email: str) -> User:
 async def authenticate_user(
     username_or_email: str, password: str = None, provider: str = None
 ) -> User:
-    user = await get_user(username_or_email)
+    user = await check_user(username_or_email)
     if not user and provider is None:
         raise IncorrectEmailOrPassword()
     elif not user and provider:

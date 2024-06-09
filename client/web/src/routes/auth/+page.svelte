@@ -7,7 +7,7 @@
 
 <div class="card-container">
 	<div class:hidden={!formSignIn}>
-		<SignIn />
+		<SignIn {form} />
 	</div>
 
 	<div class:hidden={formSignIn}>

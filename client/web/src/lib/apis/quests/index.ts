@@ -1,19 +1,15 @@
-import { QUEBYS_API_BASE_URL } from '$lib/constants';
+import { myFetch } from '$lib/utils';
 
-export const generateQuest = async (userId: string, type: string) => {
+export const generateQuest = async (token: string, type: string) => {
 	try {
-		const response = await fetch(`${QUEBYS_API_BASE_URL}/quests/generate`, {
-			method: 'POST',
+		const options = {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({
-				userId: userId,
-				type: type
-			})
-		});
-
+			body: JSON.stringify({ type: type })
+		};
+		const response = await myFetch('POST', token, '/quests/generate', options);
 		const data = await response.json();
 		return data;
 	} catch (err) {
@@ -22,15 +18,15 @@ export const generateQuest = async (userId: string, type: string) => {
 	}
 };
 
-export const getQuestDetail = async (questId: string, type: string) => {
+export const getQuestDetail = async (token: string, questId: string, type: string) => {
 	try {
 		let URL_API = '';
 		if (type === 'generated') {
-			URL_API = `${QUEBYS_API_BASE_URL}/quests/${questId}?type=${type}`;
+			URL_API = `/quests/${questId}?type=${type}`;
 		} else {
-			URL_API = `${QUEBYS_API_BASE_URL}/quests/${questId}`;
+			URL_API = `/quests/${questId}`;
 		}
-		const response = await fetch(URL_API);
+		const response = await myFetch('GET', token, URL_API);
 		const data = await response.json();
 		return data;
 	} catch (err) {
@@ -39,12 +35,9 @@ export const getQuestDetail = async (questId: string, type: string) => {
 	}
 };
 
-export const acceptQuest = async (questId: string) => {
+export const acceptQuest = async (token: string, questId: string) => {
 	try {
-		const response = await fetch(`${QUEBYS_API_BASE_URL}/quests/${questId}/accept`, {
-			method: 'POST'
-		});
-
+		const response = await myFetch('POST', token, `/quests/${questId}/accept`);
 		const data = await response.json();
 		return data;
 	} catch (err) {
@@ -53,19 +46,16 @@ export const acceptQuest = async (questId: string) => {
 	}
 };
 
-export const updateQuestStatus = async (questId: string, status: string) => {
+export const updateQuestStatus = async (token: string, questId: string, status: string) => {
 	try {
-		const response = await fetch(`${QUEBYS_API_BASE_URL}/quests/${questId}/status`, {
-			method: 'PUT',
+		const options = {
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({
-				status: status
-			})
-		});
-
+			body: JSON.stringify({ status: status })
+		};
+		const response = await myFetch('PUT', token, `/quests/${questId}/status`, options);
 		const data = await response.json();
 		return data;
 	} catch (err) {

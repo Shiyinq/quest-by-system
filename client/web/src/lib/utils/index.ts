@@ -1,3 +1,24 @@
+import { QUEBYS_API_BASE_URL } from '$lib/constants';
+
+export const myFetch = async (
+	method: string,
+	token: string,
+	endpoint: string,
+	options?: RequestInit
+) => {
+	const headers = {
+		...options?.headers,
+		Authorization: `Bearer ${token}`
+	};
+
+	delete options?.headers;
+	return await fetch(`${QUEBYS_API_BASE_URL}${endpoint}`, {
+		...{ method: method },
+		headers,
+		...options
+	});
+};
+
 export const getLabelNew = (createdAt: string): string => {
 	const createdAtDate = new Date(createdAt);
 

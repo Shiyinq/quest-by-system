@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { generateQuest } from '$lib/apis/quests';
 	import { getUserQuestGenerated } from '$lib/apis/users';
-	import { dataGeneratedQuests, userId } from '$lib/store';
+	import { dataGeneratedQuests, token } from '$lib/store';
 	import LoadingCard from '$lib/components/LoadingCard.svelte';
 	import QuestDetail from '$lib/components/quests/QuestDetail.svelte';
 
@@ -11,7 +11,7 @@
 
 	const fetchGeneratedQuest = async () => {
 		try {
-			let getGeneratedQuest = await getUserQuestGenerated($userId);
+			let getGeneratedQuest = await getUserQuestGenerated($token);
 			dataGeneratedQuests.set(getGeneratedQuest);
 		} catch (err) {
 			console.log(err);
@@ -22,7 +22,7 @@
 		generating = true;
 		quest = '';
 		try {
-			quest = await generateQuest($userId, questType);
+			quest = await generateQuest($token, questType);
 			await fetchGeneratedQuest();
 			generating = false;
 		} catch (err) {

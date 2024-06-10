@@ -2,7 +2,7 @@
 	import { Toaster, toast } from 'svelte-sonner';
 	import { updateQuestStatus, acceptQuest } from '$lib/apis/quests';
 	import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
-	import { dataGeneratedQuests, dataAcceptedQuests, userId } from '$lib/store';
+	import { dataGeneratedQuests, dataAcceptedQuests, token } from '$lib/store';
 	import { marked } from 'marked';
 
 	export let quest;
@@ -23,7 +23,7 @@
 
 	const fetchGeneratedQuest = async () => {
 		try {
-			let getGeneratedQuest = await getUserQuestGenerated($userId);
+			let getGeneratedQuest = await getUserQuestGenerated($token);
 			dataGeneratedQuests.set(getGeneratedQuest);
 		} catch (error) {
 			throw error;
@@ -32,7 +32,7 @@
 
 	const fetchAcceptedQuest = async () => {
 		try {
-			let getAcceptedQuest = await getUserQuestHistory($userId, 'all', 'in progress');
+			let getAcceptedQuest = await getUserQuestHistory($token, 'all', 'in progress');
 			dataAcceptedQuests.set(getAcceptedQuest);
 		} catch (error) {
 			throw error;
@@ -42,7 +42,7 @@
 	const changeStatusQuest = async (questId: string, status: string) => {
 		try {
 			loading = true;
-			let { message } = await updateQuestStatus(questId, status);
+			let { message } = await updateQuestStatus($token, questId, status);
 			statusChanged = true;
 			showFullContent = false;
 			toast.success(message);
@@ -57,7 +57,7 @@
 	const acceptQuestGenerated = async (questId: string) => {
 		try {
 			loading = true;
-			let { message } = await acceptQuest(questId);
+			let { message } = await acceptQuest($token, questId);
 			await fetchGeneratedQuest();
 			await fetchAcceptedQuest();
 			statusChanged = true;

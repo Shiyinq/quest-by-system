@@ -1,6 +1,6 @@
 <script>
 	import '../app.css';
-	import { userId, token } from '$lib/store';
+	import { token } from '$lib/store';
 	import { navigating } from '$app/stores';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
@@ -11,7 +11,7 @@
 
 	let showSplash = true;
 	onMount(() => {
-		if (!$userId && $token) {
+		if ($token) {
 			goto('/auth');
 		}
 		setTimeout(() => {
@@ -28,12 +28,12 @@
 	<PreloadingIndicator />
 {/if}
 
-{#if $userId}
+{#if $token}
 	<Header />
 {/if}
 
 <slot />
 
-{#if $userId}
+{#if $token}
 	<Footer />
 {/if}

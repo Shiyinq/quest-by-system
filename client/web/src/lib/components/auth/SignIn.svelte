@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	import { token, userId } from '$lib/store';
+	import { token } from '$lib/store';
 
 	import { jwtDecode } from 'jwt-decode';
 	import { Toaster, toast } from 'svelte-sonner';
@@ -20,10 +20,7 @@
 		if (form?.status) {
 			const { sub } = jwtDecode(form?.access_token);
 			toast.success(form?.message);
-
-			userId.set(sub ? sub : '');
 			token.set(form?.access_token);
-
 			goto('/');
 		} else {
 			toast.error(form?.message);

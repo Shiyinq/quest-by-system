@@ -1,6 +1,6 @@
 <script>
 	import '../app.css';
-	import { token } from '$lib/store';
+	import { activeMenu, token } from '$lib/store';
 	import { navigating } from '$app/stores';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
@@ -11,8 +11,11 @@
 
 	let showSplash = true;
 	onMount(() => {
-		if ($token) {
+		if (!$token) {
 			goto('/auth');
+			activeMenu.set('/');
+		}else {
+			goto($activeMenu);
 		}
 		setTimeout(() => {
 			showSplash = false;

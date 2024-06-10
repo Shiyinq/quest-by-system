@@ -6,7 +6,7 @@
 
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { userId } from '$lib/store';
+	import { token } from '$lib/store';
 	import { goto } from '$app/navigation';
 	import { capitalizeWord } from '$lib/utils';
 	import { getUserQuestHistory, getUserQuestGenerated } from '$lib/apis/users';
@@ -28,12 +28,12 @@
 			let meta: any = {};
 			let datas: any[] = [];
 			if (questType == 'generated') {
-				const { metadata, data } = await getUserQuestGenerated($userId, pages);
+				const { metadata, data } = await getUserQuestGenerated($token, pages);
 				meta = metadata;
 				datas = data;
 			} else {
 				const { metadata, data } = await getUserQuestHistory(
-					$userId,
+					$token,
 					questType,
 					questStatus,
 					pages
@@ -61,7 +61,7 @@
 	const filterButton = async (status: string) => {
 		pages = 1;
 		questStatus = status;
-		const { data } = await getUserQuestHistory($userId, questType, questStatus, pages);
+		const { data } = await getUserQuestHistory($token, questType, questStatus, pages);
 		list = data;
 
 		goto(`${window.location.origin}/quests/more?type=${questType}&status=${questStatus}`);

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	import { token } from '$lib/store';
+	import { activeMenu, token } from '$lib/store';
 
 	import { jwtDecode } from 'jwt-decode';
 	import { Toaster, toast } from 'svelte-sonner';
@@ -18,7 +18,7 @@
 
 	$: if (form) {
 		if (form?.status) {
-			const { sub } = jwtDecode(form?.access_token);
+			activeMenu.set('/');
 			toast.success(form?.message);
 			token.set(form?.access_token);
 			goto('/');

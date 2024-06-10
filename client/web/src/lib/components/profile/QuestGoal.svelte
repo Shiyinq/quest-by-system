@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Toaster, toast } from 'svelte-sonner';
 	import { getUserDetail, setUserGoal } from '$lib/apis/users';
-	import { dataUserInfo, userId } from '$lib/store';
+	import { dataUserInfo, token } from '$lib/store';
 
 	export let userInfo;
 
@@ -12,8 +12,8 @@
 		if (userInfo.goal == goal) return;
 		try {
 			loading = !loading;
-			let { message } = await setUserGoal($userId, goal);
-			let getUserInfo = await getUserDetail($userId);
+			let { message } = await setUserGoal($token, goal);
+			let getUserInfo = await getUserDetail($token);
 			dataUserInfo.set(getUserInfo);
 			toast.success(message);
 		} catch (error: any) {

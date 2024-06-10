@@ -1,13 +1,13 @@
 import { getUserQuestHistory } from '$lib/apis/users';
 
 export const load = async ({ cookies }) => {
-	const userId = JSON.parse(cookies.get('userId') || '');
+	const token = JSON.parse(cookies.get('token') || '');
 	try {
 		const [dailyQuests, weeklyQuests, monthlyQuests, sideQuests] = await Promise.all([
-			getUserQuestHistory(userId, 'daily'),
-			getUserQuestHistory(userId, 'weekly'),
-			getUserQuestHistory(userId, 'monthly'),
-			getUserQuestHistory(userId, 'side')
+			getUserQuestHistory(token, 'daily'),
+			getUserQuestHistory(token, 'weekly'),
+			getUserQuestHistory(token, 'monthly'),
+			getUserQuestHistory(token, 'side')
 		]);
 
 		return {

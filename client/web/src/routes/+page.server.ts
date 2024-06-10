@@ -1,11 +1,11 @@
 import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
 
 export const load = async ({ cookies }) => {
-	const userId = JSON.parse(cookies.get('userId') || '');
+	const token = JSON.parse(cookies.get('token') || '');
 	try {
 		const [generatedQuest, acceptedQuest] = await Promise.all([
-			getUserQuestGenerated(userId),
-			getUserQuestHistory(userId, 'all', 'in progress')
+			getUserQuestGenerated(token),
+			getUserQuestHistory(token, 'all', 'in progress')
 		]);
 
 		return {

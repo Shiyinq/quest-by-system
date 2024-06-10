@@ -1,11 +1,11 @@
 import { getUserDetail, getUserQuestStats } from '$lib/apis/users';
 
 export const load = async ({ cookies }) => {
-	const userId = JSON.parse(cookies.get('userId') || '');
+	const token = JSON.parse(cookies.get('token') || '');
 	try {
 		const [userInfo, userQuestStats] = await Promise.all([
-			getUserDetail(userId),
-			getUserQuestStats(userId)
+			getUserDetail(token),
+			getUserQuestStats(token)
 		]);
 
 		return {

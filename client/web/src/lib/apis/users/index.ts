@@ -1,3 +1,4 @@
+import { myFetch } from '$lib/utils';
 import { QUEBYS_API_BASE_URL } from '$lib/constants';
 
 export const userSignIn = async (username: string, password: string) => {
@@ -34,15 +35,14 @@ export const userSignUp = async (name: string, username: string, password: strin
 	return await response.json();
 };
 
-export const getUserDetail = async (userId: string) => {
-	const response = await fetch(`${QUEBYS_API_BASE_URL}/users/${userId}`);
+export const getUserDetail = async (token: string) => {
+	const response = await myFetch('GET', token, '/users/me');
 	if (!response.ok) throw await response.json();
 	return await response.json();
 };
 
-export const setUserGoal = async (userId: string, goal: string) => {
-	const response = await fetch(`${QUEBYS_API_BASE_URL}/users/${userId}/goal`, {
-		method: 'PUT',
+export const setUserGoal = async (token: string, goal: string) => {
+	const options = {
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json'
@@ -50,39 +50,40 @@ export const setUserGoal = async (userId: string, goal: string) => {
 		body: JSON.stringify({
 			goal: goal
 		})
-	});
+	};
+	const response = await myFetch('PUT', token, '/users/goal', options);
 	if (!response.ok) throw await response.json();
 	return await response.json();
 };
 
-export const getUserQuestGenerated = async (
-	userId: string,
-	page: number = 1,
-	limit: number = 5
-) => {
-	const response = await fetch(
-		`${QUEBYS_API_BASE_URL}/users/${userId}/quests/generated?page=${page}&limit=${limit}`
+export const getUserQuestGenerated = async (token: string, page: number = 1, limit: number = 5) => {
+	const response = await myFetch(
+		'GET',
+		token,
+		`/users/quests/generated?page=${page}&limit=${limit}`
 	);
 	if (!response.ok) throw await response.json();
 	return await response.json();
 };
 
 export const getUserQuestHistory = async (
-	userId: string,
+	token: string,
 	type: string = 'all',
 	status: string = 'null',
 	page: number = 1,
 	limit: number = 5
 ) => {
-	const response = await fetch(
-		`${QUEBYS_API_BASE_URL}/users/${userId}/quests/history?type=${type}&status=${status}&page=${page}&limit=${limit}`
+	const response = await myFetch(
+		'GET',
+		token,
+		`/users/quests/history?type=${type}&status=${status}&page=${page}&limit=${limit}`
 	);
 	if (!response.ok) throw await response.json();
 	return await response.json();
 };
 
-export const getUserQuestStats = async (userId: string) => {
-	const response = await fetch(`${QUEBYS_API_BASE_URL}/users/${userId}/quests/stats`);
+export const getUserQuestStats = async (token: string) => {
+	const response = await myFetch('GET', token, '/users/quests/stats');
 	if (!response.ok) throw await response.json();
 	return await response.json();
 };

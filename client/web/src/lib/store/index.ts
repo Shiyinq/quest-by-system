@@ -71,7 +71,6 @@ const toggleTheme = () => {
 
 export const theme = toggleTheme();
 export const activeMenu = createPersistedStore('activeMenu', '/');
-export const userId = createPersistedStore('userId', '');
 export const token = createPersistedStore('token', '');
 export const dataGeneratedQuests: Writable<TypeGeneratedQuest | string> = writable();
 export const dataAcceptedQuests: Writable<TypeAcceptedQuest | string> = writable();

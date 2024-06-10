@@ -1,4 +1,5 @@
 import cookie from 'cookie';
+import { jwtDecode } from 'jwt-decode';
 import { writable, type Writable } from 'svelte/store';
 
 const createPersistedStore = (key: string, startValue: string) => {
@@ -21,9 +22,22 @@ const createPersistedStore = (key: string, startValue: string) => {
 	if (typeof document !== 'undefined') {
 		store.subscribe((value) => {
 			if (value !== '') {
+				let maxAge = 365 * 24 * 60 * 60;
+				if (key === 'token') {
+					const { exp } = jwtDecode(value);
+					if (exp) {
+						const currentTime = Math.floor(Date.now() / 1000);
+						maxAge = exp - currentTime;
+						if (maxAge < 0) {
+							maxAge = 0;
+						}
+					} else {
+						maxAge = -1;
+					}
+				}
 				document.cookie = cookie.serialize(key, JSON.stringify(value), {
 					path: '/',
-					maxAge: 365 * 24 * 60 * 60
+					maxAge: maxAge
 				});
 			}
 		});

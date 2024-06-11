@@ -6,6 +6,7 @@
 	import UserInfo from '$lib/components/profile/UserInfo.svelte';
 	import QuestGoal from '$lib/components/profile/QuestGoal.svelte';
 	import CountQuests from '$lib/components/profile/CountQuests.svelte';
+	import RadarChart from '$lib/components/charts/RadarChart.svelte';
 
 	export let data: any;
 
@@ -28,6 +29,7 @@
 	{/if}
 
 	{#if data.userQuestStats}
+		<RadarChart questStats={data.userQuestStats} />
 		{#each questTypes as questType}
 			<CountQuests title={questType.title} quest={data.userQuestStats[questType.key]} />
 		{/each}

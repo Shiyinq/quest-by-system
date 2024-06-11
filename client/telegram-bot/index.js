@@ -1,6 +1,7 @@
 import { Telegraf } from "telegraf";
 import { BOT_TOKEN } from './src/config/index.js';
 import { userDetail, userSignUp } from './src/apis/users.js';
+import { userInfo } from "./src/utils.js";
 
 const bot = new Telegraf(BOT_TOKEN);
 
@@ -39,16 +40,8 @@ async function loadCommands(bot) {
     }
 }
 
-const userInfo = (ctx) => {
-    if (ctx?.message) {
-        return ctx.message.from;
-    } else if (ctx?.update) {
-        return ctx.update.callback_query.from;
-    }
-};
-
 bot.use(async (ctx, next) => {
-    let { id, first_name } = userInfo(ctx);
+    let { id, first_name, username } = userInfo(ctx);
     let userId = id.toString();
     let name = first_name;
 
@@ -58,7 +51,7 @@ bot.use(async (ctx, next) => {
     }
 
     if (userExist == 404) {
-        let signUp = await userSignUp(userId, name);
+        let signUp = await userSignUp(userId, name, username);
         if (!signUp) {
             return
         }

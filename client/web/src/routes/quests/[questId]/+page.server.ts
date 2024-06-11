@@ -1,14 +1,16 @@
 import { getQuestDetail } from '$lib/apis/quests';
+import { loadWithToken } from '$lib/utils/loadPage';
+import type { RequestEvent } from '@sveltejs/kit';
 
-export const load = async ({ params, url, cookies }) => {
+const loadData = async (token: string, loadFunction: RequestEvent) => {
+	const { params, url } = loadFunction;
 	const { questId } = params;
-	const token = JSON.parse(cookies.get('token') || '');
 	const questType = url.searchParams.get('type') || 'null';
-	try {
-		const questDetail = await getQuestDetail(token, questId, questType);
-		return { questDetail };
-	} catch (error) {
-		console.log(error);
-		throw error;
-	}
+
+	const questDetail = await getQuestDetail(token, questId || '', questType);
+	return { questDetail };
+};
+
+export const load = async (loadFunction: RequestEvent) => {
+	return await loadWithToken(loadFunction, loadData);
 };

@@ -1,19 +1,19 @@
 import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
+import { loadWithToken } from '$lib/utils/loadPage.js';
+import type { RequestEvent } from '@sveltejs/kit';
 
-export const load = async ({ cookies }) => {
-	const token = JSON.parse(cookies.get('token') || '');
-	try {
-		const [generatedQuest, acceptedQuest] = await Promise.all([
-			getUserQuestGenerated(token),
-			getUserQuestHistory(token, 'all', 'in progress')
-		]);
+const loadData = async (token: string) => {
+	const [generatedQuest, acceptedQuest] = await Promise.all([
+		getUserQuestGenerated(token),
+		getUserQuestHistory(token, 'all', 'in progress')
+	]);
 
-		return {
-			generatedQuest,
-			acceptedQuest
-		};
-	} catch (error) {
-		console.log(error);
-		throw error;
-	}
+	return {
+		generatedQuest,
+		acceptedQuest
+	};
+};
+
+export const load = async (loadFunction: RequestEvent) => {
+	return await loadWithToken(loadFunction, loadData);
 };

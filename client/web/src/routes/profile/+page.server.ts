@@ -1,19 +1,19 @@
 import { getUserDetail, getUserQuestStats } from '$lib/apis/users';
+import { loadWithToken } from '$lib/utils/loadPage.js';
+import type { RequestEvent } from '@sveltejs/kit';
 
-export const load = async ({ cookies }) => {
-	const token = JSON.parse(cookies.get('token') || '');
-	try {
-		const [userInfo, userQuestStats] = await Promise.all([
-			getUserDetail(token),
-			getUserQuestStats(token)
-		]);
+const loadData = async (token: string) => {
+	const [userInfo, userQuestStats] = await Promise.all([
+		getUserDetail(token),
+		getUserQuestStats(token)
+	]);
 
-		return {
-			userInfo,
-			userQuestStats
-		};
-	} catch (error) {
-		console.log(error);
-		throw error;
-	}
+	return {
+		userInfo,
+		userQuestStats
+	};
+};
+
+export const load = async (loadFunction: RequestEvent) => {
+	return await loadWithToken(loadFunction, loadData);
 };

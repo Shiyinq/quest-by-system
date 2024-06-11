@@ -1,13 +1,15 @@
 import { generate } from "./quests/index.js";
 import { acceptQuest, updateStatusQuest } from "../apis/quests.js";
 import { questHistory } from "./history/index.js";
+import { userInfo } from "../utils.js";
 
 const reGenerate = async (type, ctx) => {
     await generate(type, ctx);
 }
 
 const accept = async (questId, ctx) => {
-    const accept = await acceptQuest(questId);
+    let { id } = userInfo(ctx);
+    const accept = await acceptQuest(id.toString(), questId);
 
     if (!accept) {
         ctx.reply("Failed to accept quest");
@@ -26,12 +28,13 @@ const getMoreQuestHistory = async (param, ctx) => {
 }
 
 const updateStatus = async (questId, action, ctx) => {
+    let { id } = userInfo(ctx);
     const status = {
         questCompleted: "completed",
         questNotComplete: "not completed"
     }
 
-    const updated = await updateStatusQuest(questId, status[action]);
+    const updated = await updateStatusQuest(id.toString(), questId, status[action]);
 
     if (!updated) {
         ctx.reply("Failed to update status");

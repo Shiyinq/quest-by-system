@@ -1,4 +1,5 @@
 import { detailQuest } from "../../apis/quests.js";
+import { userInfo } from "../../utils.js";
 
 
 const formatTime = (date) => {
@@ -18,9 +19,10 @@ const formatTime = (date) => {
 
 
 const quest = async (ctx) => {
+    let { id } = userInfo(ctx);
     let questId = ctx.message.text.substring(1);
 
-    let detail = await detailQuest(questId);
+    let detail = await detailQuest(id.toString(), questId);
 
     if (!detail) {
         ctx.reply(`4️⃣0️⃣4️⃣ Quest not found`);

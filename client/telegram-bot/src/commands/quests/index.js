@@ -1,4 +1,5 @@
 import { generateQuest } from "../../apis/quests.js";
+import { userInfo } from "../../utils.js";
 
 const checkUserId = (ctx) => {
     let userId = "unknown";
@@ -22,13 +23,13 @@ const currentEditeMessage = (ctx) => {
 
 
 export const generate = async (type, ctx) => {
-    let userId = checkUserId(ctx);
+    let { id } = userInfo(ctx);
     let editMessageId = currentEditeMessage(ctx);
 
     await ctx.reply(`📝 Please wait, generating ${type} quest for you...`);
     await ctx.sendChatAction("typing");
 
-    let generated = await generateQuest(userId, type);
+    let generated = await generateQuest(id.toString(), type);
 
     if (!generated) {
         ctx.editMessageText("Failed to generate quest.", {

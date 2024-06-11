@@ -18,7 +18,7 @@ export const generateQuest = async (userId, type) => {
 
 export const acceptQuest = async (userId, questId) => {
     try {
-        const response = await axiosInstance.post(`/quests/${questId}/accept`, {
+        const response = await axiosInstance.post(`/quests/${questId}/accept`, null, {
             headers: {
                 'Authorization': `Bearer ${generateToken(userId)}`
             }

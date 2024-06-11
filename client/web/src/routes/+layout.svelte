@@ -14,7 +14,7 @@
 		if (!$token) {
 			goto('/auth');
 			activeMenu.set('/');
-		}else {
+		} else {
 			goto($activeMenu);
 		}
 		setTimeout(() => {

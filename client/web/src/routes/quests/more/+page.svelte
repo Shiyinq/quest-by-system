@@ -32,12 +32,7 @@
 				meta = metadata;
 				datas = data;
 			} else {
-				const { metadata, data } = await getUserQuestHistory(
-					$token,
-					questType,
-					questStatus,
-					pages
-				);
+				const { metadata, data } = await getUserQuestHistory($token, questType, questStatus, pages);
 
 				meta = metadata;
 				datas = data;

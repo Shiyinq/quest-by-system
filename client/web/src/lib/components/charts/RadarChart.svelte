@@ -82,6 +82,6 @@
 </script>
 
 <div class="dialog">
-	<h2>Stats</h2>
+	<h2>📊 Stats</h2>
 	<Radar {data} {options} />
 </div>

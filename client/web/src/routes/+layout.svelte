@@ -15,7 +15,7 @@
 			goto('/auth');
 			activeMenu.set('/');
 		} else {
-			goto($activeMenu);
+			goto(window.location.href);
 		}
 		setTimeout(() => {
 			showSplash = false;

@@ -53,3 +53,15 @@ export const capitalizeWord = (word: string) => {
 	const capitalizedWord = firstLetter + word.slice(1);
 	return capitalizedWord;
 };
+
+export const emojiStatus = (status: string) => {
+	if (status === 'completed') {
+		return '<span>✅</span>';
+	} else if (status === 'in progress') {
+		return '<span>⌛</span>';
+	} else if (status === 'not completed') {
+		return '<span>❌</span>';
+	} else if (status === 'generated') {
+		return '<span>🔄</span>';
+	}
+};

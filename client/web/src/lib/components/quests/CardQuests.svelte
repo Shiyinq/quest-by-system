@@ -1,5 +1,5 @@
 <script>
-	import { getLabelNew } from '$lib/utils';
+	import { emojiStatus, getLabelNew } from '$lib/utils';
 
 	export let loading = false;
 	export let title = '';
@@ -24,9 +24,11 @@
 			{#each quests.data as { questId, status, createdAt }}
 				<li>
 					{#if status == 'generated'}
+						{@html emojiStatus(status)}
 						<a class="quest-link" href={'quests/' + questId + '?type=generated'}>{'/' + questId}</a
 						>{getLabelNew(createdAt)}
 					{:else}
+						{@html emojiStatus(status)}
 						<a class="quest-link" href={'quests/' + questId}>{'/' + questId}</a>{getLabelNew(
 							createdAt
 						)}

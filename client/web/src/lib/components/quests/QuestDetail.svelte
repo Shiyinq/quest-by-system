@@ -88,6 +88,8 @@
 					<span>⌛</span>
 				{:else if quest.status === 'not completed'}
 					<span>❌</span>
+				{:else if quest.status === 'generated'}
+					<span>🔄</span>
 				{/if}
 			</div>
 		</div>

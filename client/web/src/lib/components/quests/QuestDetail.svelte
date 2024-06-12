@@ -74,10 +74,23 @@
 <Toaster richColors position="top-center" />
 <div class={trimContent}>
 	<div class="quest-info">
-		<p>Id: {quest.questId}</p>
-		<p>Type: {quest.type}</p>
-		<p>Status: {quest.status}</p>
-		<p>Created At: {quest.createdAt}</p>
+		<div class="quest-info-content">
+			<div class="quest-details">
+				<p>Id: {quest.questId}</p>
+				<p>Type: {quest.type}</p>
+				<p>Status: {quest.status}</p>
+				<p>Created At: {quest.createdAt}</p>
+			</div>
+			<div class="status-emoji">
+				{#if quest.status === 'completed'}
+					<span>✅</span>
+				{:else if quest.status === 'in progress'}
+					<span>⌛</span>
+				{:else if quest.status === 'not completed'}
+					<span>❌</span>
+				{/if}
+			</div>
+		</div>
 		{#if !showFullContent}
 			<div class="quest-button-container">
 				<button class="nb-button blue" on:click={showMore}>⬇️ Show more</button>
@@ -138,6 +151,25 @@
 		padding: 12px;
 		border-radius: 4px;
 		margin-bottom: 8px;
+	}
+
+	.quest-info {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.quest-info-content {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.quest-details {
+		flex: 1;
+	}
+
+	.status-emoji {
+		font-size: 3em;
+		margin-left: 10px;
 	}
 
 	.quest-button-container {

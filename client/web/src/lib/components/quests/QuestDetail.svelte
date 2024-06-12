@@ -4,6 +4,7 @@
 	import { getUserQuestGenerated, getUserQuestHistory } from '$lib/apis/users';
 	import { dataGeneratedQuests, dataAcceptedQuests, token } from '$lib/store';
 	import { marked } from 'marked';
+	import { emojiStatus } from '$lib/utils';
 
 	export let quest;
 	export let showFullContent = false;
@@ -82,15 +83,7 @@
 				<p>Created At: {quest.createdAt}</p>
 			</div>
 			<div class="status-emoji">
-				{#if quest.status === 'completed'}
-					<span>✅</span>
-				{:else if quest.status === 'in progress'}
-					<span>⌛</span>
-				{:else if quest.status === 'not completed'}
-					<span>❌</span>
-				{:else if quest.status === 'generated'}
-					<span>🔄</span>
-				{/if}
+				{@html emojiStatus(quest.status)}
 			</div>
 		</div>
 		{#if !showFullContent}

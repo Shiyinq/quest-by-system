@@ -27,7 +27,7 @@
 
 <Toaster richColors position="top-center" />
 <div class="dialog">
-	<h2>Your Goal</h2>
+	<h2>🎯 Your Goal</h2>
 	<div class="form-goal">
 		<input class="nb-input default input-goal" placeholder="Type your goal" bind:value={goal} />
 		<button class="nb-button blue button-goal" on:click={changeGoal} disabled={loading}

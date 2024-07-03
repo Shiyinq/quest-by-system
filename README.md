@@ -8,6 +8,9 @@
 | ![Home](docs/images/web/home.png) | ![Quests](docs/images/web/quests.png) | ![Detail Quest](docs/images/web/detail.png) | ![Profile](docs/images/web/profile.png) |
 |:---:|:---:|:---:|:---:|
 
+| ![Home](docs/images/bot/menu.png) | ![Quests](docs/images/bot/generated.png) | ![Detail Quest](docs/images/bot/detail.png) | ![Profile](docs/images/bot/profile.png) |
+|:---:|:---:|:---:|:---:|
+
 Sometimes we get confused about what to do today. For example, I'm a software engineer who often gets confused about how to fill my free time. As a result, my days are filled with sleeping or playing games. Therefore, this casual project was created. You will be given quests by an open-source LLM powered by Ollama, so you have references on what to do, for instance, as a software engineer. In short, just like in an MMORPG game, you will be given quests by the system.
 
 ## Table of Contents

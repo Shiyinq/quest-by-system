@@ -182,5 +182,9 @@
 		.dialog {
 			width: 98%;
 		}
+
+		.status-emoji {
+			display: none;
+		}
 	}
 </style>

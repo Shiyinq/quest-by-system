@@ -1,9 +1,9 @@
 # QUEBYS - WEB
 
-Front-end version of [quebys-bot](../telegram-bot/README.md).
-
 | ![Home](/docs/images/web/home.png) | ![Quests](/docs/images/web/quests.png) | ![Detail Quest](/docs/images/web/detail.png) | ![Profile](/docs/images/web/profile.png) |
 |:---:|:---:|:---:|:---:|
+
+Front-end version of [quebys-bot](../telegram-bot/README.md).
 
 ## Table of Contents
 

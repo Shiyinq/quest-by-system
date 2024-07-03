@@ -1,8 +1,9 @@
 # QUEBYS - BOT
 
-This bot allows you to generate quests and much more using text-based specific commands.
+| ![Home](/docs/images/bot/menu.png) | ![Quests](/docs/images/bot/generated.png) | ![Detail Quest](/docs/images/bot/detail.png) | ![Profile](/docs/images/bot/profile.png) |
+|:---:|:---:|:---:|:---:|
 
-<img width="399" alt="image" src="quebys-bot.png">
+This bot allows you to generate quests and much more using text-based specific commands.
 
 ## Table of Contents
 - [QUEBYS - BOT](#quebys---bot)

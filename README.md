@@ -1,4 +1,9 @@
 # QUEBYS - QUEST BY SYSTEM
+[![GitHub top language](https://img.shields.io/github/languages/top/Shiyinq/quest-by-system)](https://github.com/Shiyinq/quest-by-system)
+![GitHub repo size](https://img.shields.io/github/repo-size/Shiyinq/quest-by-system)
+![GitHub last commit](https://img.shields.io/github/last-commit/Shiyinq/quest-by-system)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Shiyinq/quest-by-system)
+
 
 | ![Home](docs/images/web/home.png) | ![Quests](docs/images/web/quests.png) | ![Detail Quest](docs/images/web/detail.png) | ![Profile](docs/images/web/profile.png) |
 |:---:|:---:|:---:|:---:|

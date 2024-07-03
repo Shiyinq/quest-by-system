@@ -1,4 +1,6 @@
 <script>
+	import { formatDate } from "$lib/utils";
+
 	export let userInfo;
 </script>
 
@@ -9,7 +11,7 @@
 		<li>👤 Name: {userInfo.name}</li>
 		<li>🎯 Goal: {userInfo.goal}</li>
 		<li>🌐 Source: {userInfo.source}</li>
-		<li>📅 Created At: {userInfo.createdAt}</li>
-		<li>🕒 Updated At: {userInfo.updatedAt}</li>
+		<li>📅 Created At: {formatDate(userInfo.createdAt)}</li>
+		<li>🕒 Updated At: {formatDate(userInfo.updatedAt)}</li>
 	</ul>
 </div>

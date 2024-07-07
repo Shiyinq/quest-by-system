@@ -21,12 +21,13 @@ from src.quest.schemas import (
 )
 from src.schemas import GeneralResponse
 from src.user.service import get_user
+from src.config import config
 
 
 async def ollama(prompt) -> dict:
     try:
-        response = await AsyncClient().chat(
-            model="llama3:instruct",
+        response = await AsyncClient(host=config.ollama_host).chat(
+            model=config.model,
             messages=[
                 {
                     "role": "user",

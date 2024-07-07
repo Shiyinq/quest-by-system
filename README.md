@@ -17,6 +17,7 @@ Sometimes we get confused about what to do today. For example, I'm a software en
 - [QUEBYS - QUEST BY SYSTEM](#quebys---quest-by-system)
   - [Table of Contents](#table-of-contents)
   - [Requirements](#requirements)
+  - [Getting Started with Docker](#getting-started-with-docker)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Contributing](#contributing)
@@ -27,6 +28,49 @@ Sometimes we get confused about what to do today. For example, I'm a software en
 - Python v3.9.12 ~
 - MongoDB  v5.0
 - Ollama latest version
+- Docker latest version
+
+## Getting Started with Docker
+
+Before you begin, ensure you have [Docker](https://docs.docker.com/engine/install/) installed.
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/Shiyinq/quest-by-system.git
+cd quest-by-system
+```
+
+**2. Create environment files**
+
+For the backend:
+```bash
+cp .env.example .env
+```
+
+For the frontend:
+```bash
+cd client/web
+cp .env.example .env
+cd ..
+```
+
+Fort the bot:
+```bash
+cd client/telegram-bot
+cp .env.example .env
+cd ../../
+```
+
+Open each `.env` file you have created and update the values as needed.
+
+**3. Build and run the Docker containers**
+```bash
+docker compose up --build -d
+```
+Wait a few minutes for the setup to complete. You can then access:
+- Frontend at http://localhost:5000
+- Backend at http://localhost:8000
+- Telegram Bot at http://localhost:5050
 
 ## Installation
 Make sure you have [Ollama](https://ollama.com/)  installed and at least one model downloaded from Ollama. For a better experience, use the model `llama3:instruct`.

@@ -9,6 +9,9 @@ services:
       - .env
     environment:
       MONGODB_URI: mongodb://mongodb:27017
+      OLLAMA_HOST: http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - mongodb
 

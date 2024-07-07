@@ -1,4 +1,4 @@
-import { healthCheck } from "../apis/healthcheck.js";
+import { healthCheck } from "../apis/healthCheck.js";
 
 const ping = async (ctx) => {
     const startTime = Date.now();

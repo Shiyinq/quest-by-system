@@ -18,6 +18,8 @@ class Config:
         self.secret_key = os.getenv("SECRET_KEY")
         self.algorithm = os.getenv("ALGORITHM")
         self.access_token_expire_minutes = os.getenv("TOKEN_EXPIRE")
+        self.model = os.getenv("MODEL")
+        self.ollama_host = os.getenv("OLLAMA_HOST")
 
 
 config = Config()

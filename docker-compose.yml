@@ -29,6 +29,18 @@ services:
       ORIGIN: http://localhost:5000
 
 
+  telegram-bot:
+    build:
+      context: ./client/telegram-bot
+      dockerfile: Dockerfile
+    ports:
+      - "5050:5050"
+    env_file:
+      - .env
+    environment:
+      BASE_URL_BACKEND: http://backend:8000
+
+
   mongodb:
     image: mongo:latest
     ports:

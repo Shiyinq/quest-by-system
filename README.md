@@ -18,10 +18,10 @@ Sometimes we get confused about what to do today. For example, I'm a software en
   - [Table of Contents](#table-of-contents)
   - [Requirements](#requirements)
   - [Getting Started with Docker](#getting-started-with-docker)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Contributing](#contributing)
-  - [Install Client](#install-client)
+  - [Development](#development)
+    - [Run the backend](#run-the-backend)
+    - [Run the frontend and telegram bot](#run-the-frontend-and-telegram-bot)
+    - [Contributing](#contributing)
 
 
 ## Requirements
@@ -72,44 +72,45 @@ Wait a few minutes for the setup to complete. You can then access:
 - Backend at http://localhost:8000
 - Telegram Bot at http://localhost:5050
 
-## Installation
+## Development
+### Run the backend
 Make sure you have [Ollama](https://ollama.com/)  installed and at least one model downloaded from Ollama. For a better experience, use the model `llama3:instruct`.
 
-After that, you can follow the next steps.
+After that, you can follow this instructions.
 
-Steps to install this project:
+**1. Clone this repository**
+```bash
+git clone https://github.com/Shiyinq/quest-by-system.git
+```
+**2. Navigate to the project directory**
+```bash
+cd quest-by-system
+```
+**3. Create python environment**
 
-1. Clone this repository
-    ```bash
-    git clone https://github.com/Shiyinq/quest-by-system.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd quest-by-system
-    ```
-3. Create python environment
-   
-   You can use any Python environment like conda or others, but I am using venv.
-   create environment
-   ```bash
-    python -m venv .venv
-   ```
-   activate environment
-   ```bash
-    source .venv/bin/activate
-   ```
-4. Install dependencies:
-    ```bash
-    pip install -r requirements/base.txt
-    ```
-5. Create .env file
-   ```bash
-    cp .env.example .env
-   ```
-6. Make sure you have created a MongoDB database. The default `DB_NAME` is `quest`, but you can change it in the `.env` file.
+You can use any Python environment like conda or others, but I am using venv.
 
-## Usage
-Running the project
+create environment
+```bash
+python -m venv .venv
+```
+activate environment
+```bash
+source .venv/bin/activate
+```
+**4. Install dependencies**
+```bash
+pip install -r requirements/base.txt
+```
+**5. Create .env file**
+```bash
+cp .env.example .env
+```
+**6. Make sure you have created a MongoDB database** 
+
+The default `DB_NAME` is `quest`, but you can change it in the `.env` file.
+
+**7. Running the project**
 ```bash
 sh scripts/start-dev.sh  
 ```
@@ -118,7 +119,14 @@ Open API Docs
  http://localhost:5000/docs
  ```
 
-## Contributing
+### Run the frontend and telegram bot
+You can use the [API](http://localhost:5000/docs) to create your own client, but we already have clients available for you to try: a Telegram Bot and a Web client.
+
+Documentation for the Telegram Bot and Web client is provided.
+- [Web](./client/web/README.md)
+- [Telegram Bot](./client/telegram-bot/README.md)
+
+### Contributing
 - You can open [issues](https://github.com/Shiyinq/quest-by-system/issues) to report bugs or request features.
 - You can fix bugs and add features on your own.
   1. Fork this repository
@@ -127,10 +135,3 @@ Open API Docs
   4. Push to the branch `git push origin new-feature`
   5. Create a Pull Request
    
-
-## Install Client
-You can use the [API](http://localhost:5000/docs) to create your own client, but we already have clients available for you to try: a Telegram Bot and a Web client.
-
-Documentation for the Telegram Bot and Web client is provided.
-- [Web](./client/web/README.md)
-- [Telegram Bot](./client/telegram-bot/README.md)

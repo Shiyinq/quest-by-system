@@ -86,7 +86,14 @@ git clone https://github.com/Shiyinq/quest-by-system.git
 ```bash
 cd quest-by-system
 ```
-**3. Create python environment**
+**3. Install requirements**
+
+Install the required dependencies with the following command:
+
+```
+pip install -r requirements/dev.txt
+```
+**4. Create python environment**
 
 You can use any Python environment like conda or others, but I am using venv.
 
@@ -98,19 +105,19 @@ activate environment
 ```bash
 source .venv/bin/activate
 ```
-**4. Install dependencies**
+**5. Install dependencies**
 ```bash
 pip install -r requirements/base.txt
 ```
-**5. Create .env file**
+**6. Create .env file**
 ```bash
 cp .env.example .env
 ```
-**6. Make sure you have created a MongoDB database** 
+**7. Make sure you have created a MongoDB database** 
 
 The default `DB_NAME` is `quest`, but you can change it in the `.env` file.
 
-**7. Running the project**
+**8. Running the project**
 ```bash
 sh scripts/start-dev.sh  
 ```

@@ -67,6 +67,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Quests {questType}</title>
+	<meta name="description" content="QUEBYS - Quests {questType}" />
+</svelte:head>
+
 <div class="card-container">
 	{#if questType != 'generated'}
 		<div class="dialog">

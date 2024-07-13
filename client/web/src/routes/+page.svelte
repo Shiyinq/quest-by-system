@@ -14,6 +14,12 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Home</title>
+	<meta name="description" content="QUEBYS - Home" />
+</svelte:head>
+
+
 <div class="card-container" transition:slide={{ duration: 1000 }}>
 	<GenerateQuest />
 

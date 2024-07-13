@@ -5,6 +5,11 @@
 	export let data: any;
 </script>
 
+<svelte:head>
+	<title>Quests</title>
+	<meta name="description" content="QUEBYS - Quests" />
+</svelte:head>
+
 <div class="card-container" transition:slide={{ duration: 1000 }}>
 	<div class="dialog">
 		<h2>📜 Quests</h2>

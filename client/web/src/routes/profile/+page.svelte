@@ -22,6 +22,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Profile</title>
+	<meta name="description" content="QUEBYS - Profile" />
+</svelte:head>
+
 <div class="card-container" transition:slide={{ duration: 1000 }}>
 	{#if $dataUserInfo}
 		<UserInfo userInfo={$dataUserInfo} />

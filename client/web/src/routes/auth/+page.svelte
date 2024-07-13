@@ -5,6 +5,11 @@
 	export let form: any;
 </script>
 
+<svelte:head>
+	<title>Auth</title>
+	<meta name="description" content="QUEBYS - Auth" />
+</svelte:head>
+
 <div class="card-container">
 	<div class:hidden={!formSignIn}>
 		<SignIn {form} />

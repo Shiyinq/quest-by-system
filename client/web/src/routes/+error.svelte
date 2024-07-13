@@ -8,7 +8,7 @@
 
 <svelte:head>
 	<title>{status} - {description}</title>
-	<meta name="description" content="QUEBYS - Auth" />
+	<meta name="description" content="QUEBYS - {description}" />
 </svelte:head>
 
 <div class="card-container">
